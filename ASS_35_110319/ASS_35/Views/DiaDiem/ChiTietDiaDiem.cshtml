@@ -1,0 +1,41 @@
+﻿@using DataContext.DAL;
+@using DataContext.Until;
+
+@{
+    var model = (DataContext.m_diadiemtochuc)Model;
+}
+
+@{
+    ViewBag.Title = "ChiTietDiaDiem";
+    Layout = "~/Views/Shared/LayoutVi.cshtml";
+}
+
+<div class="container">
+    @if (model != null)
+    {
+        <div class="sukien">
+            <div class="tt">
+                <span><a href="">Trang chủ &gt; </a></span>
+                <span><a href="">@Html.Raw(model.tendiadiem)</a></span>
+            </div>
+            <div class="news-noidung">
+                @Html.Raw(model.noidung)
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3>Không có dữ liệu</h3>
+    }
+
+    <section class="sec-below sec-below-trans">
+        <div class="sec-above-bg">
+            <div class="sec-above-bg-color">
+
+            </div>
+        </div>
+    </section>
+
+
+</div>
+

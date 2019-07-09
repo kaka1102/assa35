@@ -1,0 +1,131 @@
+﻿@using DataContext.DAL;
+@{
+    var modal = (List<ListMedia>)Model;
+}
+
+<div class="otherdocuments">
+    REPORTS & OTHER DOCUMENTS
+    <img src="images/document-agemda-muiten.png" alt="">
+</div>
+<div class="rebortotherdocuments">
+
+    @*<div class="agenda-assa">
+        report
+    </div>
+    <ul>
+        <li>Call meeting to order</li>
+        <li>Opening remarks by ASSA Chairman</li>
+        <li>Review and approval of the 34th ASSA Board Meeting Agenda</li>
+        <li>Confirmation of 33rd ASSA Board Meeting Minutes held in Philippines</li>
+        <li>Matters Arising from the Minutes</li>
+        <li>Presentation of ASSA Recognition Awards</li>
+        <li>
+            Handover of ASSA Chairmanship
+            <ul class="ul-con">
+                <li>Nomination of ASSA Chairman</li>
+                <li>Nomination of ASSA Vice-Chairman</li>
+                <li>Nomination of ASSA Secretary-General</li>
+                <li>Handover of ASSA emblem and documents to new ASSA Chairman and Secretary-General</li>
+            </ul>
+        </li>
+        <li>Incoming ASSA Chairman's Statement</li>
+        <li>Proposal for 35th ASSA Board Meeting Theme</li>
+        <li>Adjournment of meeting</li>
+    </ul>*@
+
+
+
+
+    <div class="doc-list">
+        @if (modal.Count > 0)
+        {
+        <ul class="nav nav-tabs">
+            <li class="active"> <a href="#pr" data-toggle="tab">Presentation</a></li>
+            <li> <a href="#gp" data-toggle="tab">Good Practice</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="pr" class="tab-pane fade in active">
+                @foreach (var item in modal)
+                {
+                    if (item.loaitl == "pr")
+                    {
+                        <div class="agenda-assa">
+                            @Html.Raw(item.tenchude)
+                        </div>
+                       
+                        <div class="Presentation-other">
+                            <ul>
+                                @if (item.lstMedia.Count > 0)
+                                {
+                                    foreach (var file in item.lstMedia)
+                                    {
+                                        <li>
+                                            <a href="@Html.Raw(file.duongdanfile)">
+                                                @if (file.duongdanfile.IndexOf(".pdf") != -1)
+                                                {<i class="fa fa-file-pdf-o" style="color:red"></i> }
+                                                else
+                                                { <i class="fa fa-file-powerpoint-o"></i>}
+                                            </a>
+                                            <a href="@Html.Raw(file.duongdanfile)">@Html.Raw(file.tenfile)</a>
+                                        </li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li>
+                                        Không có file
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                }
+            </div>
+            <div id="gp" class="tab-pane fade">
+                @foreach (var item in modal)
+                {
+                    if (item.loaitl != "pr")
+                    {
+                        <div class="agenda-assa">
+                            @Html.Raw(item.tenchude)
+                        </div>
+                       
+                        <div class="Presentation-other">
+                            <ul>
+                                @if (item.lstMedia.Count > 0)
+                                {
+                                    foreach (var file in item.lstMedia)
+                                    {
+                                        <li>
+                                            <a href="@Html.Raw(file.duongdanfile)">
+                                                @if (file.duongdanfile.IndexOf(".pdf") != -1)
+                                                {<i class="fa fa-file-pdf-o" style="color:red"></i> }
+                                                else
+                                                { <i class="fa fa-file-powerpoint-o"></i>}
+                                            </a>
+                                            <a href="@Html.Raw(file.duongdanfile)">@Html.Raw(file.tenfile)</a>
+                                        </li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li>
+                                        Không có file
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                }
+            </div>            
+        </div>
+        }
+        else
+        {
+            <h3>Đang cập nhật</h3>
+        }
+    </div>
+    
+</div>
+
+

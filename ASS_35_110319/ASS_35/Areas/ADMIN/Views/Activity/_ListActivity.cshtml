@@ -1,0 +1,160 @@
+﻿@using System.Globalization
+@using DataContext
+@using DataContext.Constants
+@using DataContext.Until
+@if (Model == null)
+{
+    <p>@(ASS_35.Resources.HomeText.No_data)</p>
+}
+else
+{
+    var model = (List<ActivityInfomation_Result>) Model;
+    <table id="manager-account">
+        <thead>
+        <tr>
+            <th>  </th>
+            <th>@(ASS_35.Resources.HomeText.ActivityName)</th>
+            <th style="display:none"></th>
+            <th>@(ASS_35.Resources.HomeText.Creators)</th>
+            <th>@(ASS_35.Resources.HomeText.Date_start)</th>
+            
+            <th>@(ASS_35.Resources.HomeText.Order_number)</th>
+            <th>@(ASS_35.Resources.HomeText.Status)</th>
+            <th>@(ASS_35.Resources.HomeText.Option)</th>
+        </tr>
+        </thead>
+        <tbody>
+            @{
+                if (model.Count == 0)
+                {
+                    <tr>
+                        <td colspan="8"><p>@(ASS_35.Resources.HomeText.No_data_table)</p></td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in model)
+                    {
+                    <tr>
+                        <td class="details-control" approved-by="@(item.emailnguoiduyet == null ? ASS_35.Resources.HomeText.No_data : item.emailnguoiduyet)" stt="@(item.stt)" startDate="@(item.startDate.Value.ToString("dd-MM-yyyy"))" actType="@(item.acttype)" active-time="@(item.approvalDate == null ? (ASS_35.Resources.HomeText.No_data) : item.approvalDate.Value.ToString("dd-MM-yyyy"))" content="@(item.des)" status="@(item.status == SystemMessageConst.StatusConst.Deactive ? "show-reason" : "hide-reason")" version="@(item.phienban)"></td>
+                        <td style="max-width: 200px;">@item.actName</td>
+                        <td style="display: none;" class="avarta-content"></td>
+                        <td>@item.emailnguoitao</td>
+                        <td>
+                            <span>@item.startDate.Value.ToString("dd MMMM yyyy")</span>
+                        </td>                        
+                        <td>
+                            @item.stt
+                        </td>
+                        <td>
+                            @Html.Action("Status2", "Common", new { id = item.status })
+                        </td>
+                        <td>
+                            <a class="hint--top edit-row-btn" aria-label="@(ASS_35.Resources.HomeText.Edit)" data-id="@item.id" onclick="BindButtonEditClick(this)">
+                                <i class="ti-pencil"></i>
+                            </a>
+                            @if (item.status != SystemMessageConst.StatusConst.Active && item.status != SystemMessageConst.StatusConst.Pending)
+                            {
+                                <a class="hint--top delete-row-btn" aria-label="@(ASS_35.Resources.HomeText.Delete)" data-id="@item.id" onclick="BindButtonDeleteClick(this)">
+                                    <i class="ti-close"></i>
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                    }
+                }
+            }
+
+        </tbody>
+    </table>
+    <script>
+       
+        $(function() {
+            BuildTableDetail();
+        });
+
+        function BuildTableDetail() {
+            var selector = $('#manager-account');
+            var table =  selector.DataTable({
+                "columnDefs": [
+                    {
+                        "targets": 0,
+                        "orderable": false
+                    },
+                    {
+                        "targets": 7,
+                        "orderable": false
+                    }
+                ],
+                "searching": false
+            }
+                
+            );
+            $('#manager-account tbody').on('click', 'td.details-control', function () {
+                var self = this;
+                var tr = $(this).closest('tr');
+                var row = table.row( tr );
+
+                if ( row.child.isShown() ) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    // Open this row
+                    row.child(format(self)).show();
+                    tr.addClass('shown');
+                }
+            } );
+        }
+        function format ( self ) {
+            return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+                '<tr>'+
+                '<td>@(ASS_35.Resources.HomeText.Approved_by):</td>'+
+                '<td>' + $(self).attr("approved-by")+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                '<td>@(ASS_35.Resources.HomeText.Browsing_time):</td>'+
+                '<td>' + $(self).attr("active-time")+'</td>'+
+                '</tr>' +
+                '<tr>'+
+                '<td>@(ASS_35.Resources.HomeText.Content):</td>'+
+                '<td>' + $(self).attr("content")+'</td>'+
+                '</tr>' +
+                '<tr>'+                             
+                '<tr>'+
+                '<td>@(ASS_35.Resources.HomeText.Version):</td>'+
+                '<td>' + $(self).attr("version") +'</td>'+
+                '</tr>' +
+                '<tr>'+
+                '<td>@(ASS_35.Resources.HomeText.Date_start):</td>'+
+                '<td>' + $(self).attr("startDate")+'</td>'+
+                '</tr>' +
+                
+                '</table>';
+        }
+        function BindButtonEditClick(self) {
+            var id = $(self).attr("data-id");
+            LoadPage('/Meeting/EditMeeting?id=' + id);
+        }
+
+        function BindButtonDeleteClick(self) {
+            id = $(self).attr("data-id");
+            QTW_RUN_MESS.alter_Message_Question_Callbaclk(" @Html.Raw(ASS_35.Resources.HomeText.Delete_infor)",
+                function() {
+                    var formData = new FormData();
+                    formData.append("id", id);
+                    QTW_JQUERY.RUN_AJAX("ajaxPOST", "/Meeting/DeleteMeeting", formData, DeleteResult);
+                });
+        }
+
+        function DeleteResult(data) {
+            if (data.result.IsSuccess === false) {
+                QTW_RUN_MESS.alter_Message_Error(data.result.Message);
+            } else {
+                QTW_RUN_MESS.alter_Message_Success(data.result.Message);
+                LoadPartialView("/Meeting/_ListMeeting", "#table-container");
+            }
+        }
+    </script>
+}

@@ -1,0 +1,55 @@
+﻿
+<div class="dataTables_paginate paging_simple_numbers" id="product-page-list">
+    <ul class="pagination">
+        <li class="previous" id="btn_previous">
+            <a>@(ASS_35.Resources.HomeText.Previous)</a>
+        </li>
+        @if (ViewBag.pageSelected - 2 > 1)
+        {
+            <li class="paginate_button page-item" page-values="1">
+                <a>1</a>
+            </li>
+            if (ViewBag.pageSelected - 3 > 1)
+            {
+                <li class="paginate_button">
+                    <a>...</a>
+                </li>
+            }
+
+        }
+        @for (int i = 1; i < ViewBag.totalPage; i++)
+        {
+            if (Math.Abs(ViewBag.pageSelected - i) <= 2)
+            {
+                <li class="paginate_button page-item" page-values="@i">
+                    <a>@i</a>
+                </li>
+            }
+        }
+        @if (ViewBag.totalPage - 3 > ViewBag.pageSelected)
+        {
+            <li class="paginate_button">
+                <a>...</a>
+            </li>
+        }
+        <li class="paginate_button page-item" page-values="@ViewBag.totalPage">
+            <a>@ViewBag.totalPage</a>
+        </li>
+        <li class="next" id="btn_next">
+            <a>@(ASS_35.Resources.HomeText.Next)</a>
+        </li>
+    </ul>
+</div>
+
+<script>
+    $(function() {
+        SetPageListSelected();
+    });
+    function SetPageListSelected() {
+        $(".page-item").each(function() {
+            if ($(this).attr("page-values") === "@ViewBag.pageSelected") {
+                $(this).addClass("active");
+            }
+        });
+    }
+</script>

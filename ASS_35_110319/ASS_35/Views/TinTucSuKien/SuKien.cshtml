@@ -1,0 +1,197 @@
+﻿@using DataContext.DAL;
+@using DataContext.Until;
+
+@{
+    var data = (ReturnSuKien)Model;
+    var model = (List<SuKien>)data.lstPost;
+}
+
+
+
+@{
+    ViewBag.Title = "SuKien";
+    Layout = "~/Views/Shared/LayoutVi.cshtml";
+}
+<style type="text/css">
+    .menu {
+        margin-bottom: 0;
+    }
+    .container.practical {
+        padding-bottom: 27px;
+    }
+    .header-title {
+        font-family: Segoe UI;
+       
+        background: url(../../images/Programer-backgroutop.png);
+        background-size: cover;
+        margin: 0;
+        padding: 40px;        
+        max-height: 270px;
+        
+    }
+        .header-title h3 {
+            font-size: 32px;
+            color: #0f7ec2;
+            font-weight: 700;
+            line-height: 40px;
+        }
+        .header-title p {
+            text-align:center;
+            font-size: 18px;
+        }
+        .sukien {
+            box-shadow: 7px 0 8px -2px rgba(207, 207, 207, 0.5), -7px 0 8px -2px rgba(207, 207, 207, 0.5);
+        }
+    .sukien table:not(:last-child) {
+        border-bottom: none;
+    }
+    table {
+        background-color: #f7f7f7;
+        font-size: 17px;
+        border: 1px solid #cfcfcf;
+    }
+        .hightlight, table tr:first-child {
+            background-color: #fcdac8;
+        }
+
+        table td {
+            border: 1px solid #cfcfcf;
+            vertical-align: top;
+        }
+    table:first-child td:first-child {
+        width: 15% !important;
+    }
+        table:first-child td:nth-child(2) {
+            width: 55% !important;
+        }
+        table:first-child td:nth-child(3) {
+            width: 30% !important;
+        }
+    td p {
+        padding: 3px 0 3px 10px;
+    }
+</style>
+<div class="header-title">
+    <h3 style="text-align: center" >
+        CHƯƠNG TRÌNH HỘI NGHỊ <br />
+        HIỆP HỘI AN SINH XÃ HỘI ASEAN (ASSA) LẦN THỨ 35
+    </h3>
+    <p >
+        Ngày 18/9- 20/9/2018 <br />
+        Khách sạn Sheraton Nha Trang, Tỉnh Khánh Hòa
+
+    </p>
+</div>
+
+<div class="sukien">    
+   
+    @if (model != null)
+    {
+        @*<div id="myCarousel" class="carousel slide " data-ride="carousel">
+            <div class="carousel-inner thuvien-bv row">
+
+                @if (model.Count > 5)
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        <div class="tintuc-bv row row item @Html.Raw(i==0?"active":"")">
+                            <div class="col-xs-12 col-sm-6 col-md-6 sk-img">
+                                <a href="@Html.Raw("chi-tiet-su-kien/" + ConvertTextToLink.ConvertUrlsToLinks(model[i].tencuochop) + "-" + model[i].id)"><img class="img-responsive" style="@Html.Raw(string.IsNullOrEmpty(model[i].avatar) ?"padding: 20%; width: 80% !important;":"" )" src="@Html.Raw(string.IsNullOrEmpty(model[i].avatar) ? "/images/assa-logo.png" : model[i].avatar)" alt=""></a>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 bp-tintuc-nb">
+                                <a href="@Html.Raw("chi-tiet-su-kien/" + ConvertTextToLink.ConvertUrlsToLinks(model[i].tencuochop) + "-" + model[i].id)"><p>@Html.Raw(model[i].tencuochop)</p></a>
+                                <div class="sl-sk-detail2">
+                                    <span><img style="padding-right:10px" src="~/images/dongho.png" alt="">Từ @Html.Raw(model[i].thoigianbatdau) đến @Html.Raw(model[i].thoigianketthuc) ngày @Html.Raw(model[i].ngaydienra)</span>
+                                </div>
+                                <div class="sl-sk-detail2">
+                                    <span><img style="padding-right:10px" src="~/images/vitri.png" alt="">@Html.Raw(model[i].diadiem)</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < model.Count; i++)
+                    {
+                        <div class="tintuc-bv row row item @Html.Raw(i==0?"active":"")">
+                            <div class="col-xs-12 col-sm-6 col-md-6 sk-img">
+                                <a href="@Html.Raw("chi-tiet-su-kien/" + ConvertTextToLink.ConvertUrlsToLinks(model[i].tencuochop) + "-" + model[i].id)"><img class="img-responsive" style="@Html.Raw(string.IsNullOrEmpty(model[i].avatar) ?"padding: 20%; width: 80% !important;":"" )" src="@Html.Raw(string.IsNullOrEmpty(model[i].avatar) ? "/images/assa-logo.png" : model[i].avatar)" alt=""></a>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 bp-tintuc-nb">
+                                <a href="@Html.Raw("chi-tiet-su-kien/" + ConvertTextToLink.ConvertUrlsToLinks(model[i].tencuochop) + "-" + model[i].id)"><p>@Html.Raw(model[i].tencuochop)</p></a>
+                                <div class="sl-sk-detail2">
+                                    <span><img style="padding-right:10px" src="~/images/dongho.png" alt="">Từ @Html.Raw(model[i].thoigianbatdau) đến @Html.Raw(model[i].thoigianketthuc) ngày @Html.Raw(model[i].ngaydienra)</span>
+                                </div>
+                                <div class="sl-sk-detail2">
+                                    <span><img style="padding-right:10px" src="~/images/vitri.png" alt="">@Html.Raw(model[i].diadiem)</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+
+                <a class="bt-left" href="#myCarousel" data-slide="prev">
+                    <img src="~/images/tin-tin-bieutuong.png" alt="">
+                </a>
+                <a class="bt-right" href="#myCarousel" data-slide="next">
+                    <img src="~/images/tin-tin-bieutuong1.png" alt="">
+                </a>
+            </div>
+        </div>*@
+
+        <div class="news-noidung">
+          
+            @for (int i=0; i< model.Count   ;i++ )
+            {
+                <div id="@Html.Raw(model[i].id)" ></div>
+                @Html.Raw(model[i].noidung);
+
+            }
+            
+            
+
+        </div>
+        <div class="row">
+            <div class="content-bottom">
+               
+                    @for (int i = 0; i < model.Count; i++)
+                    {                        
+                        <div class="row" style="padding-top: 20px;">
+                            <div class="col-sm-1">
+                                <a href="#@Html.Raw(model[i].id)"><img class="img-responsive" style="@Html.Raw(string.IsNullOrEmpty(model[i].avatar) ? " width: 60px !important;" : "")" src="@Html.Raw(string.IsNullOrEmpty(model[i].avatar) ? "/images/assa-logo.png" : model[i].avatar)" alt=""></a>
+                            </div>
+                            <div class="col-sm-11 tt-sukien">
+                                <span class="height100"><a href="#@Html.Raw(model[i].id)">@Html.Raw(model[i].tencuochop)</a></span>
+
+                                <span class="height50"><img style="padding-right:10px" src="~/images/dongho.png" alt=""> Ngày @Html.Raw(model[i].ngaydienra)</span>
+                               
+                            </div>
+                        </div>
+                    }
+                
+               
+            </div>
+        </div>
+        @*<div class="row phantrang">
+            @Html.Raw(data.dataPage)
+        </div>*@
+    }
+    else
+    {
+        <h3>Đang cập nhật</h3>
+    }
+    
+</div>
+
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        
+        var hashcode = window.location.hash;     
+        $('html,body').animate({ scrollTop: $('tr' + hashcode).offset().animate},'slow');
+
+    });
+</script>
+
+

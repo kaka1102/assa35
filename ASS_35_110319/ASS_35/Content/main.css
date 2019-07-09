@@ -1,0 +1,343 @@
+﻿/* line 963, ../SCSS/_Styles.scss */
+/* line 4185, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions {
+    /**table*/
+    font-family: Segoe UI !important;
+}
+
+    /* line 965, ../SCSS/_Styles.scss */
+    /* line 4189, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+    #Member-Institutions #main-banner {
+        height: 376px;
+        width: 100%;
+        min-width: 1248px;
+        margin-top: -55px;
+    }
+
+        /* line 971, ../SCSS/_Styles.scss */
+        /* line 4196, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+        #Member-Institutions #main-banner #bannerWrapper {
+            z-index: 10;
+            width: 1248px;
+            top: 0px;
+            margin: 0 auto;
+        }
+
+    /* line 979, ../SCSS/_Styles.scss */
+    /* line 4203, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+    #Member-Institutions .events1 {
+        background-color: #eeeeee;
+    }
+
+/* line 982, ../SCSS/_Styles.scss */
+/* line 4218, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+.buttons {
+    width: 100%;
+}
+
+/* line 4223, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+.btnLeft {
+    width: 49%;
+    border: 1px solid #c3c3c3;
+    -moz-border-radius: 8px;
+    height: 40px;
+    margin-top: 20px;
+    float: left;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+/* line 4236, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+.btnRight {
+    width: 49%;
+    border: 1px solid #c3c3c3;
+    height: 40px;
+    margin-top: 20px;
+    float: right;
+    border-left: none;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* line 4251, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+.text {
+    font-family: Segoe UI;
+    font-size: 14px;
+    color: #696969;
+    text-decoration: none !important;
+}
+
+/* line 4258, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+.email {
+    width: 100%;
+    font-family: Segoe UI;
+    color: #00578f;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 11px;
+    vertical-align: middle;
+    padding-top: 9px;
+    height: 40px;
+    float: left;
+}
+
+/* line 4274, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+.btnLeft:hover {
+    background-color: #e2e2e2;
+    transition: all 0.5s ease 0s;
+    cursor: pointer;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+}
+
+/* line 4284, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+.btnRight:hover {
+    cursor: pointer;
+    background-color: #e2e2e2;
+    transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+}
+
+/* line 4294, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+.website {
+    width: 100%;
+    font-family: Segoe UI;
+    color: #00578f;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 11px;
+    vertical-align: middle;
+    padding-top: 9px;
+    float: right;
+}
+
+/* line 4308, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#banner1 {
+    width: 100%;
+    height: 376px;
+    position: relative;
+    background-image: url(../images/memberBG.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+    /* line 4318, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+    #banner1 #in-banner {
+        position: relative;
+        top: 156px;
+        width: 439px;
+        height: 104px;
+        background-color: black;
+        opacity: 0.5;
+        float: right;
+        right: 129px;
+        border-radius: 8px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+    }
+        /* line 4332, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+        #banner1 #in-banner #bannerText {
+            padding-top: 30px;
+            font-family: Segoe UI;
+            line-height: 22px;
+            font-size: 36px;
+            line-height: 39px;
+            color: #ffffff;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+/* line 991, ../SCSS/_Styles.scss */
+/***position: relative;
+    top: 156px;
+    width: 439px;
+    height: 104px;
+    background-color: black;
+    opacity: 0.5;
+    float: left;
+    left: 149px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+}
+/* line 1005, ../SCSS/_Styles.scss */
+/* line 1018, ../SCSS/_Styles.scss */
+/* line 4373, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions #topBG {
+    background-color: rgba(128, 128, 128, 0.14);
+    margin-bottom: 34px;
+    background-image: url(../images/topShadow.jpg);
+    background-repeat: no-repeat;
+    width: 100%;
+    max-width: 100%;
+    background-size: cover;
+    background-position: top center;
+    height: 99px;
+    margin-top: -2px;
+}
+
+/* line 1033, ../SCSS/_Styles.scss */
+/* line 4386, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions .contentWrapper {
+    max-width: 1025px;
+    margin: 0 auto;
+    margin-top: 35px;
+}
+
+/* line 1039, ../SCSS/_Styles.scss */
+/* line 4393, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions .blueHeader {
+    font-family: Segoe UI;
+    font-weight: bold;
+    font-size: 18px;
+    color: #00578f;
+    margin-bottom: 51px;
+    text-align: center;
+}
+
+/* line 1047, ../SCSS/_Styles.scss */
+/* line 4402, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions .listTest {
+    font-family: Segoe UI;
+    font-size: 12px;
+    color: #00578f;
+    text-align: center;
+}
+
+/* line 1056, ../SCSS/_Styles.scss */
+/* line 4409, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions table, #Member-Institutions th, #Member-Institutions td {
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+/* line 1059, ../SCSS/_Styles.scss */
+/* line 4414, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions th, #Member-Institutions td {
+    padding: 5px;
+}
+
+/* line 1063, ../SCSS/_Styles.scss */
+/* line 4420, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions .mainHeader {
+    font-family: Segoe UI;
+    color: #ffffff;
+    font-size: 14px;
+    text-transform: uppercase;
+    background-color: #00578f;
+    background-repeat: no-repeat;
+}
+
+/* line 1072, ../SCSS/_Styles.scss */
+/* line 4429, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions .subHeader {
+    font-family: Segoe UI;
+    color: #ffffff;
+    text-transform: uppercase;
+    background-color: #00578f;
+    background-repeat: no-repeat;
+    text-align: center;
+    font-size: 11px;
+    vertical-align: middle;
+    padding: 19px;
+    border-right: 1px solid #0080d2;
+    width: 92px !Important;
+    max-width: 55px !Important;
+}
+
+/* line 1086, ../SCSS/_Styles.scss */
+/* line 4445, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions .top {
+    margin-top: 20px;
+    line-height: 22px;
+}
+
+/* line 1090, ../SCSS/_Styles.scss */
+/* line 4450, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions a {
+    font-family: Segoe UI;
+    font-size: 14px;
+    color: #696969;
+    text-decoration: none !important;
+}
+
+/* line 1097, ../SCSS/_Styles.scss */
+/* line 4457, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions .orgText {
+    font-family: Segoe UI;
+    font-size: 14px;
+    color: #00578f;
+    text-transform: uppercase;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 20px;
+}
+
+/* line 1108, ../SCSS/_Styles.scss */
+/* line 4467, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions td {
+    background-color: #f5f5f5;
+    border-right: 1px solid #bbbbbb;
+}
+
+/* line 1113, ../SCSS/_Styles.scss */
+/* line 4472, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions .info {
+    font-family: Segoe UI;
+    font-size: 14px;
+    color: #696969;
+    line-height: 22px;
+    vertical-align: middle;
+    padding: 10px;
+    max-width: 200px !important;
+    word-wrap: break-word;
+}
+
+/* line 1125, ../SCSS/_Styles.scss */
+/* line 4483, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions .cat {
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+/* line 4488, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions .borderTable {
+    border-bottom: 1px solid #B2ACAC;
+}
+
+/* line 1129, ../SCSS/_Styles.scss */
+/* line 4492, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions .title {
+    margin-right: 9px;
+}
+
+/* line 4496, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions .po {
+    width: 194px;
+}
+
+/* line 1134, ../SCSS/_Styles.scss */
+/* line 4500, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions tr {
+    border-bottom: 1px solid #e8e8e8;
+}
+
+/* line 1138, ../SCSS/_Styles.scss */
+/* line 4504, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions .circ {
+    vertical-align: middle;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* line 1143, ../SCSS/_Styles.scss */
+/* line 4511, C:/Users/Meylisa Tjong/Desktop/Junxian/asean/SCSS/_Styles.scss */
+#Member-Institutions table {
+    border-collapse: collapse;
+}

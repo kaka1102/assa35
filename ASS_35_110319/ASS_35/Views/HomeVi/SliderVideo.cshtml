@@ -1,0 +1,150 @@
+﻿@using DataContext.DAL;
+@using DataContext.Until;
+@{
+    var model = (List<Video>)Model;
+}
+
+<div id="myCarouse2" class="carousel slide" data-ride="carousel">
+
+    <!-- Indicators -->
+    <ol class="carousel-indicators slider-t" style="display:none">
+      @if (model.Count > 0)
+        {
+            double d = model.Count;
+            double check = model.Count / 4.0;
+            double tong = Math.Ceiling(check);
+                for (int i = 0; i < tong; i++)
+                {
+                    <li data-target="#myCarouse2" data-slide-to="@Html.Raw(i)" class="@Html.Raw(i==0?"active":"")"></li>
+                 }
+          }
+    </ol>      
+    <div>
+        <div class="tt-video">
+            <div class="inform-vd">
+                <a href="/video">VIDEO</a>
+            </div>
+            <div class="inform-pt">
+                <!-- Left and right controls -->
+                <a class="left carousel-control btn-p1" href="#myCarouse2" data-slide="prev">
+                    <!--<span class=""></span>-->
+                    <button class="btn-p"> <img src="~/images/pre-pt.png" style="margin-right:-10px">Preview</button>
+                    <img src="~/images/border-pt.png">
+                </a>
+                <a class="right carousel-control btn-p1" href="#myCarouse2" data-slide="next">
+                    <button class="btn-n">Next<img src="~/images/next-pt.png"> </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+        @if (model.Count > 0)
+        {
+            double d = model.Count;
+            double check = model.Count / 4.0;
+            double tong = Math.Ceiling(check);
+            var sodu = d % 4;
+            int chisodu =(int)(d - sodu);
+            if (tong == 1)
+            {
+                <div class="item active">
+                    <div class="ds-video">
+                        @for (int j = 0; j < d; j++)
+                        {
+                            <div class="dt-video col-md-3 col-sm-6">
+                                <div class="vd-video" style="position: relative">
+                                    <a href="@Html.Raw("lib-video/" + ConvertTextToLink.ConvertUrlsToLinks(model[j].tenchude) + "-" + model[j].id)" style="position: absolute; width: 100%; height: 170px; z-index: 2;"></a>
+                                    @Html.Raw(model[j].link)
+                                </div>
+                                <div class="td-video">
+                                    <a href="@Html.Raw("lib-video/" + ConvertTextToLink.ConvertUrlsToLinks(model[j].tenchude) + "-" + model[j].id)" title="@Html.Raw(model[j].tenchude)">@Html.Raw(model[j].tenchude)</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+
+                for (var i = 0; i < tong; i++)
+                {
+                    if (i == 0)
+                    {
+                        <div class="item active">
+                            <div class="ds-video">
+                                @for (int j = 0; j < 4; j++)
+                                {
+                                    <div class="dt-video col-md-3 col-sm-6">
+                                        <div class="vd-video" style="position: relative">
+                                            <a href="@Html.Raw("lib-video/" + ConvertTextToLink.ConvertUrlsToLinks(model[j].tenchude) + "-" + model[j].id)" style="position: absolute; width: 100%; height: 170px; z-index: 2;"></a>
+                                            @Html.Raw(model[j].link)
+                                        </div>
+                                        <div class="td-video">
+                                            <a href="@Html.Raw("lib-video/" + ConvertTextToLink.ConvertUrlsToLinks(model[j].tenchude) + "-" + model[j].id)" title="@Html.Raw(model[j].tenchude)">@Html.Raw(model[j].tenchude)</a>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    if (i != (tong - 1))
+                    {
+                        for (var j = 4; j < (d - sodu); j++)
+                        {
+                            <div class="item">
+                                <div class="ds-video">
+                                    @for (var h = 0; h < 4; h++)
+                                    {
+                                     <div class="dt-video col-md-3 col-sm-6">
+                                         <div class="vd-video" style="position: relative">
+                                             <a href="@Html.Raw("lib-video/" + ConvertTextToLink.ConvertUrlsToLinks(model[j].tenchude) + "-" + model[j].id)" style="position: absolute; width: 100%; height: 170px; z-index: 2;"></a>
+                                             @Html.Raw(model[j].link)
+                                         </div>
+                                      <div class="td-video">
+                                       <a href="@Html.Raw("lib-video/" + ConvertTextToLink.ConvertUrlsToLinks(model[j].tenchude) + "-" + model[j].id) title="@Html.Raw(model[j].tenchude)>@Html.Raw(model[j].tenchude)</a>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                   
+                        <div class="item">
+                            <div class="ds-video dd">
+                               
+                                @for (int h = chisodu; h < d; h++)
+                                {
+                                     
+                                    <div class="dt-video col-md-3 col-sm-6">
+                                        <div class="vd-video" style="position: relative">
+                                            <a href="@Html.Raw("lib-video/" + ConvertTextToLink.ConvertUrlsToLinks(model[h].tenchude) + "-" + model[h].id)" style="position: absolute; width: 100%; height: 170px; z-index: 2;"></a>
+                                            @Html.Raw(model[h].link)
+                                        </div>
+                                        <div class="td-video">
+                                            <a href="@Html.Raw("lib-video/" + ConvertTextToLink.ConvertUrlsToLinks(model[h].tenchude) + "-" + model[h].id)" title="@Html.Raw(model[h].tenchude)">@Html.Raw(model[h].tenchude)</a>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        }
+        else
+        {
+                        <h3>Đang cập nhật</h3>
+        }
+    </div>
+
+</div>
+
+@* cập nhật *@

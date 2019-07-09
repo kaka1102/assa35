@@ -1,0 +1,342 @@
+﻿@using DataContext.DAL;
+@using DataContext.Until;
+@{
+    var model = (List<DateMeeting>)Model;
+
+}
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutEn.cshtml";
+}
+
+
+<div class="programer">
+
+    @if (model != null)
+    {
+    <div class="programer-top">
+        <div class="programer-for">
+            <p style="font-size:40px;">
+                Program for 35<sup>th</sup> ASSA Board Meeting <br>
+                @*@Html.Raw(model.DateToDate)*@
+            </p>
+            <img src="images/programer-imgtop.png" alt="">
+        </div>
+        <div class="programer-at" style="font-size:24px;">
+            <p>
+                Challenges and Opportunities of ASEAN social security institutions <br />
+                in the context of the 4th Industrial Revolution and Free Flow of Labour <br />
+                At Sheraton in Nha Trang, Khanh Hoa, Viet Nam <br />
+                18th- 20th September, 2018
+
+            </p>
+        </div>
+        <div class="programer-at display-mobile" style="font-size:24px;">
+            <p>                
+                At Sheraton in Nha Trang, Khanh Hoa, Viet Nam <br />
+                18th- 20th September, 2018
+
+            </p>
+        </div>
+    </div>
+        <div class="container" style="padding-top:40px;padding-bottom:50px;min-height:300px;">
+            <div class="col-md-12">
+                <div class="">
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs nav-tab-prog st-document">
+                            @*<li class="div-icon" style="width: 77px;">
+                                <a href="" data-toggle="tab" aria-expanded="false">
+                                    <img src="~/images/icon.png" class="img-icon-tab-pg">
+                                </a>
+                            </li>*@
+                            @for (int i = 0; i < model.Count; i++)
+                            {
+                                <li class="@Html.Raw(i==0?"active":"")">
+                                    <a href="@Html.Raw("#basic-tab"+i)" data-toggle="tab" aria-expanded="false">@Html.Raw(model[i].ngayhop)</a>
+                                    <span class="box-arrow"></span>
+                                </li>
+                            }
+
+                           
+                            @*<li class="active">
+                                    <a href="#basic-tab1" data-toggle="tab" aria-expanded="false">@Html.Raw(model.Date1)</a>
+                                    <span class="box-arrow"></span>
+                                </li>
+                                <li class="">
+                                    <a href="#basic-tab2" data-toggle="tab" aria-expanded="true">@Html.Raw(model.Date2)</a>
+                                    <span class="box-arrow"></span>
+                                </li>
+                                <li class="">
+                                    <a href="#basic-tab3" data-toggle="tab" aria-expanded="true">@Html.Raw(model.Date3)</a>
+                                    <span class="box-arrow"></span>
+                                </li>*@
+                        </ul>
+
+                        <div class="tab-content tab-programme">
+                            @if (model != null)
+                            {
+                                for (int i = 0; i < model.Count; i++)
+                                {
+                                    // xem lại vong for
+                                    <div class="tab-pane @Html.Raw(i==0?"active":"")" id="@Html.Raw("basic-tab"+i)">
+                                        <table>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td class="pg-left" style="height: 40px;"></td>
+                                                    <td></td>
+                                                </tr>
+                                                @if (model[i].listhop != null)
+                                                {
+
+                                                    var listHop = model[i].listhop;
+                                                    for (int j = 0; j < listHop.Count; j++)
+                                                    {
+                                                        if (listHop[j].ngayhop == model[i].ngayhop)
+                                                        {
+                                                            <tr class="pg-highlight">
+                                                                <td class="pg-left"></td>
+                                                                <td class="text-bold">@Html.Raw(listHop[j].tencuochop)</td>
+                                                                @*<td class="text-bold">@Html.Raw(model[i].diadiem)</td>*@
+                                                            </tr>
+                                                            if (listHop[j].chitiet.Count > 0)
+                                                            {
+                                                                foreach (var item2 in listHop[j].chitiet)
+                                                                {
+                                                            <tr class="">
+
+                                                                @if (item2.thoigianketthuc != "23:45" && item2.thoigianbatdau !="01:00")
+                                                                {
+                                                                    <td class="pg-left  ">@Html.Raw(item2.thoigianbatdau) - @Html.Raw(item2.thoigianketthuc)</td>
+                                                                }else if (item2.thoigianketthuc == "23:45" &&   item2.thoigianbatdau != "01:00")
+                                                                {
+                                                                    <td class="pg-left  ">@Html.Raw(item2.thoigianbatdau)</td>
+                                                                }
+                                                                else if(item2.thoigianbatdau == "01:00")
+                                                                {
+                                                                    <td class="pg-left"></td>
+                                                                }
+
+                                                                <td class="">@Html.Raw(item2.noidung)</td>
+
+                                                                @*<td class="text-bold">@Html.Raw(item2.diadiem)</td>*@
+                                                            </tr>
+
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                <tr class="">
+                                                                    <td class="pg-left"></td>
+                                                                    <td></td>
+                                                                </tr>
+
+                                                            }
+                                                        }
+
+                                                    }
+                                                }
+                                                else
+                                                {
+
+
+                                                    <tr class="pg-highlight">
+                                                        <td class="pg-left"></td>
+                                                        <td class="text-bold">Update later</td>
+                                                    </tr>
+
+
+                                                }
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                }
+
+                            }
+
+                            else
+                            {
+
+
+                                <tr class="pg-highlight">
+                                    <td class="pg-left"></td>
+                                    <td class="text-bold">Không có sự kiện nào</td>
+                                </tr>
+
+
+                            }
+
+
+                            @*<div class="tab-pane active" id="basic-tab1">
+            @if (model.lstNgay1 != null)
+            {
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="pg-left" style="height: 40px;"></td>
+                        <td></td>
+                    </tr>
+                    @foreach (var item in model.lstNgay1)
+                        {
+                    <tr class="pg-highlight">
+                        <td class="pg-left"></td>
+                        <td class="text-bold">@Html.Raw(item.tencuochop)</td>
+                        <td class="text-bold">@Html.Raw(item.diadiem)</td>
+                    </tr>
+                            foreach (var item2 in item.chitiet)
+                            {
+                    <tr class="">
+                        <td class="pg-left">@Html.Raw(item2.thoigianbatdau) - @Html.Raw(item2.thoigianketthuc)</td>
+                        <td class="text-bold">@Html.Raw(item2.ten)</td>
+                        <td class="text-bold">@Html.Raw(item2.diadiem)</td>
+                    </tr>
+                    <tr>
+                        <td class="pg-left"></td>
+                        <td>@Html.Raw(item2.noidung)</td>
+                        <td class=""></td>
+                    </tr>
+                            }
+                        }
+                </tbody>
+            </table>
+            }
+            else
+            {
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="pg-left" style="height: 40px;"></td>
+                        <td></td>
+                    </tr>
+                    <tr class="pg-highlight">
+                        <td class="pg-left"></td>
+                        <td class="text-bold">Không có sự kiện nào</td>
+                    </tr>
+                </tbody>
+            </table>
+            }
+        </div>
+
+        <div class="tab-pane " id="basic-tab2">
+            @if (model.lstNgay2 != null)
+            {
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="pg-left" style="height: 40px;"></td>
+                        <td></td>
+                    </tr>
+                    @foreach (var item in model.lstNgay2)
+                        {
+                    <tr class="pg-highlight">
+                        <td class="pg-left"></td>
+                        <td class="text-bold">@Html.Raw(item.tencuochop)</td>
+                        <td class="text-bold">@Html.Raw(item.diadiem)</td>
+                    </tr>
+                            foreach (var item2 in item.chitiet)
+                            {
+                    <tr class="">
+                        <td class="pg-left">@Html.Raw(item2.thoigianbatdau) - @Html.Raw(item2.thoigianketthuc)</td>
+                        <td class="text-bold">@Html.Raw(item2.ten)</td>
+                        <td class="text-bold">@Html.Raw(item2.diadiem)</td>
+                    </tr>
+                    <tr>
+                        <td class="pg-left"></td>
+                        <td>@Html.Raw(item2.noidung)</td>
+                        <td class=""></td>
+                    </tr>
+                            }
+                        }
+                </tbody>
+            </table>
+            }
+            else
+            {
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="pg-left" style="height: 40px;"></td>
+                        <td></td>
+                    </tr>
+                    <tr class="pg-highlight">
+                        <td class="pg-left"></td>
+                        <td class="text-bold">Không có sự kiện nào</td>
+                    </tr>
+                </tbody>
+            </table>
+            }
+        </div>
+
+        <div class="tab-pane " id="basic-tab3">
+            @if (model.lstNgay3 != null)
+            {
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="pg-left" style="height: 40px;"></td>
+                        <td></td>
+                    </tr>
+                    @foreach (var item in model.lstNgay3)
+                        {
+                    <tr class="pg-highlight">
+                        <td class="pg-left"></td>
+                        <td class="text-bold">@Html.Raw(item.tencuochop)</td>
+                        <td class="text-bold">@Html.Raw(item.diadiem)</td>
+                    </tr>
+                            foreach (var item2 in item.chitiet)
+                            {
+                    <tr class="">
+                        <td class="pg-left">@Html.Raw(item2.thoigianbatdau) - @Html.Raw(item2.thoigianketthuc)</td>
+                        <td class="text-bold">@Html.Raw(item2.ten)</td>
+                        <td class="text-bold">@Html.Raw(item2.diadiem)</td>
+                    </tr>
+                    <tr>
+                        <td class="pg-left"></td>
+                        <td>@Html.Raw(item2.noidung)</td>
+                        <td class=""></td>
+                    </tr>
+                            }
+                        }
+                </tbody>
+            </table>
+            }
+            else
+            {
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="pg-left" style="height: 40px;"></td>
+                        <td></td>
+                    </tr>
+                    <tr class="pg-highlight">
+                        <td class="pg-left"></td>
+                        <td class="text-bold">Không có sự kiện nào</td>
+                    </tr>
+                </tbody>
+            </table>
+            }
+        </div>*@
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3>Error data !</h3>
+    }
+
+</div>
+
+<section class="sec-below contact-footer">
+    <div class="sec-above-bg">
+        <div class="sec-above-bg-color">
+            <span class="title-footer">Copyright 2018 Social Security Office. All right reserved</span>
+        </div>
+    </div>
+</section>

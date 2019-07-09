@@ -1,0 +1,158 @@
+﻿@using DataContext.Constants;
+@using DataContext.Until;
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Trang Chủ</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="~/Content/Js-Vi/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/Js-Vi/bootstrap.min.js"></script>
+    <script src="~/Scripts/Client.js"></script>
+    <link href="~/Content/Style-Vi/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Style-Vi/style.css" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <link href="~/Content/Style-Vi/Venues.css" rel="stylesheet" />
+    <link href="~/Content/Style-Vi/style-new.css" rel="stylesheet" />
+    <link href="~/Content/Style-Vi/Responsite.css" rel="stylesheet" />
+    <link href="~/Content/eliteadmin-colors/css/themify-icons.css" rel="stylesheet" />
+    @RenderSection("cssheader", false)
+</head>
+<body>
+    <header id="header" class="header ">
+        @*<div class=" marquee mar-maintain"  >
+            <p class="marquee-text">This site is comming soon</p>
+        </div>*@
+        <div class=" newcontainer">
+            <a href="/">
+                <img src="~/images/banner-assa-final-vi.png" alt="ASSA 2018" class="image-destop" />
+                <img src="~/images/banner-assa-final-mobile.png" alt="ASSA 2018" class="image-mobile" />
+            </a>
+        </div>
+        @*<div class="newcontainer">
+            <a href="/" class="header-destop">
+                <div class="logo">
+                    <div class="logolist">
+                        <ul>
+                            <li>
+                                <div class="logo-assa">
+                                    <img src="~/images/logo-assa-eddited.png" alt="Logo ASSA" />
+                                </div>
+                            </li>
+                            <li>
+                                <div class="logo20y">
+                                    <img src="~/images/logo-20y-edited.png" alt="20 Years" />
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flag-asean">
+                        <img src="~/images/top-flag-eddited.png" />
+                    </div>
+                </div>
+                <div class="title">
+                    <h1 class="title-assa text-uppercase">
+                        Assa Viet nam 2018
+                    </h1>
+                    <h3 class="slogan text-uppercase">
+                        THE 4<sup>TH</sup> INDUSTRIAL REVOLUTION AND ASEAN SOCIAL SECURITY DEVELOPMENT
+                    </h3>
+                </div>
+
+            </a>
+            <a class="header-respon" href="/">
+                <img src="~/images/header-1024.png" />
+            </a>
+        </div>*@
+
+    </header><!-- /header -->
+    <content>
+        <nav class="navbar navbar-default navbar-inverse menu  " role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+					<div style="padding: 9px 0px;display: block;float: left;">
+						<div class="frm-search" style="padding-left:0px">
+							<div class="row">
+								<input class="form-control" style="width: 160px; height: 30px;" placeholder="Search..." type="text" onkeydown="if (event.keyCode == 13) { window.location = window.location.origin + '/tim-kiem' + '?q=' + this.value; return false}">
+								<span class="glyphicon glyphicon-search icon-search"></span>
+							</div>
+						</div>
+					</div>
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-ex1-collapse" aria-expanded="false" aria-controls="navbar">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+					<div style="padding: 11px 2px;display: block;float: right;">
+						<a class="=dropdown-toggle waves-effect waves-light" title="English" data-toggle="" href="/en"><img style="border: 1px solid transparent;" src="~/images/nuocanh.png"></a>
+					</div>
+                </div>
+                <div class="collapse navbar-collapse navbar-ex1-collapse css-form-search" style="height: 1px;">
+                    @Html.Action("Index", "LoadMenuClient")
+
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="wrapper">
+            <div class="container practical gg-c">
+
+                @RenderBody()
+
+            </div>
+        </div>
+        <section class="sec-below sec-below-trans">
+            <div class="sec-above-bg">
+                <div class="sec-above-bg-color">
+                    <span style="">Bản quyền trang tin thuộc Bảo hiểm xã hội Việt Nam.</span>
+                </div>
+            </div>
+        </section>
+    </content>
+
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="ti-angle-double-up"></i></button>
+
+    <script type="text/javascript">
+        $(function () {
+            $(".vpause").click(function () {
+                $(this).addClass("d-hide");
+                $(this).parent().find(".vplay").removeClass("d-hide");
+            });
+            $(".vplay").click(function () {
+                $(this).addClass("d-hide");
+                $(this).parent().find(".vpause").removeClass("d-hide");
+            });
+        });
+        $(function () {
+            $(".sb-left ul li").click(function () {
+                $(this).parent().find(".tb-left").removeClass("tb-active");
+                $(this).find(".tb-left").addClass("tb-active");
+            });
+        });
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+</body>
+</html>

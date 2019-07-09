@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "AssaVN";
+    Layout = "~/Views/Shared/LayoutVi.cshtml";
+}
+
+<style>
+    .overview {
+        padding-bottom: 150px;
+    }
+
+    .menu {
+        margin-bottom: 0px !important;
+    }
+
+    .container.practical {
+        width: 100% !important;
+    }
+</style>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    @Html.Action("SlideTop", "HoiNghi")
+</div>
+
+<div class="overview">
+    <div class="container">
+        @Html.Action("GioiThieuAssaVN", "HoiNghi")
+    </div>
+</div>

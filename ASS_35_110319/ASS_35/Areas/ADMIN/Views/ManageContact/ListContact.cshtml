@@ -1,0 +1,80 @@
+﻿
+@using DataContext.Constants
+<div class="row">
+    <div class="col-lg-12">
+        <div class="white-box">
+            <div class="col-sm-12" style="padding-bottom: 10px; border-bottom: 1px solid red; margin-bottom: 20px;">
+                <div class="row">
+                    <h3 class="box-title m-b-0">
+                        <i class="ti-angle-double-right" style="padding-right: 10px"></i>@(ASS_35.Resources.HomeText.Manager_contact_infor)
+                    </h3>
+                </div>
+            </div>
+            <div id="table-container">
+                <div class="white-box">
+                    <div class="form-group text-left">
+                        <label class="control-label">@(ASS_35.Resources.HomeText.Version)</label>
+                        <select class="form-control" id="cbx-contact-language">
+                            <option value="1">@(ASS_35.Resources.HomeText.TV) </option>
+                            <option value="2">@(ASS_35.Resources.HomeText.TA) </option>
+                        </select>
+                    </div>
+                    <div class="form-group text-left" id="content-container">
+                     @Html.Action("_ListContact","ManageContact",new { language = SystemMessageConst.LanguageVersion.Vietnam })
+                    </div>
+                    <div class="form-group text-left">
+                        <button class="btn btn-success waves-effect waves-light btn-save" type="button" data-type="@SystemMessageConst.StatusConst.Pending">
+                            <span class="btn-label">
+                                <i class="ti-save"></i>
+                            </span>@(ASS_35.Resources.HomeText.ButtonSave)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function() {
+        BindButtonSaveClick();
+        BindButtonCancelClick();
+        BindButtonLanguageChange();
+    });
+
+    function BindButtonLanguageChange() {
+        $("#cbx-contact-language").change(function () {
+            var language = $(this).val();
+            var data = {
+                language : language
+            }
+            LoadPartialView('@Url.Action("_ListContact", "ManageContact")', "#content-container", data);
+        });
+    }
+    function BindButtonCancelClick() {
+        $("#btn-cancel").click(function() {
+            LoadPage('@Url.Action("ListContact", "ManageContact")');
+        });
+    }
+
+    function AddResult(data) {
+        if (data.result.IsSuccess === false) {
+            QTW_RUN_MESS.alter_Message_Error(data.result.Message);
+        } else {
+            QTW_RUN_MESS.alter_Message_Success(data.result.Message);
+        }
+    }
+
+    function BindButtonSaveClick() {
+        $(".btn-save").click(function () {
+            var venueContents = CKEDITOR.instances['txt-contents'].getData();
+            var language = $("#cbx-contact-language").val();
+            var infomationData = {
+                venueContents: venueContents,
+                language: language
+            }
+            var formData = new FormData();
+            formData.append("infomationData", JSON.stringify(infomationData));
+            QTW_JQUERY.RUN_AJAX("ajaxPOST", "/ManageContact/_EditContact", formData, AddResult);
+        });
+    }
+</script>

@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "ChangePractical";
+    Layout = "~/Views/Shared/LayoutEn.cshtml";
+}
+<style>
+    .sec-below {
+        padding-bottom: 0px;
+    }
+</style>
+<div class="container practical">
+    <div class="sec-cont-top">
+        <div class="sec-cont-top-over"></div>
+        <div class="sec-cont-top-in">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#general" aria-controls="home" role="tab" data-toggle="tab" class="taber">
+
+                        <div class="igeneralinfo">
+                            <i>
+                            </i>
+                            GENERAL INFO
+                            <div class='arrow-down'></div>
+                        </div>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#custom" aria-controls="profile" role="tab" data-toggle="tab" class="taber">
+                        <div class="icustom">
+                            <i>
+                            </i>
+                            custom &amp; immigration
+                            <div class='arrow-down'></div>
+                        </div>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#flightinformation" aria-controls="messages" role="tab" data-toggle="tab" class="taber">
+                        <div class="iflightinformation">
+                            <i>
+                            </i>
+                            FLIGHT INFORMATION
+                            <div class='arrow-down'></div>
+                        </div>
+                    </a>
+
+                </li>
+                <li role="presentation">
+                    <a href="#venue" aria-controls="messages" role="tab" data-toggle="tab" class="taber">
+                        <div class="ivenue">
+                            <i>
+                            </i>
+                            venue
+                            <div class='arrow-down'></div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="sec-cont-bottom">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="general">
+                @Html.Action("General", "Practical")
+            </div>
+            <div role="tabpanel" class="tab-pane" id="custom">
+                @Html.Action("Custom", "Practical")
+            </div>
+            <div role="tabpanel" class="tab-pane" id="flightinformation">
+                @Html.Action("Flight", "Practical")
+            </div>
+            <div role="tabpanel" class="tab-pane" id="venue">
+                @Html.Action("Venue", "Practical")
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<section class="sec-below sec-below-trans">
+    <div class="sec-above-bg">
+        <div class="sec-above-bg-color">
+            <span class="title-footer">Copyright 2018 Social Security Office. All right reserved</span>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,40 @@
+﻿@using DataContext
+@using DataContext.Constants
+@if (ViewBag.roleId == SystemMessageConst.RoleConst.Daibieu || ViewBag.roleId == SystemMessageConst.RoleConst.Phongvien)
+{
+    <li class="dropdown">
+        @if (Model != null)
+        {
+            var model = (List<ListNotificationPerson_Result>) Model;
+            <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" id="notifi-alert">
+                <i class="icon-envelope"></i>
+                @if (model.Count > 0)
+                {
+                    <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                }
+            </a>
+            <ul class="dropdown-menu mailbox animated bounceInDown" id="notifi-container" data-url="/NotificationManager/ListNotificationPerson">
+                @Html.Action("_NotificationAlert")
+            </ul>
+        }
+    </li>
+    <script>
+        $(function() {
+            BindButtonNotifiItemClick();
+            BindButtonNotifiClick();
+        });
+        function BindButtonNotifiItemClick() {
+            $("#notifi-container").click(function() {
+                var url = $(this).attr("data-url");
+                window.location.hash = url;
+                LoadPage(url);
+            });
+        }
+
+        function BindButtonNotifiClick() {
+            $("#notifi-alert").click(function() {
+                LoadPartialView('@Url.Action("_NotificationAlert")', "#notifi-container");
+            });
+        }
+    </script>
+}

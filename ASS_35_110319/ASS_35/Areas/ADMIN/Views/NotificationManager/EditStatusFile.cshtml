@@ -1,0 +1,63 @@
+﻿@using DataContext
+@if (Model != null)
+{
+    var model = (m_filethongbao) Model;
+    <div class="white-box">
+        <div class="form-group text-left">
+            <label class="control-label">@(ASS_35.Resources.HomeText.Notice_Name)</label>
+            <input type="text" class="form-control" id="txt-venue-name" placeholder="@(ASS_35.Resources.HomeText.Notice_Name)" value="@(model.tenfile)" readonly="readonly">
+        </div>
+        <div class="form-group text-left">
+            <label class="control-label">@(ASS_35.Resources.HomeText.Reason)</label>
+            <textarea id="txt-admin-feed" class="form-control" rows="5">@(model.lido)</textarea>
+        </div>
+        <div class="form-group text-left">
+            <label class="control-label" style="width: 100%;">@(ASS_35.Resources.HomeText.Status_File)</label>
+            @(Html.Action("ListStatusActiveAndDeActive", "Common", new {name = "cbx-status", idSelected = model.trangthai}))
+        </div>
+        <div class="form-actions">
+            <button id="btn-save" type="button" class="btn btn-success"> <i class="fa fa-check"></i>@(ASS_35.Resources.HomeText.ButtonSave)</button>
+            <button id="btn-cancel" type="button" class="btn btn-default">@(ASS_35.Resources.HomeText.ButtonBack)</button>
+        </div>
+    </div>
+    <script>
+        $(function() {
+            BindButtonSaveClick();
+            BindButtonCancelClick();
+        });
+
+        function BindButtonCancelClick() {
+            $("#btn-cancel").click(function() {
+                LoadPage('@Url.Action("EditNotification", "NotificationManager",new {id = ViewBag.idNotifi })');
+            });
+        }
+
+        function AddResult(data) {
+            if (data.result.IsSuccess === false) {
+                QTW_RUN_MESS.alter_Message_Error(data.result.Message);
+            } else {
+                QTW_RUN_MESS.alter_Message_Success(data.result.Message);
+            }
+        }
+
+        function BindButtonSaveClick() {
+            $("#btn-save").click(function() {
+                var venueId = "@ViewBag.id";
+                var venueStatus = $("#cbx-status").val();
+                var feedback = $("#txt-admin-feed").val();
+                var infomationData = {
+                    venueStatus: venueStatus,
+                    venueId: venueId,
+                    feedback: feedback
+                }
+                var formData = new FormData();
+                formData.append("infomationData", JSON.stringify(infomationData));
+                QTW_JQUERY.RUN_AJAX("ajaxPOST", "/NotificationManager/_EditStatusFile", formData, AddResult);
+            });
+        }
+    </script>
+}
+else
+{
+    <p>@(ASS_35.Resources.HomeText.No_data)</p>
+}

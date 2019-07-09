@@ -1,0 +1,46 @@
+﻿@using DataContext.DAL;
+@using DataContext.Until;
+
+@{
+    var model = (DetailsPost)Model;
+}
+
+@{
+    ViewBag.Title = "DetailsNew";
+    Layout = "~/Views/Shared/LayoutEn.cshtml";
+}
+
+
+<div class="document-agemda">
+    <div class="container document-nodung">
+
+        <div class="action-tt new-action-tt">
+            <span><a href="/">Home &gt; </a></span>
+            <span><a href="/news-and-events">News and events </a></span>
+        </div>
+
+        <div class="board-meeting  board-meeting-new">
+            @if (model != null)
+            {
+                <span>@Html.Raw(model.tieude)</span>
+                <span class="infor-tt">@Html.Raw(model.gioithieu)</span>
+                @*<span class="time-create"><img src="~/images/dongho.png" alt="">@Html.Raw(model.thoigianpheduyet.Remove(2, 1).Insert(2, " tháng "))</span>*@
+                <span class="time-create"><img src="~/images/dongho.png" alt=""> @Html.Raw(model.thoigianpheduyet)</span>
+                @Html.Raw(model.noidung)
+            }
+        </div>
+
+        @Html.Action("NewsInvolve", "DocumentEn")
+
+  
+    </div>
+    <section class="sec-below">
+        <div class="sec-above-bg">
+            <div class="sec-above-bg-color">
+                <span class="title-footer">Copyright 2018 Social Security Office. All right reserved</span>
+            </div>
+        </div>
+    </section>
+</div>
+
+

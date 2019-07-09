@@ -1,0 +1,12 @@
+﻿@if (ViewBag.id == 3)
+{
+    <span class="label label-table label-success">@(ASS_35.Resources.HomeText.Active)</span>
+}
+@if (ViewBag.id == 2)
+{
+    <span class="label label-table label-warning">@(ASS_35.Resources.HomeText.Pending)</span>
+}
+@if (ViewBag.id == 1)
+{
+    <span class="label label-table label-danger">@(ASS_35.Resources.HomeText.Lock)</span>
+}

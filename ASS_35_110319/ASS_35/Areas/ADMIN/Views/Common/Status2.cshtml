@@ -1,0 +1,22 @@
+﻿@using DataContext.Constants
+@if (ViewBag.id == SystemMessageConst.StatusConst.Active)
+{
+    <span class="label label-table label-success">@(ASS_35.Resources.HomeText.Active)</span>
+}
+@if (ViewBag.id == SystemMessageConst.StatusConst.Pending)
+{
+    <span class="label label-table label-warning">@(ASS_35.Resources.HomeText.Pending)</span>
+}
+@if (ViewBag.id == SystemMessageConst.StatusConst.Deactive)
+{
+    <span class="label label-table label-danger">@(ASS_35.Resources.HomeText.Deactive)</span>
+}
+@if (ViewBag.id == SystemMessageConst.StatusConst.RemoveOnSite)
+{
+    <span class="label label-table label-megna">@(ASS_35.Resources.HomeText.RemoveOnSite)</span>
+}
+@if (ViewBag.id == SystemMessageConst.StatusConst.SaveDraft)
+{
+    <span class="label label-table label-default">@(ASS_35.Resources.HomeText.Save_Draft)</span>
+}
+

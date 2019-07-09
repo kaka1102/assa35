@@ -1,0 +1,44 @@
+﻿@using DataContext
+@{
+    var model = (List<m_trangthai>) Model;
+}
+@*<div class="col-sm-6">*@
+<div class="col-sm-4">
+    <select class="custom-select col-6" id="@ViewBag.name">
+        @if (ViewBag.hasAll == true)
+        {
+            <option value="-1">@(ASS_35.Resources.HomeText.All)</option>
+        }
+        @foreach (var item in model)
+        {
+            @*<option value="@item.id" @(item.id == ViewBag.idSelected ? "selected='selected'" : "")>@item.tentrangthai</option>*@
+        <option value="@item.id" @(item.id == ViewBag.idSelected ? "selected='selected'" : "")>
+
+        @if(item.kytu==0){
+            @(ASS_35.Resources.HomeText.All)
+        }
+        else if (item.kytu == 1)
+        {
+           @(ASS_35.Resources.HomeText.Deactive)
+        }
+        else if (item.kytu == 2)
+        {
+            @(ASS_35.Resources.HomeText.Pending)
+        }
+        else if (item.kytu == 3)
+        {
+            @(ASS_35.Resources.HomeText.Active)
+        }
+        else if (item.kytu == 4)
+        {
+            @(ASS_35.Resources.HomeText.Save_Draft)
+        }
+        else if (item.kytu == 5)
+        {
+            @(ASS_35.Resources.HomeText.RemoveOnSite)
+        }
+        </option>
+        }
+    </select>
+</div>
+@*</div>*@

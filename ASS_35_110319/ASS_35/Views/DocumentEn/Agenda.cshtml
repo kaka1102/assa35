@@ -1,0 +1,22 @@
+﻿@using DataContext.DAL;
+
+@{
+    var model = (DataContext.m_baivietgioithieu)Model;
+}
+
+
+<div class="otherdocuments">
+    AGENDA
+    <img src="images/document-agemda-muiten.png" alt="">
+</div>
+<div class="rebortotherdocuments">
+
+    @if (model != null)
+    {
+        @Html.Raw(model.noidung)
+    }
+    else
+    {
+        <h3>Đang cập nhật</h3>
+    }
+</div>

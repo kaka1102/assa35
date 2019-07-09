@@ -1,0 +1,222 @@
+﻿<style type="text/css">
+    .dataTables_length {
+        margin-top: 15px;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <div class="col-sm-12" style="padding-bottom: 10px; border-bottom: 1px solid red;">
+                <div class="row">
+                    <h3 class="box-title m-b-0"><i class="ti-angle-double-right" style="padding-right:10px"></i>@ViewBag.title</h3>
+                </div>
+            </div>
+
+            <div class="col-sm-6 pull-left" id="headerLeft" style="float: left; padding-top: 20px;padding-bottom: 10px; @Html.Raw((ViewBag.roll == 4 || ViewBag.roll == 5) ? "display:none" : "") ">
+                <div class="row">
+                    <button class="btn btn-primary waves-effect waves-light" type="button" id="btnAddNewLib">
+                        <span class="btn-label"><i class="ti-plus"></i></span>@(ASS_35.Resources.HomeText.ButtonAddNew)
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-6 pull-right" id="headerRight" style="float: left; padding-top: 20px;padding-bottom: 10px; @Html.Raw((ViewBag.roll == 4 || ViewBag.roll == 5) ? "display:none" : "")">
+                <div class="row">
+                    <div class="col-sm-4 pull-left">
+                        <div class="row">
+                            <label style="padding: 10px;">@(ASS_35.Resources.HomeText.Topic_status)</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 pull-right">
+                        <div class="row">
+                            <select class="form-control" id="trangthai-chude">
+                                <option value="0">@(ASS_35.Resources.HomeText.All)</option>
+                                <option value="3">@(ASS_35.Resources.HomeText.Active)</option>
+                                <option value="2">@(ASS_35.Resources.HomeText.Pending)</option>
+                                <option value="1" style="@Html.Raw(ViewBag.roll == 1 ? "display:none" : "")">@(ASS_35.Resources.HomeText.Deactive)</option>
+                                <option value="4">@(ASS_35.Resources.HomeText.Save_Draft)</option>
+                                <option value="5">@(ASS_35.Resources.HomeText.RemoveOnSite)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <div id="example23_wrapper" class="dataTables_wrapper">
+                    <table id="example23" class="display nowrap dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example23_info" style="width: 100%;">
+                        <thead>
+                            <tr role="row">
+                                <th>ID</th>
+                                <th>@(ASS_35.Resources.HomeText.Topic_name)</th>
+                                <th>@(ASS_35.Resources.HomeText.Creators)</th>
+                                <th>@(ASS_35.Resources.HomeText.Date_created)</th>
+                                <th>@(ASS_35.Resources.HomeText.Status)</th>
+                                <th>@(ASS_35.Resources.HomeText.Handling)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        LoadAllDocument();
+        AddNewDocument();
+    });
+    function LoadAllDocument() {
+        createLoading();
+        var trangthai = $('#trangthai-chude').val();
+        var table_danhsachchudeanh = $('#example23').dataTable({
+            ajax: {
+                url: "/Document/_ViewListDocument?trangthai=" + trangthai,
+                type: 'POST',
+
+            },
+            processing: true,
+            serverSide: true,
+            bSort: false,
+            columns: [
+                {
+                    data: 'id',
+                    class: 'text-center',
+                },
+                {
+                    data: 'tenchude',
+                    mRender: function (data) {
+                        if (data.length > 40) {
+                            data = data.substring(0, 40) + "...";
+                        }
+                        return data;
+                    },
+                    class: 'text-center'
+                },
+                {
+                    data: 'tennguoitao',
+                    mRender: function (data) {
+                        if (data.length > 20) {
+                            data = data.substring(0, 20) + "...";
+                        }
+                        return data;
+                    },
+                    class: 'text-center',
+                },
+                {
+                    data: 'thoigian',
+                    class: 'text-center'
+                },
+                {
+                    data: 'trangthaihienthi',
+                    class: 'text-center'
+                },
+                 {
+                     data: 'id',
+                     mRender: function (data) {
+                         return '<a class="hint--top btnDelete" style=" @Html.Raw((ViewBag.roll == 4 || ViewBag.roll == 5) ? "display:none" : "") "  href="javascript:0" aria-label="' + " @Html.Raw(ASS_35.Resources.HomeText.Delete) " + '"><i class="ti-close"></i></a>\
+                                 <a class="hint--top btnEdit" href="javascript:0" aria-label="'+ "@Html.Raw(ASS_35.Resources.HomeText.Edit) " + '"><i class="ti-pencil"></i></a>'
+                     },
+                     class: 'text-center',
+                 },
+            ],
+            "columnDefs": [{
+                "orderable": false,
+                "targets": 'no-sort',
+            }],
+            "order": [[1, 'asc']],
+            responsive: true,
+            bLengthChange: true,
+            initComplete: function (settings, json) {
+                removeLoading();
+                if (settings.aanFeatures.f[0]) {// input
+                    var fnFilter = setStyleInputTable(settings.aanFeatures.f[0]);
+                    fnFilter.unbind();
+                    fnFilter.bind('keyup', function (e) {
+                        if (e.keyCode == 13) {
+                            if (String(this.value).trim().length > 0) {
+                                table_danhsachchudeanh.fnFilter(this.value);
+                            }
+                            else {
+                                table_danhsachchudeanh.fnFilter("");
+                            }
+                        } else {
+                            table_danhsachchudeanh.fnFilter(this.value);
+                        }
+                    });
+                }
+                if (settings.aanFeatures.l[0]) {// select
+                    var fnPageChange = setStyleSelectTable(settings.aanFeatures.l[0]);
+                }
+            },
+            fnCreatedRow: function (row, data, index) {
+                var page = table_danhsachchudeanh.api().page();
+                var len = table_danhsachchudeanh.api().page.len();
+                $('td', row).eq(0).html((page * len) + (index + 1));
+                if (data.trangthai == "2") {
+                    $(row).css("background-color", "bisque");
+                } else if (data.trangthai == "3") {
+                    $(row).css("background-color", "khaki");
+                }
+            },
+            language: {
+                lengthMenu: "@Html.Raw(ASS_35.Resources.HomeText.Show_menu_line)",
+                zeroRecords: "@Html.Raw(ASS_35.Resources.HomeText.No_line)",
+                info: "@Html.Raw(ASS_35.Resources.HomeText.Total_line)",
+                emptyTable: "@Html.Raw(ASS_35.Resources.HomeText.No_data_table)",
+                infoEmpty: "@Html.Raw(ASS_35.Resources.HomeText.No_line)",
+                loadingRecords: "@Html.Raw(ASS_35.Resources.HomeText.Loading)",
+                processing: '<div class="spinner5"></div>',
+                search: "@Html.Raw(ASS_35.Resources.HomeText.Search)",
+                searchPlaceholder: "@Html.Raw(ASS_35.Resources.HomeText.Search_Content)",
+                paginate: {
+                    first: "@Html.Raw(ASS_35.Resources.HomeText.First)",
+                    last: "@Html.Raw(ASS_35.Resources.HomeText.Last)",
+                    next: " @Html.Raw(ASS_35.Resources.HomeText.Next)",
+                    previous: "@Html.Raw(ASS_35.Resources.HomeText.Previous)",
+                }
+            },
+        });
+                 table_danhsachchudeanh.on('click', '.btnDelete', function () {
+                     var closestRow = $(this).closest('tr');
+                     var data = table_danhsachchudeanh.api().row(closestRow).data();
+                     var fm_data = new FormData();
+                     var dataObject = {
+                         id: data.id,
+                     };
+                     fm_data.append("DataSend", JSON.stringify(dataObject));
+
+                     var success = function (dx) {
+                         if (dx.Result.IsSuccess) {
+                             QTW_RUN_MESS.alter_Message_Success(dx.Result.Message);
+                             table_danhsachchudeanh.fnDraw();
+                         }
+                         else {
+                             QTW_RUN_MESS.alter_Message_Error(dx.Result.Message);
+                         }
+                     }
+                     var fun = function () {
+                         QTW_JQUERY.RUN_AJAX("ajaxPOST", "/Document/_DeleteDocument", fm_data, success);
+                     }
+                     QTW_RUN_MESS.alter_Message_Question_Callbaclk(" @Html.Raw(ASS_35.Resources.HomeText.Delete_Toppic) ", fun);
+
+                 });
+                 table_danhsachchudeanh.on('click', '.btnEdit', function () {
+                     var closestRow = $(this).closest('tr');
+                     var data = table_danhsachchudeanh.api().row(closestRow).data();
+                     var fm_data = new FormData();
+                     fm_data.append("DataSend", JSON.stringify(data));
+                     LoadPageEdit("/Document/EditDocument", fm_data);
+
+                 });
+                 $('#trangthai-chude').change(function () {
+                     table_danhsachchudeanh.api().ajax.url("/Document/_ViewListDocument?trangthai=" + $(this).val()).load();
+                 });
+
+             }
+
+             function AddNewDocument() {
+                 $('#btnAddNewLib').click(function () {
+                     LoadPage("/Document/AddNewDocument");
+                 });
+             }
+</script>

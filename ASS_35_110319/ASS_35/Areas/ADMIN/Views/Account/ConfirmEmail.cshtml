@@ -1,0 +1,139 @@
+﻿@using DataContext.DAL
+@{
+    var model = (SystemMess)Model;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Confirm email</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/assa-logo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png">
+    <script src="/Content/Js-Vi/jquery-3.2.1.min.js"></script>
+    <script src="/Content/Js-Vi/bootstrap.min.js"></script>
+
+    <link href="/Content/Style-En/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/eliteadmin-colors/css/spinners.css" rel="stylesheet" />
+    <link href="/Content/Style-En/style.css" rel="stylesheet" />
+
+    <script src="/Content/Js-En/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="/Content/Style-En/StyleAdmin.css" rel="stylesheet" />
+    <link href="/Content/eliteadmin-colors/css/themify-icons.css" rel="stylesheet" />
+
+    <link href="/Content/Style-En/ResponseEn.css" rel="stylesheet" />
+
+
+
+</head>
+<body>
+
+    <header id="header" class="header ">
+        <div class=" marquee mar-maintain">
+            <p class="marquee-text">This site is comming soon</p>
+        </div>
+
+        <div class=" newcontainer">
+            <a href="/">
+                <img src="/images/header-1024.png" alt="ASSA 2018" class="image-destop" />
+                <img src="/images/header-mobile.png" alt="ASSA 2018" class="image-mobile" />
+            </a>
+        </div>
+
+
+
+    </header><!-- /header -->
+    <content>
+
+        <nav class="navbar navbar-default navbar-inverse menu  " role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <div style="padding: 9px 0px; display: block; float: left;">
+                        <div class="frm-search" style="padding-left: 0px">
+                            <div class="row">
+                                <input class="form-control" style="width: 160px; height: 30px;" placeholder="Search..." type="text" onkeydown="if (event.keyCode == 13) { window.location = window.location.origin + '/tim-kiem' + '?q=' + this.value;return false }">
+                                <span class="glyphicon glyphicon-search icon-search"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-ex1-collapse" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div style="padding: 11px 2px; display: block; float: right;">
+                        <a class="=dropdown-toggle waves-effect waves-light" title="VietNam" data-toggle="" href="/vi"><img style="border: 1px solid transparent;" src="/images/vietnam.png"></a>
+                    </div>
+                </div>
+                <div class="collapse navbar-collapse navbar-ex1-collapse css-form-search" style="height: 1px;">
+
+
+
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="/home" id="key"><i class="fa fa-home" style="margin-right: 15px;"></i><span>HOME</span></a>
+                        </li>
+                        <li class="dropdown ">
+                            <a class="dropdown-toggle dropbtn" data-toggle="dropdown" aria-expanded="false">OVERVIEW <b class="caret"></b></a>
+                            <ul class="dropdown-menu dropdown-content">
+                                <li>
+                                    <a href="/general-introduction">
+                                        GENERAL INTRODUCTION
+                                        <span class="ti-angle-right"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/assa-vn">
+                                        MEMBER INSTITUTIONS
+                                        <span class="ti-angle-right"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=""><a href="/program">PROGRAM</a></li>
+                        <li class=""><a href="/document">DOCUMENT</a></li>
+                        <li class=""><a href="/practical">PRACTICAL</a></li>
+                        <li class=""><a href="/contact">CONTACT</a></li>
+                        <li class=""><a href="/Registration">REGISTRATION</a></li>
+                        <li class=""><a>LOGIN</a></li>
+                    </ul>
+
+
+
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+
+        <div class="container" style="min-height: 500px">
+            <h1 style="text-align: center; margin: 40px 0; color: darkblue"><p>@(model.Message)</p></h1>
+        </div>
+
+
+
+
+        <div class="">
+
+            <div class="" style="margin-bottom: 20px;">
+            </div>
+            <section class="sec-below">
+
+
+                <div class="sec-above-bg">
+                    <div class="sec-above-bg-color">
+                        <span class="title-footer">Copyright 2018 Viet Nam Social Security. All rights reserved</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+    </content>
+
+
+
+</body>
+</html>

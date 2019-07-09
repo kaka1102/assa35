@@ -1,0 +1,72 @@
+﻿@media screen and (max-width: 991px) {
+    .gg-c {
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .sb-left-l, .sb-left-r {
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .sb-left-r {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .sb-left-b {
+        margin-bottom: 10px !important;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .d-slider {
+        padding-left: 2%;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .slider-t {
+        width: 30%;
+        padding-left: 3px;
+        /*margin-left:5px;*/
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .d-slider a {
+        width: 77%;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .d-slider {
+        padding-left: 2%;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .carousel-indicators {
+        margin-left: -40%;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .sb-right {
+        position: relative !important;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .tc-bs {
+        padding-right: 25px !important;
+    }
+}
+
+.sb-left-r {
+    padding-right: 0 !important;
+}

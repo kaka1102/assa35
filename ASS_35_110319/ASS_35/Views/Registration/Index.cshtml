@@ -1,0 +1,1095 @@
+﻿@using DataContext.Constants
+@using DataContext.Until
+@using DocumentFormat.OpenXml.Office2010.PowerPoint
+@{
+    ViewBag.Title = "Registration";
+    var result = ViewBag.test;
+    Layout = "~/Views/Shared/LayoutEn.cshtml";
+}
+
+
+@section cssheader {
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+
+    <link href="~/assets/theme/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+
+    <link href="~/assets/theme/css/core.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/theme/css/components.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/theme/css/colors.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/theme/css/custom.css" rel="stylesheet" type="text/css">
+    <style>
+        /*.section2 , .section3, .section3_2, .section4 {
+            display: none !important;
+        }*/
+        .dob {
+            margin-bottom: 10px;
+            display: none;
+        }
+
+            .dob .col-sm-3, .dob .col-sm-6 {
+                padding-right: 0;
+            }
+
+        .formassa .content-sec1_2 {
+            padding: 30px 0;
+        }
+
+        .content-sec1_2 .row {
+            margin: 20px 0;
+        }
+
+        .cm-quote {
+            margin-left: 5%;
+            margin-top: 20px;
+            font-style: italic;
+            color: #117ec2;
+        }
+
+        .hightlight {
+            padding-top: 10px;
+            margin: 15px 0;
+            background-color: #fafafa;
+            border-radius: 5px;
+        }
+    </style>
+}
+@section loader {
+    <div class="preloader" style="display:none">
+        <div class="cssload-speeding-wheel"></div>
+        <h3 style="color:#000080">Please waiting for the processing...</h3>
+    </div>
+}
+@section scripts {
+    <script type="text/javascript" src="~/assets/theme/js/plugins/loaders/pace.min.js"></script>
+
+    <script type="text/javascript" src="~/assets/theme/js/plugins/loaders/blockui.min.js"></script>
+    <script type="text/javascript" src="~/assets/theme/js/plugins/ui/nicescroll.min.js"></script>
+    <script type="text/javascript" src="~/assets/theme/js/plugins/ui/drilldown.js"></script>
+    <!-- /core JS files -->
+    <script type="text/javascript" src="~/assets/theme/js/pages/form_layouts.js"></script>
+    <script type="text/javascript" src="~/assets/theme/js/plugins/forms/selects/bootstrap_select.min.js"></script>
+    <script type="text/javascript" src="~/assets/theme/js/pages/form_bootstrap_select.js"></script>
+    <script type="text/javascript" src="~/assets/theme/js/plugins/forms/selects/select2.min.js"></script>
+    <script type="text/javascript" src="~/assets/theme/js/plugins/forms/styling/uniform.min.js"></script>
+
+    <script type="text/javascript" src="~/assets/theme/js/core/libraries/jquery_ui/interactions.min.js"></script>
+    <script type="text/javascript" src="~/assets/theme/js/pages/form_select2.js"></script>
+
+    <!-- <script type="text/javascript" src="assets/theme/js/plugins/notifications/jgrowl.min.js"></script> -->
+    <script type="text/javascript" src="~/assets/theme/js/plugins/ui/moment/moment.min.js"></script>
+    <script type="text/javascript" src="~/assets/theme/js/plugins/pickers/daterangepicker.js"></script>
+    <script type="text/javascript" src="~/assets/theme/js/plugins/pickers/anytime.min.js"></script>
+    <script type="text/javascript" src="~/assets/theme/js/plugins/pickers/pickadate/picker.js"></script>
+    <script type="text/javascript" src="~/assets/theme/js/plugins/pickers/pickadate/picker.date.js"></script>
+    <script type="text/javascript" src="~/assets/theme/js/plugins/pickers/pickadate/picker.time.js"></script>
+    <script type="text/javascript" src="~/assets/theme/js/plugins/pickers/pickadate/legacy.js"></script>
+    <script type="text/javascript" src="~/assets/demo/assa/picker_date.js"></script>
+    <script type="text/javascript" src="~/assets/demo/assa/script.js"></script>
+    <script type="text/javascript" src="~/assets/demo/assa/timenaa.js"></script>
+    <script type="text/javascript" src="~/assets/theme/js/plugins/forms/validation/validate.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js' type="text/javascript"></script>
+    <script type="text/javascript" src="~/assets/theme/js/plugins/notifications/sweet_alert.min.js"></script>
+    <script type="text/javascript" src="https://rawgit.com/MrRio/jsPDF/master/dist/jspdf.debug.js"></script>
+    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <!-- Theme JS files -->
+    <script src="~/assets/crm/js/alertbox/bootbox.js"></script>
+    <script type="text/javascript" src="~/assets/theme/js/plugins/forms/selects/selectboxit.min.js"></script>
+    @*<script type="text/javascript" src="~/assets/demo/assa/form_validation.js"></script>*@
+
+    <script src="~/Content/ScriptPuplic/Language.js"></script>
+    <script src="~/Content/ScriptPuplic/LibAss.js"></script>
+    <style>
+        .btn-yellow {
+            background-color: #ecc41b;
+            border-color: #ecc41b;
+            color: #fff;
+        }
+
+        input:-webkit-autofill {
+            background-color: transparent;
+        }
+    </style>
+    <script>
+        var res = '';
+
+        function callbac(response) {
+            res = response;
+
+        }
+
+        $(document).ready(function() {
+
+
+            $('#submit-form').on('click',
+                function() {
+                    var validator = $(".form-validate-jquery").validate({
+                        ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
+                        rules: {
+                            sec1_middle: {
+                                minlength: 2,
+                                maxlength: 50,
+                                inputFormat: true
+                            }
+                            ,
+                            sec1_oth_title: {
+                                inputFormat: true
+                            },
+                            sec1_position: {
+                                inputFormat: true
+                            },
+                            sec1_department: {
+                                inputFormat: true
+                            },
+                            sec1_organization: {
+                                inputFormat: true
+                            },
+                            sec1_address: {
+                                inputFormat: true
+                            },
+                            sec1_meal_req: {
+                                inputFormat: true
+                             },
+                            acc_per1: {
+                                inputFormat: true
+                            },
+                            acc_per2: {
+                                inputFormat: true
+                            },
+                            acc_per3: {
+                                inputFormat: true
+                            },
+                            acc_spec: {
+                                inputFormat: true
+                            },
+                            sec3_conarr_airline: {
+                                inputFormat: true
+                            },
+                            sec3_conarr_flight: {
+                                inputFormat: true
+                            },
+                            sec3_condep_airline: { inputFormat: true }, sec3_condep_flight: { inputFormat: true }, sec2_other_req: { inputFormat: true }
+
+
+                        },
+                        messages: {
+                            sec1_middle: {
+                                minlength: "The length must be larger than 2",
+                                maxlength: "The length must be smaller than 50 "
+                            },
+
+                        },
+
+                        errorClass: 'validation-err-label',
+                        successClass: 'validation-valid-label',
+                        highlight: function(element, errorClass) {
+                            $(element).removeClass(errorClass);
+                            //$(element).removeClass('error-fill');
+
+                        },
+                        unhighlight: function(element, errorClass) {
+                            $(element).removeClass(errorClass);
+
+                            if ($($(element).parent()).find(".select2-selection--single")) {
+                                var ab = $($(element).parent()).find(".select2-selection--single");
+                                $(ab).removeClass('error-fill');
+                            }
+                            if ($($(element).parent()).find(".selectboxit-btn")) {
+                                var cd = $($(element).parent()).find(".selectboxit-btn");
+                                $(cd).removeClass('error-fill');
+                            }
+                            // $(cv).addClass('error-fill');
+                            // $(element).removeClass('error-fill');
+                        },
+
+                        // Different components require proper error label placement
+                        errorPlacement: function(error, element) {
+
+                            // Styled checkboxes, radios, bootstrap switch
+                            if (element.parents('div').hasClass("checker") ||
+                                element.parents('div').hasClass("choice") ||
+                                element.parent().hasClass('bootstrap-switch-container')) {
+                                if (element.parents('label').hasClass('checkbox-inline') ||
+                                    element.parents('label').hasClass('radio-inline')) {
+                                    error.appendTo(element.parent().parent().parent().parent());
+                                } else {
+                                    error.appendTo(element.parent().parent().parent().parent().parent());
+                                }
+                            }
+                            // Unstyled checkboxes, radios
+                            else if (element.parents('div').hasClass('checkbox') ||
+                                element.parents('div').hasClass('radio')) {
+                                error.appendTo(element.parent().parent().parent());
+
+                            }
+                            // Input with icons and Select2
+                            else if (element.parents('div').hasClass('has-feedback') ||
+                                element.hasClass('select2-hidden-accessible') ||
+                                element.hasClass('selectbox')) {
+                                error.appendTo(element.parent());
+                                //$(element).addClass('error-fill');
+                                var cv = $(element.parent()).find(".select2-selection--single");
+                                $(cv).addClass('error-fill');
+
+                                if ($(element.parent()).find(".selectboxit-btn")) {
+                                    $($(element.parent()).find(".selectboxit-btn")).addClass('error-fill');
+                                }
+                            }
+                            // Inline checkboxes, radios
+                            else if (element.parents('label').hasClass('checkbox-inline') ||
+                                element.parents('label').hasClass('radio-inline')) {
+                                error.appendTo(element.parent().parent());
+                            }
+                            // Input group, styled file input
+                            else if (element.parent().hasClass('uploader') ||
+                                element.parents().hasClass('input-group')) {
+                                error.appendTo(element.parent().parent());
+                            } else {
+
+                                error.insertAfter(element);
+                                $(element).addClass('error-fill');
+
+                            }
+                        },
+                        validClass: "validation-valid-label",
+                        success: function(label, element) {
+                            //label.addClass("validation-valid-label").text("Success.")
+                            label.remove();
+                            $(element).removeClass('error-fill');
+                        },
+                        submitHandler: function(form) {
+                            var roomtype = $("table.hotel_desktop input[name=sec2_typeroom]:checked").closest('td')
+                                .data('roomtype');
+                            var regisInfor = {
+                                titleName: $("select[name=sec1_title]").val(),
+                                titleOther: $("input[name=sec1_oth_title]").val(),                                
+                                lastName: $("input[name=sec1_last]").val(),
+                                firstName: $("input[name=sec1_first]").val(),
+                                middleInitial: $("input[name=sec1_middle]").val(),
+                                gender: $("input[name=sec1_gender]:checked").val() == "M" ? 1 : 2,
+                                country: $("select[name=sec1_state]").val(),
+                                address: $("input[name=sec1_address]").val(),
+                                organization: $("input[name=sec1_organization]").val(),
+                                department: $("input[name=sec1_department]").val(),
+                                position: $("input[name=sec1_position]").val(),
+                                telno: $("input[name=sec1_telno]").val(),
+                                faxno: $("input[name=sec1_cellno]").val(),
+                                email: $("input[name=sec1_email]").val(),
+                                meal: parseInt($("input[name=sec1_meal]:checked").val() != null
+                                    ? $("input[name=sec1_meal]:checked").val()
+                                    : 0),
+                                meal_other_req: $("input[name=sec1_meal_req]").val(),
+                                acc_per1: $("input[name=acc_per1]").val(),
+                                acc_per2: $("input[name=acc_per2]").val(),
+                                acc_per3: $("input[name=acc_per3]").val(),
+                                acc_spec: $("input[name=acc_spec]").val(),
+
+                                arr_con: $("select[name=arr_con]").val(),
+                                conarr_airline: $("input[name=sec3_conarr_airline]").val(),
+                                conarr_flight: $("input[name=sec3_conarr_flight]").val(),
+                                conarr_date: $("input[name=sec3_conarr_date]").val(),
+                                conarr_time: $("input[name=sec3_conarr_time]").val(),
+
+                                dep_con: $("select[name=dep_con]").val(),
+                                condep_airline: $("input[name=sec3_condep_airline]").val(),
+                                condep_flight: $("input[name=sec3_condep_flight]").val(),
+                                condep_date: $("input[name=sec3_condep_date]").val(),
+                                condep_time: $("input[name=sec3_condep_time]").val(),
+
+
+                            };
+                            var room_order = {
+                                date_checkin: $("input[name=sec2_date_checkin]").val(),
+                                date_checkout: $("input[name=sec2_date_checkout]").val(),
+                                roomtype: roomtype != null ? roomtype : 0,
+                                roomop1: $("input[name=sec2_typeroom]:checked").val() != null
+                                    ? $("input[name=sec2_typeroom]:checked").val()
+                                    : 0,
+                                roomop2: $("input[name=sec2_room_op2]:checked").val() != null
+                                    ? $("input[name=sec2_room_op2]:checked").val()
+                                    : 0,
+                                sec2_other_req: $("input[name=sec2_other_req]").val()
+
+                            };
+
+
+                            var regis_act = {
+                                a1: parseInt($("input[name=sec5_a1]:checked").val() != null
+                                    ? $("input[name=sec5_a1]:checked").val()
+                                    : 0),
+                                a2: parseInt($("input[name=sec5_a2]:checked").val() != null
+                                    ? $("input[name=sec5_a2]:checked").val()
+                                    : 0),
+                                a3: parseInt($("input[name=sec5_a3]:checked").val() != null
+                                    ? $("input[name=sec5_a3]:checked").val()
+                                    : 0),
+                                a4: parseInt($("input[name=sec5_a4]:checked").val() != null
+                                    ? $("input[name=sec5_a4]:checked").val()
+                                    : 0),
+                                a5: parseInt($("input[name=sec5_a5]:checked").val() != null
+                                    ? $("input[name=sec5_a5]:checked").val()
+                                    : 0),
+                                a6: parseInt($("input[name=sec5_a6]:checked").val() != null
+                                    ? $("input[name=sec5_a6]:checked").val()
+                                    : 0),
+                            }
+
+                            function RegisterResult(data) {
+
+                                if (data.result.IsSuccess === false) {
+                                    QTW_RUN_MESS.alter_Message_Error(data.result.Message);
+                                } else {
+                                    swal({
+                                        title: "OK",
+                                        text: data.result.Message,
+                                        type: "success"
+                                                                                
+                                    }, function () {
+                                        window.location.href ='/home';
+                                    });
+                                    
+                                }
+
+                            }
+                            var frmData = new FormData();
+                            var response = $("#g-recaptcha-response").val();
+                            frmData.append("response", res);
+                            frmData.append("room", JSON.stringify(room_order));
+                            frmData.append("data", JSON.stringify(regisInfor));
+                            frmData.append("actData", JSON.stringify(regis_act));
+
+
+
+                            //frmData.append("dataPDF", pdf);
+
+
+                            
+                            QTW_JQUERY.RUN_AJAX("ajaxPOST", "/Registration/AddNew", frmData, RegisterResult);
+
+                            //var doc = new jsPDF();
+                            //html2canvas(document.querySelector("#form_data .wrap-form")).then(canvas => {
+                            //    var base64 = canvas.toDataURL("image/png");
+
+                            //    //doc.setFontSize(40);
+                            //    //var newHeight = (canvas.height * 210 / canvas.width) + 40;
+                            //    //var heightLeft = newHeight;
+                            //    //doc.addImage(base64, 'JPEG', 0, 0, 210, newHeight);
+                            //    //heightLeft -= 295;
+
+                            //    //while (heightLeft >= 0) {
+                            //    //    doc.addPage();
+                            //    //    doc.addImage(base64, 'JPEG', 0, heightLeft - newHeight, 210, newHeight);
+                            //    //    heightLeft -= 295;
+                            //    //}
+
+
+                            //    //var dataPDF = doc.output('arraybuffer');
+                            //    //var pdf = new Blob([new Uint8Array(dataPDF)], { type: 'application/pdf' });
+
+                            //    var frmData = new FormData();
+                            //    var response = $("#g-recaptcha-response").val();
+                            //    frmData.append("response", res);
+                            //    frmData.append("room", JSON.stringify(room_order));
+                            //    frmData.append("data", JSON.stringify(regisInfor));
+                            //    frmData.append("actData", JSON.stringify(regis_act));
+
+
+
+                            //    //frmData.append("dataPDF", pdf);
+
+
+                            //    frmData.append("base64",base64);
+                            //    QTW_JQUERY.RUN_AJAX("ajaxPOST", "/Registration/AddNew", frmData, RegisterResult);
+                               
+                            //});
+
+
+                            @*$.ajax({
+                            url: "@Url.Action("AddNew")",
+                            type: 'POST',
+                            data: { regis_info: regisInfor, regisAct: regis_act },
+                            success: function (data) {
+                                if (data.IsSuccess) {
+                                    swal({
+                                        title: data.Message,
+                                        type: "success"
+                                    });
+
+                                } else {
+                                    swal({
+                                        title: data.Message,
+                                        type: "error",
+
+
+                                    })
+                                }
+                                console.log(data);
+                                console.log(regisInfor);
+                        }
+                    });*@
+                        }
+
+                    });
+                    //    $.validator.addMethod("dateFormat",
+                    //        function(value, element) {
+                    //            if (value === "") {
+                    //                return true;
+                    //            } else {
+                    //                return value.match(/^dd?-dd?-dd$/);
+                    //            }
+                    //        },
+                    //        "Please enter a date in the format dd-mm-yyyy.");
+                    //    $.validator.addMethod("timeFormat",
+                    //        function(value, element) {
+                    //            if (value === "") {
+                    //                return true;
+                    //            } else {
+                    //                return value.match(/^dd?:dd?$/);
+                    //            }
+                    //        },
+                    //        "Please enter a time in the format HH:mm.");
+                });
+            $.validator.addMethod("inputFormat",
+                function(value, element) {
+                    return this.optional(element) || /^[a-zA-Z0-9 \s \. \']{1,500}$/.test(value);
+                },
+                jQuery.validator.format("This field is not correct format !!!"));
+
+        });
+    </script>
+}
+
+
+<form class="form-validate-jquery" id="form_data" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="wrap-form">
+            <div class="panel registration-form">
+                <div class="panel-body">
+                    <div class="overwrap headerassa" style="clear: both">
+                        @*<div class="pull-left logoassa" style="width: 13%">
+                            <img src="~/images/logo-assa-eddited.png" class="logo_x" style="width:auto;">
+                        </div>*@
+                        <div class=" header-form quarkbold">
+                            <h5 class="text-bold">ASEAN SOCIAL SECURITY ASSOCIATION</h5>
+                            <h6>
+                                35<sup>th</sup> ASSA Board Meeting<br />
+                                18-20th September , 2018 at Nha Trang city, Khanh Hoa province, Viet Nam
+                            </h6>
+                        </div>
+                        @*<div class="pull-right logo20y" style="width: 13%">
+                            <img src="~/images/logo-20y-edited.png">
+                        </div>*@
+                    </div>
+
+                    <!--GENERAL INFORMATION-->
+                    <div class="panel panel-default formassa section1 sec-head" style="clear: both;">
+                        <div class="panel-heading">
+                            <div class="new-heading">
+                                <h5 class="panel-title">GENERAL INFORMATION</h5>
+                            </div>
+
+                        </div>
+
+                        <div class="panel-body content-sec1">
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-12 col-md-4">
+
+                                    <div class="form-group">
+                                        <label class="">Title Name: <span class="text-danger">*</span></label>
+                                        <select class="selectbox required data-req" name="sec1_title" id="salut">
+                                            <option value="">select your title name</option>
+                                            <option value="MR">Mr.</option>
+                                            <option value="MS">Ms.</option>
+                                            <option value="MRS">Mrs.</option>
+                                            <option value="Prof">Prof.</option>
+                                            <option value="Dr">Dr.</option>
+                                            <option value="OTH">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-xs-6 specify_oth hide">
+                                    <div class="form-group">
+                                        <label><br></label>
+                                        <input type="text" name="sec1_oth_title" class="form-control " placeholder="Please specify" id="spc_oth_salut" value="">
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <input type="hidden" name="code" id="code_ps" />
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Last Name: <span class="text-danger">*</span></label>
+                                        <input type="text" name="sec1_last" class="form-control data-req" required="" value="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>First Name: <span class="text-danger">*</span></label>
+                                        <input type="text" name="sec1_first" class="form-control required data-req" value="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Middle Initial:</label>
+                                        <input type="text" name="sec1_middle" class="form-control " value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-xs-12">
+                                    <label class="display-block">Gender: <span class="text-danger">*</span></label>
+                                    <div class="col-sm-3 col-md-6">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="sec1_gender" class="styled data-req" value="M" required="required">
+                                            Male
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-3 col-md-6">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="sec1_gender" class="styled" value="F">
+                                            Female
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div> <!--row-->
+
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Position:</label>
+                                        <input type="text" name="sec1_position" class="form-control" value="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Department:</label>
+                                        <input type="text" name="sec1_department" class="form-control" value="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Institution: <span class="text-danger">*</span></label>
+                                        <input type="text" name="sec1_organization" class="form-control required data-req" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-8 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Office Address:</label>
+                                        <input type="text" name="sec1_address" class="form-control" value="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group state_">
+                                        <label>Country <span class="text-danger">*</span></label>
+                                        <select class="selectbox state_select required" name="sec1_state">
+                                            <option value=""></option>
+                                            <option value="BN-Brunei" data-iconurl="../../assets/demo/assa/state/brunei.jpg">
+                                                Brunei Darussalam
+                                            </option>
+                                            <option value="KH-Cambodia" data-iconurl="../../assets/demo/assa/state/cambodia.jpg">
+                                                Cambodia
+                                            </option>
+                                            <option value="ID-Indonesia" data-iconurl="../../assets/demo/assa/state/Indonesia.jpg">
+                                                Indonesia
+                                            </option>
+                                            <option value="LA-Laos" data-iconurl="../../assets/demo/assa/state/lao.jpg">
+                                                Laos PDR
+                                            </option>
+                                            <option value="MY-Malaysia" data-iconurl="../../assets/demo/assa/state/malaysia.jpg">
+                                                Malaysia
+                                            </option>
+                                            <option value="MM-Myanmar" data-iconurl="../../assets/demo/assa/state/myanmar.jpg">
+                                                Myanmar
+                                            </option>
+                                            <option value="PH-Philippines" data-iconurl="../../assets/demo/assa/state/philipine.jpg">
+                                                Philippines
+                                            </option>
+
+                                            <option value="SG-Singapore" data-iconurl="../../assets/demo/assa/state/singapore.jpg">
+                                                Singapore
+                                            </option>
+                                            <option value="TH-Thailand" data-iconurl="../../assets/demo/assa/state/thailand.jpg">
+                                                Thailand
+                                            </option>
+                                            <option value="VI-Viet Nam" data-iconurl="../../assets/demo/assa/state/vietnam.jpg">
+                                                Viet Nam
+                                            </option>
+
+
+
+                                        </select>
+                                        <label class="state-msg validation-err-label" style="display: none;">This field is required.</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row hightlight" style="padding-bottom: 15px;">
+                                <div class="col-md-12">
+                                    <label class="display-block text-semibold ">Dietary Requirement </label>
+                                    <div class="col-sm-2 col-md-2">
+                                        <label class="radio-inline">
+                                            Vegetarian
+                                            <input type="radio" name="sec1_meal" class="styled" value="1">
+
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2">
+                                        <label class="radio-inline">
+                                            Non-Vegetarian
+                                            <input type="radio" name="sec1_meal" class="styled" value="2">
+
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2">
+                                        <label class="radio-inline">
+                                            Halal Food
+                                            <input type="radio" name="sec1_meal" class="styled" value="3">
+
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2">
+                                        <label class="radio-inline">
+                                            Normal
+                                            <input type="radio" name="sec1_meal" class="styled" value="4">
+
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2">
+                                        <label class="radio-inline">
+                                            Other
+                                            <input type="radio" name="sec1_meal" class="styled" value="5">
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 " style="padding: 10px 0 5px 0">
+                                        <label>Specify requirement: </label>
+                                        <input type="text" name="sec1_meal_req" class="form-control" value="">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row hightlight">
+                                <div class="col-sm-12">
+                                    <label class="display-block text-semibold" style="margin-top: 10px;">Contact information </label>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Telephone Number: </label>
+                                        <input type="number" name="sec1_telno" class="form-control" value="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Cellphone Number: </label>
+                                        <input type="number" name="sec1_cellno" class="form-control" value="">
+                                        <label class="state-msg validation-err-label" style="display: none;">This field is required.</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Email Address: <span class="text-danger">*</span></label>
+                                        <input type="email" name="sec1_email" class="form-control required data-req email_form" value="">
+                                        <label id="emailexists" class="validation-err-label" style="display: none;">The Email already exists.</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="new-heading" style="width:100% ">
+                                        <h5 class="panel-title">ACCOMPANYING PERSON(S) (IF ANY)</h5>
+                                    </div>
+
+                                </div>
+                                <div class="panel-body content-sec1_2">
+                                    <div class="row">
+                                        <div class="col-md-1 " align=""><label> Person:</label></div>
+                                        <div class="col-md-11">
+                                            <input type="text" name="acc_per1" value="" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1 " align=""><label> Person:</label></div>
+                                        <div class="col-md-11">
+                                            <input type="text" name="acc_per2" value="" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1 " align=""><label> Person:</label></div>
+                                        <div class="col-md-11">
+                                            <input type="text" name="acc_per3" value="" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row" style="padding: 0 15px">
+                                        <label> Special requirements: </label>
+                                        <input type="text" class="form-control" name="acc_spec" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!--panel body-->
+                    </div><!--panel-->
+
+                    <div class="panel panel-default formassa section3 flightcontent sec-head" style="clear: both;">
+                        <div class="panel-heading">
+                            <div class="new-heading">
+                                <h5 class="panel-title">FLIGHT DETAILS</h5>
+                            </div>
+                        </div>
+                        <div class="panel-body content-sec3">
+                            <!--test-->
+                            <div>
+                                <div class="content-divider text-muted form-group"><span><h5 class="f12">ARRIVAL</h5></span></div>
+
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Connecting flight from:<span class="text-danger">*</span>  </label>
+                                        <select name="arr_con" class="form-control required">
+                                            <option value="" selected="selected" disabled="">Select city </option>
+                                            <option value="hn">Ha Noi </option>
+                                            <option value="dn">Da Nang</option>
+                                            <option value="hcm">Ho Chi Minh</option>
+                                            <option value="kl">KuaLa Lumpur</option>
+                                        </select>
+                                    </div>
+                                    <div class="connection-wrap">
+
+                                        <div class="col-sm-3 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Airline <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control flight_input required" placeholder="" name="sec3_conarr_airline" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Flight No. <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control flight_input required" placeholder="" name="sec3_conarr_flight" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Date <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control pickadate-selectors flight_input required" id="" name="sec3_conarr_date" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Time <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control naa_time_picker naa_time_input flight_input required" data="arrtime2" placeholder="" name="sec3_conarr_time" readonly="" value="">
+                                                <div class="naa_time naa_time_picker hide arrtime2">
+                                                    <table class="naa_hour naa_time_picker">
+                                                        <tr><th colspan="6" class="naa_time_picker text-center naa_head_hr naa_time_picker">Hour</th></tr>
+                                                        <tr><th class="naa_time_picker" colspan="6" style="padding: 5px 2px;"></th></tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-hr="00">00</td>
+                                                            <td class="naa_time_picker" data-hr="01">01</td>
+                                                            <td class="naa_time_picker" data-hr="02">02</td>
+                                                            <td class="naa_time_picker" data-hr="03">03</td>
+                                                            <td class="naa_time_picker" data-hr="04">04</td>
+                                                            <td class="naa_time_picker" data-hr="05">05</td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-hr="06">06</td>
+                                                            <td class="naa_time_picker" data-hr="07">07</td>
+                                                            <td class="naa_time_picker" data-hr="08">08</td>
+                                                            <td class="naa_time_picker" data-hr="09">09</td>
+                                                            <td class="naa_time_picker" data-hr="10">10</td>
+                                                            <td class="naa_time_picker" data-hr="11">11</td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-hr="12">12</td>
+                                                            <td class="naa_time_picker" data-hr="13">13</td>
+                                                            <td class="naa_time_picker" data-hr="14">14</td>
+                                                            <td class="naa_time_picker" data-hr="15">15</td>
+                                                            <td class="naa_time_picker" data-hr="16">16</td>
+                                                            <td class="naa_time_picker" data-hr="17">17</td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-hr="18">18</td>
+                                                            <td class="naa_time_picker" data-hr="19">19</td>
+                                                            <td class="naa_time_picker" data-hr="20">20</td>
+                                                            <td class="naa_time_picker" data-hr="21">21</td>
+                                                            <td class="naa_time_picker" data-hr="22">22</td>
+                                                            <td class="naa_time_picker" data-hr="23">23</td>
+                                                        </tr>
+                                                    </table>
+                                                    <label class="naa_time_part"></label>
+                                                    <table class="naa_minute naa_time_picker timepc">
+                                                        <tr>
+                                                            <th colspan="3" class="naa_time_picker text-center naa_head_hr">Minute</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="naa_time_picker" colspan="3" style="padding: 5px 2px;"></th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-min="00">00</td>
+                                                            <td class="naa_time_picker" data-min="05">05</td>
+                                                            <td class="naa_time_picker" data-min="10">10</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-min="15">15</td>
+                                                            <td class="naa_time_picker" data-min="20">20</td>
+                                                            <td class="naa_time_picker" data-min="25">25</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-min="30">30</td>
+                                                            <td class="naa_time_picker" data-min="35">35</td>
+                                                            <td class="naa_time_picker" data-min="40">40</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-min="45">45</td>
+                                                            <td class="naa_time_picker" data-min="50">50</td>
+                                                            <td class="naa_time_picker" data-min="55">55</td>
+                                                        </tr>
+                                                    </table>
+                                                    <table class="naa_minute naa_time_picker timemob">
+                                                        <tr>
+                                                            <th colspan="6" class="naa_time_picker text-center naa_head_hr">Minute</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="naa_time_picker" colspan="6" style="padding: 5px 2px;"></th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-min="00">00</td>
+                                                            <td class="naa_time_picker" data-min="05">05</td>
+                                                            <td class="naa_time_picker" data-min="10">10</td>
+                                                            <td class="naa_time_picker" data-min="15">15</td>
+                                                            <td class="naa_time_picker" data-min="20">20</td>
+                                                            <td class="naa_time_picker" data-min="25">25</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-min="30">30</td>
+                                                            <td class="naa_time_picker" data-min="35">35</td>
+                                                            <td class="naa_time_picker" data-min="40">40</td>
+                                                            <td class="naa_time_picker" data-min="45">45</td>
+                                                            <td class="naa_time_picker" data-min="50">50</td>
+                                                            <td class="naa_time_picker" data-min="55">55</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--test-->
+                            <!--test-->
+                            <div style="margin-top:50px;">
+                                <div class="content-divider text-muted form-group"><span><h5 class="f12">DEPARTURE</h5></span></div>
+
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Connecting flight to: <span class="text-danger">*</span></label>
+                                        <select name="dep_con" class="form-control required">
+                                            <option value="" selected="selected" disabled="">Select city </option>
+                                            <option value="hn">Ha Noi </option>
+                                            <option value="dn">Da Nang</option>
+                                            <option value="hcm">Ho Chi Minh</option>
+                                            <option value="kl">KuaLa Lumpur</option>
+                                        </select>
+                                    </div>
+                                    <div class="connection-wrap">
+
+                                        <div class="col-sm-3 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Airline <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control flight_input required" placeholder="" name="sec3_condep_airline" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Flight No. <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control flight_input required" placeholder="" name="sec3_condep_flight" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Date <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control pickadate-selectors flight_input required" id="" name="sec3_condep_date" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Time <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control naa_time_picker naa_time_input flight_input required" readonly="" data="deptime2" placeholder="" name="sec3_condep_time" value="">
+                                                <div class="naa_time naa_time_picker hide deptime2">
+                                                    <table class="naa_hour naa_time_picker">
+                                                        <tr><th colspan="6" class="naa_time_picker text-center naa_head_hr naa_time_picker">Hour</th></tr>
+                                                        <tr><th class="naa_time_picker" colspan="6" style="padding: 5px 2px;"></th></tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-hr="00">00</td>
+                                                            <td class="naa_time_picker" data-hr="01">01</td>
+                                                            <td class="naa_time_picker" data-hr="02">02</td>
+                                                            <td class="naa_time_picker" data-hr="03">03</td>
+                                                            <td class="naa_time_picker" data-hr="04">04</td>
+                                                            <td class="naa_time_picker" data-hr="05">05</td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-hr="06">06</td>
+                                                            <td class="naa_time_picker" data-hr="07">07</td>
+                                                            <td class="naa_time_picker" data-hr="08">08</td>
+                                                            <td class="naa_time_picker" data-hr="09">09</td>
+                                                            <td class="naa_time_picker" data-hr="10">10</td>
+                                                            <td class="naa_time_picker" data-hr="11">11</td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-hr="12">12</td>
+                                                            <td class="naa_time_picker" data-hr="13">13</td>
+                                                            <td class="naa_time_picker" data-hr="14">14</td>
+                                                            <td class="naa_time_picker" data-hr="15">15</td>
+                                                            <td class="naa_time_picker" data-hr="16">16</td>
+                                                            <td class="naa_time_picker" data-hr="17">17</td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-hr="18">18</td>
+                                                            <td class="naa_time_picker" data-hr="19">19</td>
+                                                            <td class="naa_time_picker" data-hr="20">20</td>
+                                                            <td class="naa_time_picker" data-hr="21">21</td>
+                                                            <td class="naa_time_picker" data-hr="22">22</td>
+                                                            <td class="naa_time_picker" data-hr="23">23</td>
+                                                        </tr>
+                                                    </table>
+                                                    <label class="naa_time_part"></label>
+                                                    <table class="naa_minute naa_time_picker timepc">
+                                                        <tr>
+                                                            <th colspan="3" class="naa_time_picker text-center naa_head_hr">Minute</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="naa_time_picker" colspan="3" style="padding: 5px 2px;"></th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-min="00">00</td>
+                                                            <td class="naa_time_picker" data-min="05">05</td>
+                                                            <td class="naa_time_picker" data-min="10">10</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-min="15">15</td>
+                                                            <td class="naa_time_picker" data-min="20">20</td>
+                                                            <td class="naa_time_picker" data-min="25">25</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-min="30">30</td>
+                                                            <td class="naa_time_picker" data-min="35">35</td>
+                                                            <td class="naa_time_picker" data-min="40">40</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-min="45">45</td>
+                                                            <td class="naa_time_picker" data-min="50">50</td>
+                                                            <td class="naa_time_picker" data-min="55">55</td>
+                                                        </tr>
+                                                    </table>
+                                                    <table class="naa_minute naa_time_picker timemob">
+                                                        <tr>
+                                                            <th colspan="6" class="naa_time_picker text-center naa_head_hr">Minute</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="naa_time_picker" colspan="6" style="padding: 5px 2px;"></th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-min="00">00</td>
+                                                            <td class="naa_time_picker" data-min="05">05</td>
+                                                            <td class="naa_time_picker" data-min="10">10</td>
+                                                            <td class="naa_time_picker" data-min="15">15</td>
+                                                            <td class="naa_time_picker" data-min="20">20</td>
+                                                            <td class="naa_time_picker" data-min="25">25</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="naa_time_picker" data-min="30">30</td>
+                                                            <td class="naa_time_picker" data-min="35">35</td>
+                                                            <td class="naa_time_picker" data-min="40">40</td>
+                                                            <td class="naa_time_picker" data-min="45">45</td>
+                                                            <td class="naa_time_picker" data-min="50">50</td>
+                                                            <td class="naa_time_picker" data-min="55">55</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--test-->
+                        </div>
+                    </div><!--panel-->
+                    <div class="panel panel-default formassa section4 sec-head" style="clear: both;">
+                        <div class="panel-heading">
+                            <div class="new-heading">
+                                <h5 class="panel-title">INDICATE YOUR PARTICIPATION </h5>
+                            </div>
+                        </div>
+                        <div class="panel-body" style="padding: 20px;">
+                            <div class="">
+                                <table class="table table-bordered part4form">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center active tb-1" style="width: 348px;"><p class="text-bold">Activity</p></th>
+                                            <th class="text-center active tb-2"><p class="text-bold">Participation</p></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @Html.Action("GetListAct", "Registration", new { actType = 0 })
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> <!--panel body-->
+                    </div><!--panel-->
+                    <!--hotel-->
+                    <div class="panel panel-default formassa section2 sec-head" style="clear: both;">
+                        <div class="panel-heading">
+                            <div class="new-heading">
+                                <h5 class="panel-title">HOTEL REGISTRATION</h5>
+                            </div>
+                        </div>
+
+                        <div class="panel-body content-sec2" style="padding: 20px;">
+
+                            @Html.Action("GetHotel", "Registration")
+
+                        </div> <!--panel body-->
+                    </div>
+                    <div class="text-left cm-quote">
+                        <p>Any questions please contact:</p>
+                        <p>- Email: vuhtqt@vss.gov.vn</p>
+                        <p>- Tel: (84-24) 3936 1776</p>
+                        <p>- Fax: (84-24) 3936 6438</p>
+
+                    </div>
+                    <!--panel-->
+                    <!--Hotel reservation-->
+                    <!--FLIGHT-->
+                    <!--CREDIT CARD DETAILS-->
+                    <div class="text-center">
+                        @*<div class="g-recaptcha" data-sitekey="6LeUZi0UAAAAAN0cfbyqhO_Jn7uylbF7q8_zvS0O" data-callback="callbac"></div>*@
+                        <div class="g-recaptcha" data-sitekey="6LeQZi0UAAAAADHvpGph9O5oL1jrq-sDCOdE-h4s" data-callback="callbac"></div>
+                    </div>
+                    <div class="text-center" style="padding: 30px 0px;">
+                        <button type="submit" class="btn-new" id="submit-form">
+                            <b>SUBMIT</b>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+<section class="sec-below contact-footer">
+    <div class="sec-above-bg">
+        <div class="sec-above-bg-color">
+            <span class="title-footer">Copyright 2018 Social Security Office. All right reserved</span>
+        </div>
+    </div>
+</section>

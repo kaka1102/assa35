@@ -1,0 +1,164 @@
+﻿@using DataContext
+@using DataContext.Constants
+@using DataContext.Until
+<table id="manager-account" class="table toggle-circle table-hover">
+    <thead>
+    <tr>
+        <th style="width: 35px;"></th>
+        <th>@(ASS_35.Resources.HomeText.Name_the_place)</th>
+        <th>@(ASS_35.Resources.HomeText.Creators)</th>
+        <th>@(ASS_35.Resources.HomeText.Date_created)</th>
+        <th>@(ASS_35.Resources.HomeText.Status)</th>
+        <th>@(ASS_35.Resources.HomeText.Option)</th>
+        <th style="display: none;">@(ASS_35.Resources.HomeText.Avatar)</th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model != null)
+    {
+        var model = (List<VenueInfomation_Result>) Model;
+        foreach (var item in model)
+        {
+            <tr>
+                <td class="details-control" approved-by="@(item.emailnguoiduyet == null ? ASS_35.Resources.HomeText.No_data : item.emailnguoiduyet)" app-time="@(item.thoigianduyet == null ? (ASS_35.Resources.HomeText.No_data) : item.thoigianduyet.Value.ToString("dd-MM-yyyy"))" content="@item.noidung" note="@item.ghichu" version="@(item.phienban == 1 ? "Tiếng việt" : "Tiếng anh")" reason="@(item.lydotuchoi == null ? ASS_35.Resources.HomeText.No_data : item.lydotuchoi) " status="@(item.trangthai == SystemMessageConst.StatusConst.Deactive ? "show-reason" : "hide-reason")"></td>
+                <td>@item.tendiadiem</td>
+                <td>@item.emailnguoitao</td>
+                <td>@item.thoigiantao.Value.ToString("dd-MM-yyyy")</td>
+                <td>
+                    @Html.Action("Status2", "Common", new {id = item.trangthai})
+                </td>
+                <td>
+                    <a class="hint--top edit-row-btn" aria-label="@(ASS_35.Resources.HomeText.Edit)" data-id="@item.id" onclick="BindButtonEditClick(this)">
+                        <i class="ti-pencil"></i>
+                    </a>
+                    @if (item.trangthai != SystemMessageConst.StatusConst.Active && item.trangthai != SystemMessageConst.StatusConst.Pending)
+                    {
+                        <a class="hint--top delete-row-btn" aria-label="@(ASS_35.Resources.HomeText.Delete)" data-id="@item.id" onclick="BindButtonDeleteClick(this)">
+                            <i class="ti-close"></i>
+                        </a>
+                    }
+                </td>
+                <td style="display: none;" class="file-avatar">
+                    <img src="@item.avatar" style="max-width: 200px;"/>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+<script>
+    $(function() {
+        BuildTableDetail();
+        BindButtonDeleteClick();
+    });
+
+    function BuildTableDetail() {
+        var selector = $('#manager-account');
+        var table = selector.DataTable({
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "orderable": false
+                },
+                {
+                    "targets": 5,
+                    "orderable": false
+                }
+            ]
+        });
+        $('#manager-account tbody').on('click',
+            'td.details-control',
+            function() {
+                var self = this;
+                var status = $(self).attr("status");
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+
+                if (row.child.isShown()) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                } else {
+                    // Open this row
+                    row.child(format(self)).show();
+                    tr.addClass('shown');
+                }
+            });
+    }
+
+    function format(self) {
+
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+            '<tr>' +
+            '<td>@(ASS_35.Resources.HomeText.Approved_by):</td>' +
+            '<td>' +
+            $(self).attr("approved-by") +
+            '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>@(ASS_35.Resources.HomeText.Browsing_time):</td>' +
+            '<td>' +
+            $(self).attr("app-time") +
+            '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>@(ASS_35.Resources.HomeText.Content):</td>' +
+            '<td>' +
+            $(self).attr("content") +
+            '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>@(ASS_35.Resources.HomeText.Note):</td>' +
+            '<td>' +
+            $(self).attr("note") +
+            '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>@(ASS_35.Resources.HomeText.Version):</td>' +
+            '<td>' +
+            $(self).attr("version") +
+            '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>@(ASS_35.Resources.HomeText.Avatar):</td>' +
+            '<td>' +
+            $(self).parent().find(".file-avatar").html() +
+            '</td>' +
+            '</tr>' +
+            '<tr class="' + $(self).attr("status")+'">' +
+            '<td>@(ASS_35.Resources.HomeText.Reason):</td>' +
+            '<td style="color: red;">' +
+            $(self).attr("reason") +
+            '</td>' +
+            '</tr>' +
+            '</table > ';
+    }
+
+    function BindButtonEditClick(self) {
+        var id = $(self).attr("data-id");
+            LoadPage('/VenueManagement/EditVenue?id=' + id);
+    }
+
+    function BindButtonDeleteClick() {
+        $(".delete-row-btn").click(function() {
+            var self = this;
+            id = $(self).attr("data-id");
+            QTW_RUN_MESS.alter_Message_Question_Callbaclk(
+                "@Html.Raw(ASS_35.Resources.HomeText.Confirm_Dell_Location) !",
+                function() {
+                    var formData = new FormData();
+                    formData.append("id", id);
+                    QTW_JQUERY.RUN_AJAX("ajaxPOST", "/VenueManagement/DeleteVenue", formData, DeleteResult);
+                });
+        });
+    }
+
+    function DeleteResult(data) {
+        if (data.result.IsSuccess === false) {
+            QTW_RUN_MESS.alter_Message_Error(data.result.Message);
+        } else {
+            QTW_RUN_MESS.alter_Message_Success(data.result.Message);
+            LoadPartialView("/VenueManagement/_ListVenue", "#table-container");
+        }
+    }
+</script>

@@ -1,0 +1,14 @@
+﻿@model List<DataContext.Sp_GetActivityRegis_Result>
+
+<div>
+    <h3>Indicate participation</h3>
+
+</div>
+@foreach (var item in Model)
+{
+    <div>@item.actName</div>
+    <div>@item.des</div>
+    <div>@item.value0</div>
+    <div>@item.value1</div>
+    <div>@item.value2</div>
+}

@@ -1,0 +1,178 @@
+﻿@using DataContext
+@using DataContext.Constants
+@using DataContext.Until
+@{
+    var model = (List<m_thongtincanhan>)Model;
+}
+<table id="manager-account" class="table toggle-circle table-hover">
+    <thead>
+        <tr>
+            <th style="width: 35px;"></th>
+            <th>@(ASS_35.Resources.HomeText.Full_Name)</th>
+            <th>@(ASS_35.Resources.HomeText.Address)</th>
+            <th>@(ASS_35.Resources.HomeText.Phone)</th>
+            <th>@(ASS_35.Resources.HomeText.Status)</th>
+            <th>@(ASS_35.Resources.HomeText.Option)</th>
+            <th style="display: none;">@(ASS_35.Resources.HomeText.ID_Card_Passport_Image)</th>
+            <th style="display: none;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in model)
+        {
+            <tr>
+                <td class="details-control" reason="@(item.lydo)" reason-show="@(item.trangthai == SystemMessageConst.StatusConst.Deactive ? "" : "none")" gender="@(item.gioitinh == true ? (ASS_35.Resources.HomeText.Male) : (ASS_35.Resources.HomeText.Female))" position=" @item.chucvu" idcard="@item.cmthochieu" card-location="@item.noicap" date-range="@(item.ngaycap == null ? DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.NoData, SystemMessageConst.systemmessage.NoDataEn) : item.ngaycap.Value.ToString("dd-MM-yyyy"))" exp-date=" @(item.ngayhethan == null ? DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.NoData, SystemMessageConst.systemmessage.NoDataEn) : item.ngayhethan.Value.ToString("dd-MM-yyyy"))" employee-card="@item.sothenhabao" birth=" @(item.ngaysinh == null ? DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.NoData, SystemMessageConst.systemmessage.NoDataEn) : item.ngaysinh.Value.ToString("dd-MM-yyyy"))" email="@item.email" is-car="@(item.dangkyxe == 1 ? "có" : "không")" is-room="@(item.dangkyphong == 1 ? "có" : "không")"></td>
+                <td>@(item.hovaten)</td>
+                <td>@item.diachi</td>
+                <td>@item.sodienthoai</td>
+                <th>@Html.Action("AccountMemberStatus", "Common", new { id = item.trangthai })</th>
+                <td>
+                    @if (item.trangthai != SystemMessageConst.StatusConst.Active)
+                    {
+                        <a class="hint--top delete-row-btn" aria-label="@(ASS_35.Resources.HomeText.Delete)" data-id="@item.id"><i class="ti-close"></i></a>
+                        <a class="hint--top edit-row-btn" aria-label="@(ASS_35.Resources.HomeText.Edit)" data-id="@item.id"><i class="ti-pencil"></i></a>
+                    }
+                </td>
+                <td style="display: none;" class="img-hidden">
+                    <div>
+                        <img src="@item.anhcmtmattruoc" style="max-width: 150px; max-height: 150px;" />
+                        <img src="@item.anhcmtmatsau" style="max-width: 150px; max-height: 150px;" />
+                    </div>
+                </td>
+                <td style="display: none;" class="img-hidden-employee">
+                    <div>
+                        <img src="@item.fileanhthe" style="max-width: 300px; max-height: 300px;" />
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+<script>
+
+    $(function () {
+        var selector = $('#manager-account');
+        var table =  selector.DataTable({
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "orderable": false
+                },
+                {
+                    "targets": 5,
+                    "orderable": false
+                }
+            ]
+        });
+        $('#manager-account tbody').on('click', 'td.details-control', function () {
+            var self = this;
+            var tr = $(this).closest('tr');
+            var row = table.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child(format(self)).show();
+                tr.addClass('shown');
+            }
+        } );
+        BindButtonEditClick();
+        BindButtonDeleteClick();
+
+    });
+
+    function format ( self ) {
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+            '<tr>'+
+            '<td style="color:blue;">@Html.Raw(ASS_35.Resources.HomeText.Gender):</td>'+
+            '<td>' + $(self).attr("gender")+'</td>'+
+            '</tr>'+
+            '<tr>'+
+            '<td style="color:blue;">@Html.Raw(ASS_35.Resources.HomeText.Position):</td>'+
+            '<td>' + $(self).attr("position")+'</td>'+
+            '</tr>' +
+            '<tr>'+
+            '<td style="color:blue;">@Html.Raw(ASS_35.Resources.HomeText.ID_Card_Passport):</td>'+
+            '<td>' + $(self).attr("idcard")+'</td>'+
+            '</tr>' +
+            '<tr>'+
+            '<td style="color:blue;">@Html.Raw(ASS_35.Resources.HomeText.Place_of_issue):</td>'+
+            '<td>' + $(self).attr("card-location")+'</td>'+
+            '</tr>' +
+            '<tr>'+
+            '<td style="color:blue;">@Html.Raw(ASS_35.Resources.HomeText.Date_Range):</td>'+
+            '<td>' + $(self).attr("date-range")+'</td>'+
+            '</tr>' +
+            '<tr>'+
+            '<td style="color:blue;">@Html.Raw(ASS_35.Resources.HomeText.Expiration_Date):</td>'+
+            '<td>' + $(self).attr("exp-date")+'</td>'+
+            '</tr>' +
+            '<tr>'+
+            '<td style="color:blue;">@Html.Raw(ASS_35.Resources.HomeText.ID_Card_Passport_Image):</td>'+
+            '<td>' + $(self).parent().find(".img-hidden").html() +'</td>'+
+            '</tr>' +
+            '<tr>'+
+            '<td style="color:blue;">@Html.Raw(ASS_35.Resources.HomeText.Number_of_employee_Cards):</td>'+
+            '<td>' + $(self).attr("employee-card") +'</td>'+
+            '</tr>' +
+            '<tr>'+
+            '<td style="color:blue;">@Html.Raw(ASS_35.Resources.HomeText.Photo_employee_Card):</td>'+
+            '<td>' + $(self).parent().find(".img-hidden-employee").html() +'</td>'+
+            '</tr>' +
+            '<tr>'+
+            '<td style="color:blue;">@(ASS_35.Resources.HomeText.Date_of_Birth):</td>'+
+            '<td>' + $(self).attr("birth") +'</td>'+
+            '</tr>' +
+            '<tr>'+
+            '<td style="color:blue;">@Html.Raw(ASS_35.Resources.HomeText.Email):</td>'+
+            '<td>' + $(self).attr("email") +'</td>'+
+            '</tr>' +
+            '<tr>'+
+            '<td style="color:blue;">@Html.Raw(ASS_35.Resources.HomeText.Parking_Registration):</td>'+
+            '<td>' + $(self).attr("is-car") +'</td>'+
+            '</tr>' +
+            '<tr>'+
+            '<td style="color:blue;">@Html.Raw(ASS_35.Resources.HomeText.Room_Registration):</td>'+
+            '<td>' + $(self).attr("is-room") +'</td>'+
+            '</tr>' +
+            '</tr>' +
+            '<tr style="display: ' + $(self).attr("reason-show")+';">'+
+            '<td style="color:red;">@Html.Raw(ASS_35.Resources.HomeText.Reason):</td>'+
+            '<td style="color:red;">' + $(self).attr("reason") +'</td>'+
+            '</tr>'+
+            '</table>';
+    }
+    function BindButtonEditClick() {
+        $(".edit-row-btn").click(function () {
+            var id = $(this).attr("data-id");
+            LoadPage('/AccountInfo/EditMember?id=' + id);
+        });
+    }
+
+    function BindButtonDeleteClick() {
+        $(".delete-row-btn").click(function () {
+            var self = this;
+            id = $(self).attr("data-id");
+            QTW_RUN_MESS.alter_Message_Question_Callbaclk("@(Html.Raw(ASS_35.Resources.HomeText.ConfirmDeleteAccount))", function () {
+                var formData = new FormData();
+                formData.append("id", id);
+                QTW_JQUERY.RUN_AJAX("ajaxPOST", "/AccountInfo/DeleteMember", formData, DeleteResult);
+            });
+        });
+    }
+
+    function DeleteResult(data) {
+        if (data.result.IsSuccess === false) {
+            QTW_RUN_MESS.alter_Message_Error(data.result.Message);
+        } else {
+            QTW_RUN_MESS.alter_Message_Success(data.result.Message);
+            LoadPartialView("/AccountInfo/_MemberOfGroup", "#table-container");
+        }
+    }
+</script>
+

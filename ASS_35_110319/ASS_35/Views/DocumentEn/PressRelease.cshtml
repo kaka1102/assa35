@@ -1,0 +1,43 @@
+﻿@using DataContext.DAL;
+@using DataContext.Until;
+
+@{
+    var model = (ReturnPost)Model;
+}
+
+<div class="otherdocuments">
+    PRESS RELEASE
+    <img src="images/document-agemda-muiten.png" alt="">
+</div>
+<div class="news-noidung">
+
+    @*@if (model != null)
+        {
+            if (model.lstPost.Count > 0)
+            {
+                foreach (var item in model.lstPost)
+                {
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-12">
+                            <a href="@Html.Raw("detail-new/" + ConvertTextToLink.ConvertUrlsToLinks(item.tieude) + "-" + item.id)"><img style="width:100%" src="@Html.Raw(item.avatar)" alt=""></a>
+                        </div>
+                        <div class="col-sm-10 col-xs-12">
+                            <a style="font-size: 18px;" href="@Html.Raw("detail-new/" + ConvertTextToLink.ConvertUrlsToLinks(item.tieude) + "-" + item.id)">@Html.Raw(item.tieude)</a>
+                        </div>
+                    </div>
+                }
+                <div class="row phantrang">
+                    @Html.Raw(model.dataPage)
+                </div>
+            }
+            else
+            {
+                <h3>Update later</h3>
+            }
+        }
+        else
+        {
+            <h3>Update later</h3>
+        }*@
+    <h3>Update later</h3>
+</div>

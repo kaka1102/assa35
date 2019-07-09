@@ -1,0 +1,68 @@
+﻿
+@using DataContext
+@{
+    var model = (m_taikhoan)Model;
+}
+<div class="white-box">
+    <div class="col-sm-6" style="float:right">
+        <h3 id="btn-cancel" class="box-title m-b-0" style="float: right; cursor: pointer;"><i class="ti-arrow-left" style="padding-right:10px"></i><a>@(ASS_35.Resources.HomeText.ButtonBack)</a></h3>
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Email)</label>
+        <input type="text" class="form-control" id="txt-account-email" placeholder="Example@domain.com" value="@(model.email)" readonly="readonly">
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox checkbox-success">
+                <input id="cbx-role-2" type="checkbox" value="true" @(ViewBag.role2 ? "checked='checked'" : "")>
+                <label for="checkbox33">@(ASS_35.Resources.HomeText.Editorial_board)</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox checkbox-success">
+                <input id="cbx-role-3" type="checkbox" value="true" @(ViewBag.role3 ? "checked='checked'" : "")>
+                <label for="checkbox33">@(ASS_35.Resources.HomeText.Secretariat)</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-actions">
+        @Html.Action("AccountManagerButton","Common",new { status  = model.trangthai})
+    </div>
+</div>
+<script>
+    $(function() {
+        BindButtonSaveClick();
+        BindButtonCancelClick();
+    });
+
+    function BindButtonCancelClick() {
+        $("#btn-cancel").click(function() {
+            LoadPage('@Url.Action("ManagerAccount","ManagerAccount")');
+        });
+    }
+    function RegisterResult(data) {
+        if (data.result.IsSuccess === false) {
+            QTW_RUN_MESS.alter_Message_Error(data.result.Message);
+        } else {
+            QTW_RUN_MESS.alter_Message_Success(data.result.Message);
+        }
+    }
+    function BindButtonSaveClick() {
+        $(".btn-save").click(function () {
+            var role2 = $("input[type='checkbox'][id='cbx-role-2']:checked").val();
+            var role3 = $("input[type='checkbox'][id='cbx-role-3']:checked").val();
+            var infomationData = {
+                id: "@(model.id)",
+                role2: role2,
+                role3: role3,
+                status: $('input[name=radio]:checked').val(),
+                reason: $("#txt-reason").val()
+            }
+            var formData = new FormData();
+            formData.append("data", JSON.stringify(infomationData));
+            QTW_JQUERY.RUN_AJAX("ajaxPOST", "/ManagerAccount/_EditManager", formData, RegisterResult);
+        });
+    }
+</script>

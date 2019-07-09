@@ -1,0 +1,154 @@
+﻿@using DataContext.DAL;
+@{
+    var model = (ListMedia)Model;
+}
+
+@{
+    ViewBag.Title = "ThuVienChiTiet";
+    Layout = "~/Views/Shared/LayoutVi.cshtml";
+}
+
+<div class="thuvien">
+
+
+    @if (model != null)
+    {
+        <div class="tt">
+            <span><a href="">Trang chủ &gt; </a></span>
+            <span><a style="color:#858585" href="">Hình ảnh &gt;</a></span>
+            <span><a href="">@Html.Raw(model.tenchude) </a></span>
+        </div>
+        <div class="gioithieu">
+            <p class="text-left"><strong>@Html.Raw(model.gioithieu)</strong></p>
+        </div>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators icon-thuvienchitiet">
+                @if (model.lstMedia != null)
+                {
+                    for (int i = 0; i < model.lstMedia.Count; i++)
+                    {
+                        <li data-target="#myCarousel" data-slide-to="@Html.Raw(i)" class="@Html.Raw(i == model.lstMedia.Count - 1 ? "active" : "")"></li>
+                    }
+                }
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+
+                @if (model.lstMedia != null)
+                {
+                    for (int i = 0; i < model.lstMedia.Count; i++)
+                    {
+                        <div class="item @Html.Raw(i == model.lstMedia.Count - 1 ? "active" : "")">
+                            <div class="thuvien-bv-ct row">
+                                <div class="icon-thuvien-ct">
+                                    <img src="~/images/thu-vien-anh.png" alt="">
+                                </div>
+                                <div class="icon-thuvien-ct1">
+                                    <img src="~/images/thu-vien-anh1.png" alt="">
+                                </div>
+                                <div class="anh-thuvien-ct">
+                                    <img src="@Html.Raw(model.lstMedia[i].duongdanfile)" alt="">
+                                </div>
+                                @if (model.lstMedia[i].trichdan != null)
+                                {
+                                    <div class="tieude-thuvien-chitiet">
+                                        <p class="col-md-12">@Html.Raw(model.lstMedia[i].trichdan)</p>
+
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="item">
+                        <div class="thuvien-bv-ct row">
+                            <div class="anh-thuvien-ct">
+                                <img src="~/images/image-not-found.png" alt="">
+                            </div>
+
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+
+            
+        </div>
+
+    }
+    else
+    {
+        <h3>Đang cập nhật</h3>
+    }
+    <div id="testnhe">
+        
+    </div>
+    <script>
+        $(document).ready(function () {        
+        
+            $.ajax({
+                url: '@Url.Action("ContentDetailImage", "VideoHinhAnh")',
+                data: { page: 1, moidang: 0, xemnhieu: 0, curpage:"" },
+            
+                success: function(data) {
+                    $('#testnhe').append(data);
+                }
+            
+
+            });
+        });
+        $(window).bind('hashchange', function () {
+
+            var urlHash = getHashUrlVars();
+            var page = urlHash.page;
+            var curPage = urlHash.currentPage;
+            if (urlHash.xemnhieu) {
+                var xemnhieu = urlHash.xemnhieu;
+            
+                $.ajax({
+                    url: '@Url.Action("ContentDetailImage", "VideoHinhAnh")',
+                    data: { page: page, moidang: 0, xemnhieu: xemnhieu, curpage: curPage },
+
+                    success: function (data) {
+                        $('#testnhe').html("");
+                        $('#testnhe').append(data);
+                    }
+
+                });
+            } else if(urlHash.moidang) {
+           
+                var moidang = urlHash.moidang;
+                $.ajax({
+                    url: '@Url.Action("ContentDetailImage", "VideoHinhAnh")',
+                    data: { page: page, moidang: moidang, xemnhieu: 0, curpage: curPage },
+
+                    success: function (data) {
+                        $('#testnhe').html("");
+                        $('#testnhe').append(data);
+                    }
+
+                });
+            }
+
+            $('#myCarousel').carousel({
+                interval: 5000
+            });
+        });
+      
+    </script>
+    @*@Html.Action("ContentDetailImage", "VideoHinhAnh")*@
+</div>

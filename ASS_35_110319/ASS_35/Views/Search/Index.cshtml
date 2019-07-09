@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutVi.cshtml";
+}
+<style type="text/css">
+    .table, td, th {
+        border: none !important;
+    }
+
+    .gsc-input-box {
+        border: none !important;
+    }
+
+    .gsib_a {
+        padding: 10px !important;
+    }
+
+    .gsc-input {
+        width: 80% !important;
+    }
+
+    .gsc-search-button {
+        width: 15% !important;
+    }
+
+    .gsc-clear-button {
+        width: 3% !important;
+    }
+
+    .gsc-input-box {
+        height: auto !important;
+    }
+
+    .cse input.gsc-search-button, input.gsc-search-button {
+        border: none !important;
+    }
+
+    .cse .gsc-search-button input.gsc-search-button-v2, input.gsc-search-button-v2 {
+        margin: 0px !important;
+        width: 100px !important;
+        height: 40px !important;
+        padding: 3px 30px;
+    }
+
+    .gsc-tabData.gsc-tabdActive {
+        display: inline-block !important;
+    }
+
+    .content-search {
+        float: left;
+        height: auto;
+    }
+</style>
+<h2>Tìm kiếm</h2>
+<div style="float:left;min-height:500px"></div>
+
+<script>
+    (function () {
+        var cx = '005750742310000158564:lbpx3pznezo';
+        var gcse = document.createElement('script');
+        gcse.type = 'text/javascript';
+        gcse.async = true;
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(gcse, s);
+
+        gcse.onload = function () {
+            setTimeout(function () {
+                var a = $('input[type=text].gsc-input')[0];
+                a.onkeydown = function () { if (event.keyCode == 13) { window.location = window.location.origin + '/tim-kiem' + '?q=' + this.value; return false } };
+                var a = $('.gsc-search-button input[type=image]');
+                var srcIMG = a[0].src.replace(a[0].src, '/images/icon-search.png');
+                var cc = a.attr('src', srcIMG);
+            }, 2000);
+        };
+    })();
+</script>
+<div class="content-search">
+    <gcse:search></gcse:search>
+</div>
+

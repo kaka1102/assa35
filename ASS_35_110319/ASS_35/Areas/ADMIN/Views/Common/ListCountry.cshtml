@@ -1,0 +1,14 @@
+﻿@using DataContext
+@{
+    var model = (List<m_quocgia>)Model;
+}
+<select class="form-control" id="@ViewBag.name">
+    @if (model.Count > 0)
+    {
+        foreach (var item in model)
+        {
+            <option value="@item.id" @(item.id == ViewBag.idSelected ? "selected" : "")>@item.country_name</option>
+        }
+    }
+   
+</select>

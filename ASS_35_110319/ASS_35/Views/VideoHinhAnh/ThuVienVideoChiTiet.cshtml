@@ -1,0 +1,109 @@
+﻿@using DataContext.DAL;
+@using System.Text.RegularExpressions;
+@{
+    var model = (ListMedia)Model;
+}
+@{
+    ViewBag.Title = "ThuVienVideoChiTiet";
+    Layout = "~/Views/Shared/LayoutVi.cshtml";
+}
+
+<div class="thuvien">
+
+
+    @if (model != null)
+    {
+        <div class="tt">
+            <span><a href="">Trang chủ &gt; </a></span>
+            <span><a style="color:#858585" href="">Video &gt; </a></span>
+            <span><a href="">@Html.Raw(model.tenchude) </a></span>
+        </div>
+        <div class="video-bv-ct row">
+            <div class="anh-thuvien-ct">
+                @if (model.lstMedia != null)
+                {
+                    Regex rgx = new Regex(@"(https?:\/\/[^\s]+)rel=0");
+                    if (rgx.IsMatch(model.lstMedia[0].duongdanfile))
+                    {
+                        @Html.Raw(model.lstMedia[0].duongdanfile)
+                    }
+                    else
+                    {
+                        @Html.Raw(model.lstMedia[0].duongdanfile.Replace("\" frameborder", "?rel=0\" frameborder"))
+                    }
+                }
+                else
+                {
+                    <img src="~/images/youtubefail.png" alt="">
+                }
+
+            </div>
+            <div class="tieude-video-chitiet">
+                <p>@Html.Raw(model.tenchude)</p>
+                <p><img src="~/images/dongho1.png" alt=""> @Html.Raw(model.thoigianpheduyet)</p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3>Đang cập nhật</h3>
+    }
+
+    @*@Html.Action("ContentDetailVideo", "VideoHinhAnh")*@
+
+    <div id="testnhe">
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        @if(model != null)
+        {
+
+        }
+
+        $.ajax({
+            url: '@Url.Action("ContentDetailVideo", "VideoHinhAnh")',
+            success: function(data) {
+                $('#testnhe').append(data);
+            }
+
+        });
+    });
+    $(window).bind('hashchange', function () {
+
+        var urlHash = getHashUrlVars();
+        var page = urlHash.page;
+        var curPage = urlHash.currentPage;
+        if (urlHash.xemnhieu) {
+            var xemnhieu = urlHash.xemnhieu;
+
+            $.ajax({
+                url: '@Url.Action("ContentDetailVideo", "VideoHinhAnh")',
+                data: { page: page, moidang: 0, xemnhieu: xemnhieu, curpage: curPage },
+
+                success: function (data) {
+                    $('#testnhe').html("");
+                    $('#testnhe').append(data);
+                }
+
+            });
+        } else if(urlHash.moidang) {
+
+            var moidang = urlHash.moidang;
+            $.ajax({
+                url: '@Url.Action("ContentDetailVideo", "VideoHinhAnh")',
+                data: { page: page, moidang: moidang, xemnhieu: 0, curpage: curPage },
+
+                success: function (data) {
+                    $('#testnhe').html("");
+                    $('#testnhe').append(data);
+                }
+
+            });
+        }
+
+    });
+
+</script>

@@ -1,0 +1,53 @@
+﻿@using DataContext.DAL;
+@using DataContext.Until;
+
+@{
+    var model = (DetailsPost)Model;
+}
+
+@{
+    ViewBag.Title = "ChiTietTinTuc";
+    Layout = "~/Views/Shared/LayoutVi.cshtml";
+}
+
+<div class="sukien">
+
+    @if (model != null)
+    {
+        <div class="tt">
+            <span><a href="/trang-chu">Trang chủ &gt; </a></span>
+            <span><a style="color:#2f88c5" href="">@Html.Raw(model.tieude)</a></span>
+
+        </div>
+    }
+    else
+    {
+        <div class="tt">
+            <span><a href="/trang-chu">Trang chủ &gt; </a></span>
+            <span><a href="/tin-tuc">Tin tức </a></span>
+        </div>
+    }
+
+    <div class="tintuc-bv-ct row">
+
+        @if (model != null)
+        {
+            <span style="font-family:Arial;font-size:27px;font-weight:bold;">@Html.Raw(model.tieude)</span>
+            <span class="time-create"><img src="~/images/dongho.png" alt="">@Html.Raw(model.thoigianpheduyet.Remove(2, 1).Insert(2, " tháng "))</span>
+            <span style="font-size:17px; text-align:justify" class="infor-tt">@Html.Raw(model.gioithieu)</span>
+           
+            @Html.Raw(model.noidung)
+            if(model.tacgia !=null || model.tacgia != "")
+            {
+            <p class="tacgia">@Html.Raw(model.tacgia)</p>
+            }
+        }
+        else
+        {
+            <h3>Đang cập nhật</h3>
+        }
+    </div>
+
+    @Html.Action("TinTucLienQuan", "TinTucSuKien")
+
+</div>

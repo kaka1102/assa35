@@ -1,0 +1,339 @@
+﻿@using DataContext.Constants
+@using DataContext.Until;
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/assa-logo.png">
+    <title>ADMIN ASSA-35</title>
+
+    <link href="~/Content/plugins/bower_components/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/eliteadmin-colors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/plugins/bower_components/bootstrap-extension/css/bootstrap-extension.css" rel="stylesheet" />
+    <link href="~/Content/plugins/bower_components/sidebar-nav/sidebar-nav.min.css" rel="stylesheet" />
+    <link href="~/Content/plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet" />
+    <link href="~/Content/eliteadmin-colors/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/plugins/bower_components/sweetalter/sweetalert.css" rel="stylesheet" />
+
+    <link href="~/Content/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/eliteadmin-colors/css/style.css" rel="stylesheet" />
+    <link href="~/Content/eliteadmin-colors/css/colors/default-dark.css" rel="stylesheet" />
+    <link href="~/Content/plugins/bower_components/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+
+    <link href="~/Content/plugins/bower_components/bosstrap-datetimepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+
+
+    <link href="~/Content/eliteadmin-colors/css/1_a_hint.css" rel="stylesheet" />
+    <script src="~/Content/plugins/bower_components/jquery/jquery.min.js"></script>
+    <script src="~/Content/plugins/bower_components/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script src="~/Content/plugins/bower_components/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ScriptPuplic/Language.js"></script>
+    <style>
+        .footable-sort-indicator {
+            display: none !important;
+        }
+
+        td.details-control {
+            background: url('/Content/IMG/Icon/details_open.png') no-repeat center center !important;
+            cursor: pointer;
+        }
+
+        tr.shown td.details-control {
+            background: url('/Content/IMG/Icon/details_close.png') no-repeat center center !important;
+            cursor: pointer;
+        }
+
+        .ti-close {
+            cursor: pointer !important;
+        }
+
+        .ti-pencil {
+            cursor: pointer !important;
+        }
+
+        .hide-reason {
+            display: none;
+        }
+
+        .select-item {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="preloader">
+        <div class="cssload-speeding-wheel"></div>
+    </div>
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-static-top m-b-0">
+            <div class="navbar-header">
+                <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse">
+                    <i class="ti-menu"></i>
+                </a>
+                <div class="top-left-part">
+                    @*<a class="logo" href="index.html">
+                            <b>
+                                <img src="~/images/assa-logo.png" alt="home" class="dark-logo img-responsive" />
+                                <img src="~/Content/plugins/images/eliteadmin-logo-dark.png" alt="home" class="light-logo" />
+                            </b>
+                            <span class="hidden-xs">
+                                ASSA-35
+                            </span>
+                        </a>*@
+
+                    <div class="lg-left logo">
+                        <a href="/Index">
+                            <b>
+                                <img src="~/images/assa-logo.png" alt="home" class="dark-logo img-responsive" />
+                            </b>
+                        </a>
+                    </div>
+                    <div class="lg-right logo">
+                        <span class="hidden-xs" style="padding-top:15%;">
+                            ASSA-35
+                        </span>
+                    </div>
+                </div>
+                <ul class="nav navbar-top-links navbar-right pull-right" style="padding-right: 10px;">
+                    @Html.Action("NotificationAlert", "NotificationManager")
+                    @Html.Action("NotificationAlertAccountReportPending", "NotificationManager")
+                    <li class="dropdown">
+                        @*<a class="=dropdown-toggle waves-effect waves-light" title="English" id="English" data-toggle="" href="/Language/Change?LanguageAbbrevation=en"><img style="border: 1px solid black;" src="~/Content/IMG/Icon/icon-flag-en.png"></a>*@
+                        <a class="=dropdown-toggle waves-effect waves-light" title="English" id="English" data-toggle="" href="javascript:0"><img style="border: 1px solid black;" src="~/Content/IMG/Icon/icon-flag-en.png"></a>
+                    </li>
+                    <li class="dropdown">
+                        @*<a class="=dropdown-toggle waves-effect waves-light" title="Việt Nam" id="VietNam" data-toggle="" href="/Language/Change?LanguageAbbrevation=vi"><img style="border: 1px solid transparent;" src="~/Content/IMG/Icon/icon-flag-vn.png"></a>*@
+                        <a class="=dropdown-toggle waves-effect waves-light" title="Việt Nam" id="VietNam" data-toggle="" href="javascript:0"><img style="border: 1px solid transparent;" src="~/Content/IMG/Icon/icon-flag-vn.png"></a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-top-links navbar-left hidden-xs">
+                    <li>
+                        <a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light">
+                            <i class="icon-arrow-left-circle ti-menu"></i>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </nav>
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse slimscrollsidebar">
+                <div class="user-profile">
+                    <div class="dropdown user-pro-body">
+                        <div>
+                            <img src="@AccountUntil.GetAccount().avatar" alt="user-img" class="img-circle">
+                        </div>
+                        <a class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            @if (AccountUntil.GetAccount().hovaten == "Không xác định")
+                            {
+                                @AccountUntil.GetAccount().email
+                            }
+                            else
+                            {
+                                @AccountUntil.GetAccount().hovaten
+                            }
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu animated flipInY">
+                            <li class="select-item" data-url="/AccountInfo/AccountInfomation">
+                                <a><i class="ti-user"></i>@(ASS_35.Resources.HomeText.Account_Information)</a>
+                            </li>
+                            @if (AccountUntil.GetAccount().typeAcc.Value == SystemMessageConst.AccountType.Group && (AccountUntil.GetAccount().idquyentaikhoan == SystemMessageConst.RoleConst.Daibieu || AccountUntil.GetAccount().idquyentaikhoan == SystemMessageConst.RoleConst.Phongvien))
+                            {
+                                <li class="select-item" data-url="/AccountInfo/MemberOfGroup">
+                                    <a><i class="ti-alert"></i>@(ASS_35.Resources.HomeText.Team_Members)</a>
+                                </li>
+                            }
+                            <li>
+                                <a class="select-item" data-url="/AccountInfo/ChangePassword"><i class="fa fa-key"></i>@(ASS_35.Resources.HomeText.Changes_Password)</a>
+                            </li>
+                            <li>
+                                <a href="/Admin/LogoutAdmin" id="btnLogoutAdmin"><i class="fa fa-power-off"></i> @(ASS_35.Resources.HomeText.Logout)</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                @Html.Action("Index", "MenuAdmin")
+            </div>
+        </div>
+        <div id="page-wrapper">
+            <div id="page-contents" class="container-fluid">
+                @RenderBody()
+
+            </div>
+            <footer class="footer text-center"> @(ASS_35.Resources.HomeText.Footer) </footer>
+        </div>
+    </div>
+    <script src="~/Content/eliteadmin-colors/bootstrap/dist/js/tether.min.js"></script>
+    <script src="~/Content/eliteadmin-colors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/Content/plugins/bower_components/bootstrap-extension/js/bootstrap-extension.min.js"></script>
+    <script src="~/Content/plugins/bower_components/sidebar-nav/sidebar-nav.min.js"></script>
+    <script src="~/Content/eliteadmin-colors/js/jquery.slimscroll.js"></script>
+    <script src="~/Content/eliteadmin-colors/js/waves.js"></script>
+    <script src="~/Content/plugins/bower_components/waypoints/jquery.waypoints.js"></script>
+    <script src="~/Content/plugins/bower_components/counterup/jquery.counterup.min.js"></script>
+    <script src="~/Content/plugins/bower_components/raphael/raphael-min.js"></script>
+    <script src="~/Content/eliteadmin-colors/js/custom.min.js"></script>
+    <script src="~/Content/plugins/bower_components/sweetalter/sweetalert.min.js"></script>
+    <script src="~/Content/plugins/bower_components/sweetalter/jquery.sweet-alert.custom.js"></script>
+    <script src="~/Content/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="~/Content/plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.js"></script>
+    <script src="~/Content/plugins/bower_components/toast-master/js/jquery.toast.js"></script>
+    <script src="~/Content/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/plugins/bower_components/bosstrap-datetimepicker/bootstrap-datepicker.min.js"></script>
+
+    <script src="~/Content/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+    <script src="~/Content/ScriptPuplic/LibAss.js"></script>
+    <script src="~/Content/ScriptPuplic/LibAjax.js"></script>
+
+    <script type="text/javascript">
+        var _URLx = window.URL || window.webkitURL;
+
+        $(document).ready(function ($) {
+
+            $(document).delegate('*[data-toggle="lightbox"]:not([data-gallery="navigateTo"])',
+                'click',
+                function (event) {
+                    event.preventDefault();
+                    return $(this).ekkoLightbox({
+                        onShown: function () {
+                            if (window.console) {
+                                return console.log('Checking our the events huh?');
+                            }
+                        },
+                        onNavigate: function (direction, itemIndex) {
+                            if (window.console) {
+                                return console.log('Navigating ' + direction + '. Current item: ' + itemIndex);
+                            }
+                        }
+                    });
+                });
+            $('.btnRemoveItems').click(function (e) {
+                e.preventDefault();
+            });
+            //Programatically call
+            $('#open-image').click(function (e) {
+                e.preventDefault();
+                $(this).ekkoLightbox();
+            });
+            $('#open-youtube').click(function (e) {
+                e.preventDefault();
+                $(this).ekkoLightbox();
+            });
+            ChangeLanguage();
+
+            var Cookie = getCookie('Language');
+            if (Cookie == 'en') {
+                $('#English').css('background', 'rgba(0,0,0,.1)');
+            } else {
+                $('#VietNam').css('background', 'rgba(0,0,0,.1)');
+            }
+
+
+            // navigateTo
+            $(document).delegate('*[data-gallery="navigateTo"]',
+                'click',
+                function (event) {
+                    event.preventDefault();
+                    var lb;
+                    return $(this).ekkoLightbox({
+                        onShown: function () {
+                            lb = this;
+                            $(lb.modal_content).on('click',
+                                '.modal-footer a',
+                                function (e) {
+                                    e.preventDefault();
+                                    lb.navigateTo(2);
+                                });
+
+                        }
+                    });
+                });
+            ListenSocket();
+        });
+
+        function ListenSocket() {
+            var ws = new window["MozWebSocket" in window
+                ? 'MozWebSocket'
+                : ("WebSocket" in window ? 'WebSocket' : null)](
+                'wss://' + window.location.host + '/NotificationManager/ProcessRequest');
+            ws.onmessage = function (e) {
+                var result = JSON.parse(e.data);
+                if (result.Type === 2) {
+                    var selector = $("#notifi-alert");
+                    var containt =
+                        $('<i class="icon-envelope"></i><div class="notify"><span class="heartbit"></span><span class="point"></span></div>');
+                    selector.empty();
+                    selector.append(containt);
+                };
+                if (result.Type === 10) {
+                    var selector = $("#notifi-accountpending-alert");
+                    var containt =
+                        $('<i class="icon-envelope"></i><div class="notify"><span class="heartbit"></span><span class="point"></span></div>');
+                    selector.empty();
+                    selector.append(containt);
+                };
+                if (result.Type === 3) {
+                    swal({
+                        title: ReturnLanguageJs(Accountsignedsomewhere, AccountsignedsomewhereEn),
+                        text: ReturnLanguageJs(ExxitAfter2s, ExxitAfter2sEn),
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                };
+            }
+        }
+
+        function ChangeLanguage() {
+            $('#English').click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Language/Change?LanguageAbbrevation=en",
+                    contentType: false,
+                    processData: false,
+                    success: function (kq) {
+                        window.location.reload();
+                    }
+                });
+
+            });
+            $('#VietNam').click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Language/Change?LanguageAbbrevation=vi",
+                    contentType: false,
+                    processData: false,
+                    success: function (kq) {
+
+                        window.location.reload();
+                    }
+                });
+
+            });
+        }
+        function getCookie(cn) {
+            var name = cn + "=";
+            var allCookie = decodeURIComponent(document.cookie).split(';');
+            var cval = [];
+            for (var i = 0; i < allCookie.length; i++) {
+                if (allCookie[i].trim().indexOf(name) == 0) {
+                    cval = allCookie[i].trim().split("=");
+                }
+            }
+            return (cval.length > 0) ? cval[1] : "";
+        }
+    </script>
+</body>
+
+</html>

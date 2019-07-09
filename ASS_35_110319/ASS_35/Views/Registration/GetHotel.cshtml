@@ -1,0 +1,210 @@
+﻿<div class="row">
+    <div class="col-md-6 col-sm-6">
+        <div class="form-group">
+            <label>Check-in (Date) <span class="text-danger">*</span></label>
+            <input type="text" class="form-control pickadate-selectors required" id="date_checkin" name="sec2_date_checkin" value="">
+        </div>
+    </div>
+    <!-- <div class="col-md-1"></div> -->
+    <div class="col-md-6 col-sm-6">
+        <div class="form-group">
+            <label>Check-out (Date) <span class="text-danger">*</span> </label>
+            <input type="text" class="form-control pickadate-selectors required" id="date_checkout" name="sec2_date_checkout" value="">
+        </div>
+    </div>
+</div>
+<div class="non-pad col-md-12" style="margin-bottom: 24px;">
+    
+    <table class="table table-bordered hotel_desktop">
+       
+        <thead>           
+            <tr>
+                <th class="text-center warning" style="width: 270px;"><p class="text-bold">Hotel Name</p></th>
+                <th class="text-center warning">
+                    <p class="text-bold">Star Rating</p>
+                </th>
+                <th class="text-center warning" style="width: 320px">
+                    <p class="text-bold">Type of room required</p>
+                </th>
+                <th class="text-center warning">
+                    <p class="text-bold">
+                        Rate (USD/ room/ night )
+                    </p>
+                </th>
+                <th class="text-center warning">
+                    <p class="text-bold">Rate (VND/ room/ night)</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="5" class="warning">
+                    <p>Sheraton Nha Trang Hotel & Spa</p>
+                    <p>Add: 26 – 28 Tran Phu street, Nha Trang city, Viet Nam</p>
+                </td>
+                <td class="warning text-center" rowspan="5">
+                    <p>5*</p>
+                </td>
+                <td class="warning" data-roomtype="1">
+                    <p class="text-bold">Deluxe </p>
+                    <div class="col-sm-4">
+                        <label class="radio-inline">
+                            SGL
+                            <input type="radio" name="sec2_typeroom" class="styled cbox-type" value="1">
+                        </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="radio-inline">
+                            DBL
+                            <input type="radio" name="sec2_typeroom" class="styled cbox-type" value="2">
+                        </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="radio-inline">
+                            TWIN
+                            <input type="radio" name="sec2_typeroom" class="styled cbox-type" value="3">
+                        </label>
+                    </div>
+                </td>
+                <td class=" text-center warning">
+                    <p>123</p>
+                </td>
+                <td class="text-center warning">
+                    <p>2.804.400</p>
+                </td>
+                @*<td class="warning chk_type_box">
+                    <div class="col-sm-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="sec2_typeroom" class="styled cbox-type troom1" value="1">
+                            Smoking
+                        </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="sec2_typeroom" class="styled cbox-type" value="2">
+                            Non-smoking
+                        </label>
+                    </div>
+                </td>*@
+            </tr>
+            <tr>
+                <td class="warning" data-roomtype="2">
+                    <p class="text-bold">Premium Deluxe Ocean View </p>
+                    <div class="col-sm-4">
+                        <label class="radio-inline">
+                            SGL
+                            <input type="radio" name="sec2_typeroom" class="styled cbox-type" value="1">
+                        </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="radio-inline">
+                            DBL
+                            <input type="radio" name="sec2_typeroom" class="styled cbox-type" value="2">
+                        </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="radio-inline">
+                            TWIN
+                            <input type="radio" name="sec2_typeroom" class="styled cbox-type" value="3">
+                        </label>
+                    </div>
+                </td>
+                <td class="warning text-center">
+                    <p>149</p>
+                </td>
+                <td class="warning text-center">
+                    <p>3.397.200</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="warning" data-roomtype="3">
+                    <p class="text-bold">Club Ocean View  </p>
+                    <div class="col-sm-4">
+                        <label class="radio-inline">
+                            SGL
+                            <input type="radio" name="sec2_typeroom" class="styled cbox-type" value="1">
+                        </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="radio-inline">
+                            DBL
+                            <input type="radio" name="sec2_typeroom" class="styled cbox-type" value="2">
+                        </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="radio-inline">
+                            TWIN
+                            <input type="radio" name="sec2_typeroom" class="styled cbox-type" value="3">
+                        </label>
+                    </div>
+                </td>
+                <td class="warning text-center">
+                    <p>197</p>
+                </td>
+                <td class="warning text-center">
+                    <p>4.491.600</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="col-sm-6">
+                        <label class="label-inline">
+                            Smoking:
+                            <input name="sec2_room_op2" type="radio" value="1" class="styled cbox-type" />
+                        </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="label-inline">
+                            Non Smoking:
+                            <input name="sec2_room_op2" type="radio" value="2" class="styled cbox-type" />
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <label>Other requirements (if any): </label>
+                    <input type="text" name="sec2_other_req" class="form-control" />
+                </td>
+            </tr>
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5">
+                    <p>Room Rate included: Breakfast & VAT Tax (Exchange rate: 1usd = 22.800vnd)</p>
+                    <p>Check in: After 15:00 PM | Checkout: Before 12:00 PM</p>
+                    <p><strong>Remarks for payment:</strong> Full payment is required upon receiving the room confirmation</p>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+
+    <label class="roomtype-msg validation-err-label pull-right" style="display: none;">This room type is required.</label>
+    
+</div>
+@*<div class="row accompanying-form">
+        <div class="col-lg-12">
+            <div style="padding: 0px 10px;"><label class="text-semibold">Name of Accompanying Person (if any)</label></div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                    <label>Last Name:</label>
+                    <input type="text" name="sec2_acc_last" class="form-control" value="">
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                    <label>First Name:</label>
+                    <input type="text" name="sec2_acc_name" class="form-control" value="">
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                    <label>Middle Initial:</label>
+                    <input type="text" name="sec2_acc_middle" class="form-control" value="">
+                </div>
+            </div>
+        </div>
+    </div>*@
+

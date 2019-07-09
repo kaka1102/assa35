@@ -1,0 +1,12 @@
+﻿@if (ViewBag.Type == "KEYNOTESPEAKER")
+{
+    @Html.Action("KEYNOTESPEAKER", "DocumentEn")
+}
+else if (ViewBag.Type == "PANELIST")
+{
+    @Html.Action("PANELIST", "DocumentEn")
+}
+else
+{
+    @Html.Action("GUESTSPEAKER", "DocumentEn")
+}

@@ -1,0 +1,59 @@
+﻿
+@using DataContext.Constants
+@using DataContext.Until
+<div class="form-group text-left">
+    <label class="control-label">@(ASS_35.Resources.HomeText.CurrentStatus)</label>
+    <input type="text" class="form-control" value="@ViewBag.value" readonly="readonly">
+</div>
+
+<div class="form-group" id="frm-edit-status" style="padding-left: 20px;">
+        <div class="form-check">
+            @if (ViewBag.status == SystemMessageConst.StatusConst.Active)
+            {
+                <label class="custom-control custom-radio">
+                    <input type="checkbox" name="radio" value="@SystemMessageConst.StatusConst.Deactive" class="custom-control-input"> <span class="custom-control-indicator"></span><span class="custom-control-description">@(ASS_35.Resources.HomeText.MemberLock)</span>
+                </label>
+            }
+            @if (ViewBag.status == SystemMessageConst.StatusConst.Pending)
+            {
+                <label class="custom-control custom-radio">
+                    <input type="radio" name="radio" value="@SystemMessageConst.StatusConst.Active" class="custom-control-input"> <span class="custom-control-indicator"></span><span class="custom-control-description">@(ASS_35.Resources.HomeText.ActiveStatus)</span>
+                </label>
+                <label class="custom-control custom-radio">
+                    <input type="radio" name="radio" value="@SystemMessageConst.StatusConst.Deactive" class="custom-control-input"> <span class="custom-control-indicator"></span><span class="custom-control-description">@(ASS_35.Resources.HomeText.ButtonDeactiveAccount)</span>
+                </label>
+            }
+            @if (ViewBag.status == SystemMessageConst.StatusConst.Deactive)
+            {
+                <label class="custom-control custom-radio">
+                    <input type="checkbox" name="radio" value="@SystemMessageConst.StatusConst.Active" class="custom-control-input"> <span class="custom-control-indicator"></span><span class="custom-control-description">@(ASS_35.Resources.HomeText.ActiveStatus)</span>
+                </label>
+            }
+        </div>
+    </div>
+@if (AccountUntil.GetAccount().idquyentaikhoan == SystemMessageConst.RoleConst.Admin)
+{
+    <div class="form-group" id="fr-lydo" style="display: none;">
+        <label class="col-md-12">@(ASS_35.Resources.HomeText.Reason)</label>
+        <textarea class="form-control" rows="5" id="txt-reason"></textarea>
+    </div>
+}
+<button class="btn btn-success waves-effect waves-light btn-save" type="button">
+    <span class="btn-label"><i class="ti-save"></i></span>@(ASS_35.Resources.HomeText.ButtonSave)
+</button>
+<script>
+    $(function() {
+        BindButonStatusChange();
+    });
+
+    function BindButonStatusChange() {
+        $('input[name=radio]').change(function() {
+            if ($(this).val() === "@SystemMessageConst.StatusConst.Deactive") {
+                $("#fr-lydo").css("display", "block");
+            } else {
+                $("#fr-lydo").css("display", "none");
+            }
+        });
+    }
+</script>
+

@@ -1,0 +1,328 @@
+﻿
+@media (max-width: 768px) {
+    .nav > li > a {
+        padding: 15px 22px 0px 0px;
+    }
+
+    
+
+    .sec-cont-top-in a {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 425px) {
+    .slide-document li {
+        display: none;
+    }
+
+    .slide-document .active {
+        display: block;
+        width: 100%;
+    }
+    .programer-for > p {
+        font-size: 28px !important;
+    }
+
+    .display-mobile {
+        display: inline-block !important;
+    }
+    .programer-at{
+        display: none;
+    }
+    .body-contact {
+        padding-bottom: 110px;
+    }
+
+    .contact-noidung {
+        padding: 50px 0px 0px 0px;
+    }
+
+    .tieude-contact {
+        font-size: 30px;
+    }
+
+    .contact {
+        padding: 5px;
+        font-size: 1.5em;
+        background-repeat: round;
+        padding-left: 20px;
+    }
+
+    .vanue_table td {
+        padding: 15px 5px;
+    }
+
+    .vnue-left {
+        width: 40px;
+        text-align: center;
+    }
+
+    .padtop64 {
+        padding-top: 30px !important;
+    }
+
+    .padtop30 {
+        padding-top: 0px !important;
+    }
+
+    .sec-title-sp .sec-arrow-right {
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-left: 15px solid #fcab7f;
+        top: calc(50% - 15px);
+        border-radius: 0px;
+    }
+
+    .sec-title-sp h4 {
+        padding-left: 25px;
+    }
+
+    .sec-title-sp .line {
+        margin-left: 25px;
+    }
+
+    .content-p > p {
+        margin-left: 25px;
+    }
+
+    .table-hotel .add-hotel, .table-hotel .tel-hotel, .table-hotel .fax-hotel, .table-hotel .web-hotel, .table-hotel .roominfo, .table-hotel .distance {
+        font-size: 17px;
+    }
+
+    .sec-cont-bottom .table-hotel thead tr td {
+        font-size: 14px;
+    }
+
+    .table-hotel .hotelname, .table-hotel .roomname {
+        font-size: 17px;
+    }
+
+    .sec-cont-bottom {
+        padding-bottom: 110px;
+    }
+
+    .sec-cont-top {
+        height: 239px;
+    }
+
+    .sec-cont-top-in a {
+        font-size: 10px;
+    }
+
+    .row.phantrang {
+        padding-right: 0px;
+    }
+
+    .news-noidung {
+        padding-bottom: 110px !important;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .detail-portfilio {
+        padding-bottom: 110px;
+    }
+
+    .panel-body {
+        padding: 0px;
+    }
+
+    .st-document li {
+        width: 100%;
+    }
+
+    .pg-left {
+        width: 30%;
+    }
+
+    .adenda {
+        margin-bottom: 20px;
+    }
+
+    .rebortotherdocuments {
+        padding-left: 0px;
+        padding-bottom: 110px !important;
+    }
+
+    .overview-qg {
+        background-image: url(../../images/overview-backgrou.png);
+        background-repeat: round;
+        padding-top: 70px;
+        padding-bottom: 70px;
+        background-position: 50px -15px;
+    }
+
+    .overview-quocki {
+        padding-bottom: 5px;
+    }
+
+    .img-overview {
+        height: 100% !important;
+    }
+
+    .new-css-ft {
+        margin-bottom: 30px;
+    }
+
+    .sec-below .sec-above-bg {
+        /*margin-bottom: 30px;*/
+    }
+
+        .sec-below .sec-above-bg .sec-above-bg-color {
+            margin-bottom: -30px;
+        }
+
+        .sec-below .sec-above-bg .sec-above-bg-color {
+            height: 30px;
+        }
+
+    .sec-below {
+        padding-bottom: 60px;
+    }
+
+    .carousel {
+        height: 220px;
+        overflow: hidden;
+    }
+
+    .carousel-inner {
+        height: 100%;
+    }
+
+        .carousel-inner > .item {
+            height: 100%;
+        }
+
+    .img-home {
+        display: none;
+    }
+
+    .navbar-nav {
+        margin: 0px !important;
+    }
+
+    
+
+    .article-top {
+        width: 100%;
+    }
+
+    .article-video {
+        height: 240px;
+        width: 100%;
+    }
+
+    .article-top .article-des {
+        font-size: 21px;
+    }
+
+    .list-country ul li {
+        width: 50%;
+    }
+
+    .sec-below .sec-above-bg .sec-above-bg-color {
+        margin-bottom: -22px;
+    }
+
+    .title-footer {
+        font-size: 12px;
+    }
+
+    .list-country ul li img {
+        width: 100%;
+        height: 110px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 375px) {
+    .table-hotel .add-hotel, .table-hotel .tel-hotel, .table-hotel .fax-hotel, .table-hotel .web-hotel, .table-hotel .roominfo, .table-hotel .distance {
+        font-size: 13px;
+    }
+
+    .sec-cont-bottom .table-hotel thead tr td {
+        font-size: 14px;
+    }
+
+    .table-hotel .hotelname, .table-hotel .roomname {
+        font-size: 14px;
+    }
+
+    .sec-cont-top {
+        height: 211px;
+    }
+
+    .carousel {
+        height: 210px;
+    }
+
+    .list-country ul li img {
+        height: 95px;
+    }
+  
+
+    
+}
+
+@media (max-width: 320px) {
+    .table-hotel .add-hotel, .table-hotel .tel-hotel, .table-hotel .fax-hotel, .table-hotel .web-hotel, .table-hotel .roominfo, .table-hotel .distance {
+        font-size: 11px;
+    }
+
+    .sec-cont-bottom .table-hotel thead tr td {
+        font-size: 12px;
+    }
+
+    .table-hotel .hotelname, .table-hotel .roomname {
+        font-size: 11px;
+    }
+
+    .sec-cont-top {
+        height: 180px;
+    }
+
+    .carousel {
+        height: 190px;
+    }
+
+    
+
+    .list-country ul li img {
+        height: 80px;
+    }
+}
+
+/* Responsive Home Page and Header*/
+
+/*Resposinve Document*/
+@media (max-width: 1024px) {
+    .guest-speaker .port-thumb {
+        width: 100%;
+    }
+
+    .adenda {
+        margin-bottom: 10px;
+    }
+    .guest-speaker .slide-document li {
+        width: 15%;
+        height:111px;
+    }
+    .guest-speaker .port-thumb {
+        height: 111px;
+    }
+}
+@media (max-width: 425px) {
+    .guest-speaker .slide-document li {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+    }
+
+    .guest-speaker .port-thumb {
+        height: 200px;
+    }
+    .board-meeting p img {
+        height: unset !important;
+    }
+}

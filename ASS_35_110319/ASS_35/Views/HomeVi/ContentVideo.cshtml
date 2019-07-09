@@ -1,0 +1,24 @@
+﻿@using DataContext.ClientBusiness;
+@using DataContext.DAL;
+@using DataContext.Until;
+
+@{
+    var model = (Video)Model;
+}
+
+@if (model != null)
+{
+    <div class="sb-dtvideo">
+        @Html.Raw(model.link)
+    </div>
+    <div class="sb-nd">
+        <h2 style="text-align:center;font-size:16px;font-weight:bold;font-family:'Segoe UI';color:#3c387c;   margin-top: 10px;">HIỆP HỘI AN SINH XÃ HỘI ĐÔNG NAM Á</h2>
+        <a href="@Html.Raw("lib-video/" + ConvertTextToLink.ConvertUrlsToLinks(model.tenchude) + "-" + model.id)"><h5 class="l-title" style="font-size:14px;color:#3c387c;font-family:''Segoe UI''">@Html.Raw(model.tenchude)</h5></a>
+        
+    </div>
+}
+else
+{
+    <h5>Không có video nào</h5>
+}
+

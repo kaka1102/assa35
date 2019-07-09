@@ -1,0 +1,52 @@
+﻿@using DataContext.DAL;
+@{
+    var model = (DataContext.m_lienhe)Model;
+}
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutEn.cshtml";
+}
+<style>
+    /*.container {
+
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }*/
+
+    .sec-below {
+        background-color: #fff !important;
+        border-left: 2px solid #cccc;
+        border-right: 2px solid #cccc;
+        padding-bottom:0px;
+    }
+</style>
+<div class="content-contact">
+    <div class="container">
+        <div class="body-contact">
+            <div class="head-contact">
+                <img src="images/banercontact.png">
+                <div class="contact">
+                    Contact us
+                </div>
+            </div>
+            <div class="contact-noidung">
+                @if (model != null)
+                {
+                    @Html.Raw(model.noidung)
+                }
+                else
+                {
+                    <h3>Đang cập nhật</h3>
+                }
+            </div>
+        </div>
+    </div>
+    <section class="sec-below contact-footer">
+        <div class="sec-above-bg">
+            <div class="sec-above-bg-color">
+                <span class="title-footer">Copyright 2018 Social Security Office. All right reserved</span>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,7 @@
+﻿@*<div class="col-sm-6">*@
+<div class="col-sm-4">
+    <select class="custom-select col-6" id="@ViewBag.name">
+        <option value="false" @(ViewBag.idSelected == false ? "selected='selected'" : "")>@(ASS_35.Resources.HomeText.Unread)</option>
+        <option value="true" @( ViewBag.idSelected == true ? "selected='selected'" : "")>@(ASS_35.Resources.HomeText.Read)</option>
+    </select>
+</div>

@@ -1,0 +1,16 @@
+﻿@using DataContext.Constants
+@using DataContext.Until
+<select class="form-control" id="@ViewBag.name" @(ViewBag.isDisable ? "disabled" : "")>
+    @if (ViewBag.hasAll == true)
+    {
+        <option value="-1" selected="selected">@(ASS_35.Resources.HomeText.All)</option>
+    }
+    <option value="@SystemMessageConst.StatusConst.Pending" @(ViewBag.idSelected == SystemMessageConst.StatusConst.Pending ? "selected='selected'" : "")>@(ASS_35.Resources.HomeText.Pending)</option>
+    @if (AccountUntil.GetAccount().idquyentaikhoan == SystemMessageConst.RoleConst.Admin || ViewBag.check == true)
+    {
+        <option value="@SystemMessageConst.StatusConst.Active" @(ViewBag.idSelected == SystemMessageConst.StatusConst.Active ? "selected='selected'" : "")>@(ASS_35.Resources.HomeText.Active)</option>
+    }
+    <option value="@SystemMessageConst.StatusConst.SaveDraft" @(ViewBag.idSelected == SystemMessageConst.StatusConst.SaveDraft ? "selected='selected'" : "")>@(ASS_35.Resources.HomeText.Save_Draft)</option>
+    <option value="@SystemMessageConst.StatusConst.RemoveOnSite" @(ViewBag.idSelected == SystemMessageConst.StatusConst.RemoveOnSite ? "selected='selected'" : "")>@(ASS_35.Resources.HomeText.RemoveOnSite)</option>
+    <option value="@SystemMessageConst.StatusConst.Deactive" @(ViewBag.idSelected == SystemMessageConst.StatusConst.Deactive ? "selected='selected'" : "")>@(ASS_35.Resources.HomeText.Deactive)</option>
+</select>

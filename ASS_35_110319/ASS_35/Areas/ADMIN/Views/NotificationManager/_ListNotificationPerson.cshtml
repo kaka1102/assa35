@@ -1,0 +1,132 @@
+﻿@using DataContext
+@using DataContext.Constants
+@using DataContext.Until
+<table id="manager-account" class="table toggle-circle table-hover">
+    <thead>
+    <tr>
+        <th style="width: 35px;"></th>
+        <th>@(ASS_35.Resources.HomeText.Notice_Name)</th>
+        <th>@(ASS_35.Resources.HomeText.Creators)</th>
+        <th>@(ASS_35.Resources.HomeText.Time_to_send)</th>
+        <th style="display: none;">@(ASS_35.Resources.HomeText.Attached_files)</th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model != null)
+    {
+        var model = (List<ListNotificationPerson_Result>)Model;
+        foreach (var item in model)
+        {
+            <tr style="background-color: @(item.daxem == false ? "#c7f1f3;" : "white;")">
+                <td class="details-control"  @(item.daxem == true ? "is-view = true" : "") data-id="@item.idchitietthongbao" content="@item.noidung" note="@item.ghichu" onclick="BindButtonDocumentViewerClick(this)"></td>
+                <td>@item.tenthongbao</td>
+                <td>@item.emailnguoitao</td>
+                <td>@item.thoigianduyet.Value.ToString("dd-MM-yyyy hh:mm")</td>
+                <td class="file-container" style="display: none;">
+                    @Html.Action("ListFileByNotifiId", "Common", new {id = item.id, lstFile = ViewBag.lstFile})
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myLargeModalLabel"></h4>
+            </div>
+            <div class="modal-body" style="min-height:500px">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">@(ASS_35.Resources.HomeText.Close)</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+//        PreviewPdf();
+        var selector = $('#manager-account');
+        var table =  selector.DataTable({
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "orderable": false
+                },
+                {
+                    "targets": 3,
+                    "orderable": false
+                }
+            ]
+        });
+        $('#manager-account tbody').on('click', 'td.details-control', function () {
+            var self = this;
+            var tr = $(this).closest('tr');
+            var row = table.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child(format(self)).show();
+                tr.addClass('shown');
+            }
+        });
+    });
+    function format ( self ) {
+        // `d` is the original data object for the row
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+            '<td>@(ASS_35.Resources.HomeText.Content):</td>'+
+            '<td>' + $(self).attr("content")+'</td>'+
+            '</tr>' +
+            '<td>@(ASS_35.Resources.HomeText.Attached_files):</td>'+
+            '<td>' + $(self).parent().find(".file-container").html() +'</td>'+
+            '</tr></table>';
+    }
+    function BindButtonDocumentViewerClick(self) {
+            var isView = $(self).attr("is-view");
+            var id = $(self).attr("data-id");
+            if (!$(self).hasClass('shown') && isView !== "true") {
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("NotificaMessageUpdateRead","NotificationManager")',
+                    data: { id: id},
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.result.IsSuccess === true) {
+                            $(self).attr("is-view", "true");
+                            $(self).parent().css("background-color", "white");
+                            if (data.result.Message === "0") {
+                                $("#notifi-alert").empty();
+                                var containt = $('<i class="icon-envelope"></i><div class="notify">');
+                                $("#notifi-alert").append(containt);
+                            }
+                        }
+                    },
+                    failure: function () {
+                        alert("fail");
+                    }
+                });
+            }
+    }
+    function PreviewPdf(self) {
+        $('.item-file-pdf').unbind();
+        var url = $(self).attr('data-url');
+            $('.modal-body').empty();
+            $('.modal-body').append("<embed src='/Media/ReadFilePDF?url=" + url + "' style='min-height: 500px; width: 100%;' />");
+     
+    }
+    function BindButtonEditClick() {
+        var id = $(self).attr("data-id");
+        LoadPage('/NotificationManager/EditNotification?id=' + id);
+    }
+</script>
+
+

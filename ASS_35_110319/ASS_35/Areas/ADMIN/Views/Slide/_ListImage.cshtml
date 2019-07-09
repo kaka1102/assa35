@@ -1,0 +1,162 @@
+﻿@using System.Globalization
+@using DataContext
+@using DataContext.Constants
+@using DataContext.Until
+@if (Model == null)
+{
+    <p>@(ASS_35.Resources.HomeText.No_data)</p>
+}
+else
+{
+    var model = (List<SlideInformation_Result>)Model;
+    <table id="manager-account">
+        <thead>
+            <tr>
+                <th> Thu tu </th>
+                <th>Tên ảnh</th>
+              
+                <th>@(ASS_35.Resources.HomeText.Creators)</th>
+                <th>@(ASS_35.Resources.HomeText.Date_created)</th>
+
+                <th>@(ASS_35.Resources.HomeText.Order_number)</th>
+                <th>@(ASS_35.Resources.HomeText.Status)</th>
+                <th>@(ASS_35.Resources.HomeText.Option)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (model.Count == 0)
+                {
+                    
+                }
+                else
+                {
+                    foreach (var item in model)
+                    {
+                        <tr>
+                            <td class="details-control" editted-by="@(item.emailnguoisua == null ? ASS_35.Resources.HomeText.No_data : item.emailnguoisua )" created-by="@(item.emailnguoitao == null ? ASS_35.Resources.HomeText.No_data : item.emailnguoitao)" tenanh="@(item.tenanh)" created-date="@item.ngaytao" duongdan="@(item.duongdan)" linkanh="@item.hinhanh" stt="@(item.stt)"  trichdan="@(item.trichdan)" trangthai="@(item.trangthai == SystemMessageConst.StatusConst.Deactive ? "show-reason" : "hide-reason")" version="@(item.phienban)"></td>
+                            <td style="max-width: 200px;">@item.tenanh</td>
+                            
+                            <td>@item.emailnguoitao</td>
+                            <td>
+                                <span>@item.ngaytao.Value.ToString("dd MMMM yyyy")</span>
+                            </td>
+                            <td>
+                                @item.stt
+                            </td>
+                            <td>
+                                @Html.Action("Status2", "Common", new { id = item.trangthai })
+                            </td>
+                            <td>
+                                <a class="hint--top edit-row-btn" aria-label="@(ASS_35.Resources.HomeText.Edit)" data-id="@item.id" onclick="BindButtonEditClick(this)">
+                                    <i class="ti-pencil"></i>
+                                </a>
+                                @if (item.trangthai != SystemMessageConst.StatusConst.Active && item.trangthai != SystemMessageConst.StatusConst.Pending)
+                                {
+                                    <a class="hint--top delete-row-btn" aria-label="@(ASS_35.Resources.HomeText.Delete)" data-id="@item.id" onclick="BindButtonDeleteClick(this)">
+                                        <i class="ti-close"></i>
+                                    </a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+
+        </tbody>
+    </table>
+    <script>
+
+        $(function() {
+            BuildTableDetail();
+
+        });
+
+        function BuildTableDetail() {
+            var selector = $('#manager-account');
+            var table =  selector.DataTable({
+                    pageLength: 10,
+                    paging: true,
+                    searching: false,
+                    
+                    columnDefs: [{ orderable: false, targets: [6] }] //                
+            }
+
+            );
+            $('#manager-account tbody').on('click', 'td.details-control', function () {
+                var self = this;
+                var tr = $(this).closest('tr');
+                var row = table.row( tr );
+
+                if ( row.child.isShown() ) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    // Open this row
+                    row.child(format(self)).show();
+                    tr.addClass('shown');
+                }
+            } );
+        }
+        function format ( self ) {
+            return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+                '<tr>'+
+                '<td>Người tạo:</td>'+
+                '<td>' + $(self).attr("created-by")+'</td>'+
+                '</tr>' +
+                '<tr>' +
+                '<td>Người sua:</td>' +
+                '<td>' + $(self).attr("editted-by") + '</td>' +
+                '</tr>' +
+                '<tr>'+
+                '<td>Hình ảnh:</td>'+
+                '<td>' +'<img src=" '+$(self).attr("linkanh")+'" style="width: 200px; height:100px;">'+'</td>'+
+                '</tr>' +
+                '<tr>'+
+                '<td>Trich dan:</td>'+
+                '<td>' + $(self).attr("trichdan")+'</td>'+
+                '</tr>' +
+                '<tr>' +
+                '<td>Duong dan:</td>' +
+                '<td>' + $(self).attr("duongdan") + '</td>' +
+                '</tr>' +
+                '<tr>'+
+                '<tr>'+
+                '<td>@(ASS_35.Resources.HomeText.Version):</td>'+
+                '<td>' + $(self).attr("version") +'</td>'+
+                '</tr>' +
+                '<tr>'+
+                '<td>Ngày tạo:</td>'+
+                '<td>' + $(self).attr("created-date")+'</td>'+
+                '</tr>' +
+
+                '</table>';
+        }
+        function BindButtonEditClick(self) {
+            var id = $(self).attr("data-id");
+            LoadPage('/Slide/EditImage?id=' + id);
+        }
+
+        function BindButtonDeleteClick(self) {
+            id = $(self).attr("data-id");
+            QTW_RUN_MESS.alter_Message_Question_Callbaclk(" @Html.Raw(ASS_35.Resources.HomeText.Delete_infor)",
+                function() {
+                    var formData = new FormData();
+                    formData.append("id", id);
+                    QTW_JQUERY.RUN_AJAX("ajaxPOST", "/Slide/DeleteImage", formData, DeleteResult);
+                });
+        }
+
+        function DeleteResult(data) {
+            if (data.result.IsSuccess === false) {
+                QTW_RUN_MESS.alter_Message_Error(data.result.Message);
+            } else {
+                QTW_RUN_MESS.alter_Message_Success(data.result.Message);
+                LoadPartialView("/Slide/_ListImage", "#table-container");
+            }
+        }
+    </script>
+}
+

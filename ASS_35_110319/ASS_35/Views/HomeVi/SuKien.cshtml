@@ -1,0 +1,54 @@
+﻿@using DataContext.DAL;
+@using DataContext.ClientBusiness;
+@using DataContext.Until;
+
+@{
+    var model = (List<SuKien>)Model;
+}
+
+
+<div id="menu1" class="tab-pane fade">
+    @if (model.Count > 0)
+    {
+        @*<div class="sb-left-r col-md-12 col-lg-12">
+            @foreach (var item in model)
+            {
+                <div class="sl-left-d">
+                    <a class="a-link" href="@Html.Raw("chi-tiet-su-kien/" + ConvertTextToLink.ConvertUrlsToLinks(item.tencuochop) + "-" + item.id)">@Html.Raw(item.tencuochop)</a>
+                    <div class="sl-sk-detail">
+                        <span class="sp-time"><img src="~/images/dongho.png" alt="">Từ @Html.Raw(item.thoigianbatdau) đến @Html.Raw(item.thoigianketthuc) ngày @Html.Raw(item.ngaydienra)</span><br />
+
+                    </div>
+                    <div class="sl-sk-detail">
+                        <span><img src="~/images/vitri.png" alt="">@Html.Raw(item.diadiem)</span>
+                    </div>
+                </div>
+            }
+        </div>*@
+        <div class="sb-left-r col-md-12 col-lg-12">
+            @foreach (var item in model)
+            {
+                <div class="sl-left-d">
+                    <a class="a-link" href="@Html.Raw("/su-kien#" +item.id)">@Html.Raw(item.tencuochop)</a>
+                    <div class="sl-sk-detail">
+                        <span class="sp-time"><img src="~/images/dongho.png" alt="">Từ @Html.Raw(item.thoigianbatdau) đến @Html.Raw(item.thoigianketthuc) ngày @Html.Raw(item.ngaydienra)</span><br />
+
+                    </div>
+                    <div class="sl-sk-detail">
+                        <span><img src="~/images/vitri.png" alt="">@Html.Raw(item.diadiem)</span>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="sb-left-b">
+            <a href="/su-kien" class="btn btnxemthem">Xem thêm</a>
+
+    
+        </div>
+    }
+    else
+    {
+        <h3>Đang cập nhật</h3>
+    }
+</div>
+

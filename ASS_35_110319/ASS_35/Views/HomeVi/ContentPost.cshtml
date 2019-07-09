@@ -1,0 +1,49 @@
+﻿   <!-- tab menu -->
+<div class="sb-left">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="#home">
+                <div class="tb-left tb-tintuc tb-active">
+                    <img src="~/images/tintuc.png" alt="Icon tin tức">  TIN TỨC
+                </div>
+            </a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#menu1">
+                <div class="tb-left tb-sukien">
+                    <img src="~/images/calendar.png" alt="Icon sự kiện" style="margin-right:-7px">
+                    SỰ KIỆN
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- thong tin su kien -->
+<div class="">
+
+    <div class="tab-content">
+   
+        @Html.Action("TinTuc", "HomeVi")
+        @Html.Action("SuKien", "HomeVi")
+    </div>
+
+</div>
+@*<div>
+
+    <div class="sb-left-b">
+        <a href="/tin-tuc" class="btn btnxemthem">Xem thêm</a>
+
+        <div class="img-next">
+            <!-- Left and right controls -->
+            <a class="left carousel-control btn-p1" href="#myCarouse2" data-slide="prev">
+                <!--<span class=""></span>-->
+                <button class="btn-p"> <img src="~/images/pre-pt.png" style="margin-right:-10px"></button>
+                <img src="~/images/pause.png" class="vpause d-hide">
+                <i class="fa fa-play vplay" aria-hidden="true" style="color: #717171;font-size:16px;"></i>
+            </a>
+            <a class="right carousel-control btn-p1" href="#myCarouse2" data-slide="next">
+                <button class="btn-n"><img src="~/images/next-pt.png"> </button>
+            </a>
+        </div>
+    </div>
+</div>*@

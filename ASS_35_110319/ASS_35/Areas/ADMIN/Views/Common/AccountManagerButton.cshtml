@@ -1,0 +1,122 @@
+﻿@using DataContext.Constants
+@Html.Action("ShowCurrentAccountStatus", "Common", new {status = ViewBag.status})
+<div class="form-group" id="frm-edit-status" style="padding-left: 20px;">
+    <div class="form-check">
+        @if (ViewBag.status == SystemMessageConst.StatusConst.Active)
+        {
+            <label class="custom-control custom-radio">
+                <input type="checkbox" name="radio" value="@SystemMessageConst.StatusConst.Deactive" class="custom-control-input"> <span class="custom-control-indicator"></span><span class="custom-control-description">@(ASS_35.Resources.HomeText.ButtonLockAccount)</span>
+            </label>
+        }
+        @if (ViewBag.status == SystemMessageConst.StatusConst.Pending)
+        {
+            <label class="custom-control custom-radio">
+                <input type="radio" name="radio" value="@SystemMessageConst.StatusConst.Active" class="custom-control-input"> <span class="custom-control-indicator"></span><span class="custom-control-description">@(ASS_35.Resources.HomeText.ActiveStatus)</span>
+            </label>
+            <label class="custom-control custom-radio">
+                <input type="radio" name="radio" value="@SystemMessageConst.StatusConst.Deactive" class="custom-control-input"> <span class="custom-control-indicator"></span><span class="custom-control-description">@(ASS_35.Resources.HomeText.ButtonDeactiveAccount)</span>
+            </label>
+        }
+        @if (ViewBag.status == SystemMessageConst.StatusConst.Deactive)
+        {
+            <label class="custom-control custom-radio">
+                <input type="checkbox" name="radio" value="@SystemMessageConst.StatusConst.Active" class="custom-control-input"> <span class="custom-control-indicator"></span><span class="custom-control-description">@(ASS_35.Resources.HomeText.ButtonActiveAccount)</span>
+            </label>
+        }
+    </div>
+</div>
+@if (ViewBag.myRole == SystemMessageConst.RoleConst.Admin)
+{
+    <div class="form-group" id="fr-lydo" style="display: none;">
+        <label class="col-md-12">@(ASS_35.Resources.HomeText.Reason)</label>
+        <textarea class="form-control" rows="5" id="txt-reason"></textarea>
+    </div>
+}
+@if (ViewBag.myRole == SystemMessageConst.RoleConst.Admin && ViewBag.hasInvitations == true && ViewBag.status == SystemMessageConst.StatusConst.Pending)
+{
+    <div class="form-group text-left" id="invite-container" style="display: none;">
+        <label class="col-sm-12">@(ASS_35.Resources.HomeText.Upload_invitations_file)</label>
+        <div class="col-sm-6">
+            <div class="fileinput fileinput-new input-group" id="item-append-error">
+                <div class="form-control" id="frmInput">
+                </div>
+                <span class="input-group-addon btn btn-default btn-file">
+                    <span class="fileinput-new">@(ASS_35.Resources.HomeText.Select_file)</span>
+                    <input type="hidden"><input type="file" name="..." multiple="" id="btn-venue-file" accept="application/pdf">
+                </span>
+                <span id="appendInput">
+
+                </span>
+            </div>
+        </div>
+        <div id="gallaryFileOther">
+            <ul class="feeds" id="view-item-file">
+            </ul>
+        </div>
+    </div>
+}
+<div class="form-group">
+    <button class="btn btn-success waves-effect waves-light btn-save" type="button">
+        <span class="btn-label">
+            <i class="ti-save"></i>
+        </span>@(ASS_35.Resources.HomeText.ButtonSave)
+    </button>
+</div>
+
+<script>
+    $(function() {
+        var files = [];
+        BindButonStatusChange();
+        BindButtonChooseFileChange(files);
+    });
+
+    function BindButonStatusChange() {
+        $('input[name=radio]').change(function () {
+            if ($('input[name=radio]:checked').val() === "@SystemMessageConst.StatusConst.Deactive") {
+                $("#fr-lydo").css("display", "block");
+                $("#invite-container").css("display", "none");
+            } else {
+                $("#fr-lydo").css("display", "none");
+                $("#invite-container").css("display", "block");
+            }
+        });
+    }
+
+    function BindButtonChooseFileChange(files) {
+        $("#btn-venue-file").change(function() {
+//            var file = $("#btn-venue-file")[0].files;
+            BuildFileItemLayout($("#btn-venue-file")[0].files[0], files.length);
+//            for (var i = 0; i < file.length; i++) {
+//                BuildFileItemLayout(file[i], files.length);
+//                files.push(file[i]);
+//            }
+        });
+    }
+
+    function BuildFileItemLayout(file, index) {
+        $('#view-item-file').empty();
+        var icon = "fa fa-file-pdf-o";
+        var container = $("<li  style='position: relative;'></li>");
+        container.append("<div style='width: 90%;' class='li-item-file li-file model_img img-responsive'>\
+                                            <div class='bg-purple' style='width: 40px;float: left;'>\
+                                                 <i class='" +
+            icon +
+            " text-white'></i>\
+                                            </div>\
+                                            <div style='float: left;padding: 10px;width: 70%;'>\
+                                                <span style='float:left'>" +
+            file.name +
+            "</span>\
+                                            </div>\
+                                            <div style='float: right;padding: 10px;width: 20%;'>\
+                                               <span style='padding-right:50px' class='text-muted'>" +
+            file.size +
+            " bytes</span>\
+                                            </div>\
+                                       </div>");
+        $('#view-item-file').append(container);
+//        container.find('.btnRemoveItems').click(function() {
+//            container.remove();
+//        });
+    }
+</script>

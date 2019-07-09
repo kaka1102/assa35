@@ -1,0 +1,12 @@
+﻿@using DataContext
+@{
+    var model = (List<m_quyen>) Model;
+}
+<ul role="menu" class="common-list">
+    @foreach (var item  in model)
+    {
+        <li>
+            <a><i class="fa fa-check text-success"></i>@item.tenquyen</a>
+        </li>
+    }
+</ul>

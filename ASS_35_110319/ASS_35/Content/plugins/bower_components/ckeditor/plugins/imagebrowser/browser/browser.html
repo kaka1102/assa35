@@ -1,0 +1,84 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <base>
+
+
+    <link href="/Content/eliteadmin-colors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/plugins/bower_components/bootstrap-extension/css/bootstrap-extension.css" rel="stylesheet" />
+    <link href="/Content/eliteadmin-colors/css/style.css" rel="stylesheet" />
+    <link href="/Content/eliteadmin-colors/css/colors/default-dark.css" rel="stylesheet" />
+    <link href="/Content/plugins/bower_components/gallery/css/animated-masonry-gallery.css" rel="stylesheet" />
+    <link href="/Content/plugins/bower_components/fancybox/ekko-lightbox.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="browser.css">
+    <script src="/Content/plugins/bower_components/jquery/jquery.min.js"></script>
+    <script src="/Content/plugins/bower_components/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script src="/Content/ScriptPuplic/Language.js"></script>
+    <style>
+        .register-box {
+            max-width: 100% !important;
+        }
+    </style>
+</head>
+<body>
+
+    <section id="wrapper" class="step-register">
+        <div class="register-box">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="white-box p-l-20 p-r-20">
+
+                        <div class="form-group">
+                            <label class="col-sm-12">File upload (chỉ chấp nhận ảnh png, jpeg, gif)</label>
+                            <div class="col-sm-6">
+                                <div class="fileinput fileinput-new input-group" id="item-append-error">
+                                    <div class="form-control" id="frmInput">
+                                        <i class="glyphicon glyphicon-file"></i> 0 File được chọn
+                                    </div>
+                                    <span class="input-group-addon btn btn-default btn-file">
+                                        <span class="fileinput-new">Select file</span>
+                                        <input type="hidden"><input type="file" name="..."  id="btnInputImgCK" accept="image/x-png,image/gif,image/jpeg">
+                                    </span>
+                                    <span id="appendInput">
+
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div id="gallery" class="">
+                                <div id="gallery-content">
+                                    <div id="gallery-content-center" class="gallery-content-center-full isotope">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="galleryVideo">
+                                <div class="el-element-overlay" id="view-item-video">
+
+                                </div>
+                            </div>
+                            <div id="gallaryFileOther">
+                                <ul class="feeds" id="view-item-file"></ul>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn btn-success waves-effect waves-light" type="button" id="btnSave">
+                                <span class="btn-label"><i class="ti-save"></i></span>Đồng ý
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="/Content/eliteadmin-colors/bootstrap/dist/js/tether.min.js"></script>
+    <script src="/Content/eliteadmin-colors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/Content/plugins/bower_components/bootstrap-extension/js/bootstrap-extension.min.js"></script>
+    <script src="/Content/plugins/bower_components/sidebar-nav/sidebar-nav.min.js"></script>
+    <script src="/Content/eliteadmin-colors/js/js-input-ckeditor.js"></script>
+    <script src="/Content/plugins/bower_components/fancybox/ekko-lightbox.min.js"></script>
+    <script src="/Content/ScriptPuplic/LibAss.js"></script>
+</body>
+</html>

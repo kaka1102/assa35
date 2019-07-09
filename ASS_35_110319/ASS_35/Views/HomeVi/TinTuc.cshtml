@@ -1,0 +1,55 @@
+﻿@using DataContext.DAL;
+@using DataContext.ClientBusiness;
+@using DataContext.Until;
+
+@{
+    var model = (List<DetailsPost>)Model;
+}
+
+<div id="home" class="tab-pane fade in active">
+    @if (model.Count > 0)
+    {
+        <div class="sb-left-l col-md-6 tt-c" style="float:left">
+            <div class="total-fm">
+                <a class="a-total" href="@Html.Raw("chi-tiet/" + ConvertTextToLink.ConvertUrlsToLinks(model[0].tieude) + "-" + model[0].id)"><img src="@Html.Raw(model[0].avatar)" alt="Icon sự kiện"></a>
+                <a class="l-title a-total2" href="@Html.Raw("chi-tiet/" + ConvertTextToLink.ConvertUrlsToLinks(model[0].tieude) + "-" + model[0].id)">
+                    @Html.Raw(model[0].tieude)
+
+                </a>
+                <div style="padding-top:10px;padding-bottom:10px;" class="time-total">
+                    <span class="sp-time">
+                        @Html.Raw(model[0].thoigianpheduyet.Remove(2, 1).Insert(2, " tháng "))
+                    </span>
+                </div>
+                <div class="short-des" style="text-align:justify">
+                    @Html.Raw(model[0].gioithieu)
+                </div>
+            </div>
+        </div>
+        <div class="sb-left-r col-md-6 " style="float:right">
+
+            @for (int i = 1; i < model.Count; i++)
+            {
+                <div class="sl-left-d">
+                    <a class="a-link" href="@Html.Raw("chi-tiet/" + ConvertTextToLink.ConvertUrlsToLinks(model[i].tieude) + "-" + model[i].id)">@Html.Raw(model[i].tieude)</a>
+                    <div style="padding-top:10px;">
+                        <span class="sp-time">
+                            @Html.Raw(model[i].thoigianpheduyet.Remove(2, 1).Insert(2, " tháng "))
+                        </span>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+        <div class="sb-left-b">
+            <a href="/tin-tuc" class="btn btnxemthem">Xem thêm</a>
+
+    
+        </div>
+    }
+    else
+    {
+        <h3>Đang cập nhật</h3>
+    }
+</div>

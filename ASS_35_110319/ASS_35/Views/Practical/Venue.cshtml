@@ -1,0 +1,14 @@
+﻿@using DataContext.DAL;
+
+@{
+    var model = (DataContext.m_baivietgioithieu)Model;
+}
+
+@if (model != null)
+{
+    @Html.Raw(model.noidung)
+}
+else
+{
+<h3>Update later</h3>
+}

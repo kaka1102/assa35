@@ -1,0 +1,25 @@
+﻿@using DataContext
+@{
+    var model = (List<m_quyen>)Model;
+}
+@*<div class="col-sm-6">*@
+<div class="col-sm-4">
+    <select class="custom-select col-6" id="@ViewBag.name">
+        @foreach (var item in model)
+        {
+            @*<option value="@item.id">@item.tenquyen</option>*@
+
+            <option value="@item.id">
+                @if (item.id == 2)
+                {
+                    @(ASS_35.Resources.HomeText.Editorial_board)
+                }
+                else
+                {
+                    @(ASS_35.Resources.HomeText.Secretariat)
+                }
+            </option>
+        }
+    </select>
+</div>
+@*</div>*@

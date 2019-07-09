@@ -1,0 +1,52 @@
+﻿
+<style type="text/css">
+    .modal-lg {
+        max-width: 80% !important;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="white-box">
+            <div class="col-sm-12" style="padding-bottom: 10px; border-bottom: 1px solid red; margin-bottom: 20px;">
+                <div class="row">
+                    <h3 class="box-title m-b-0"><i class="ti-angle-double-right" style="padding-right:10px"></i>@(ASS_35.Resources.HomeText.Meeting_Management)</h3>
+                </div>
+            </div>
+            <div class="row m-b-20">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        BindButtonAddAccountClick();
+        BindButtonStatusChange();
+        PreviewPdf();
+    });
+    function BindButtonAddAccountClick() {
+        $("#btn-add-member").click(function () {
+            LoadPage('@Url.Action("AddNotification", "NotificationManager")');
+        });
+    }
+
+    function BindButtonStatusChange() {
+        $("#cbx-status").change(function () {
+            var statusId = $(this).val();
+            var data = {
+                status: statusId
+            };
+            LoadPartialView('@Url.Action("_ListNotification", "NotificationManager")', "#table-container", data);
+        });
+    }
+
+
+    function PreviewPdf(parameters) {
+        $('.item-file-pdf').unbind();
+        $('.item-file-pdf').click(function () {
+            var url = $(this).attr('data-url');
+            $('.modal-body').empty();
+            $('.modal-body').append("<embed src='/Media/ReadFilePDF?url=" + url + "' style='min-height: 500px; width: 100%;' />");
+        });
+    }
+</script>
+

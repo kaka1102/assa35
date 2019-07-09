@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutVi.cshtml";
+}
+
+
+
+<div class="thuvien">
+    <div class="tt">
+        <span><a href="">Trang chủ &gt; </a></span>
+        <span><a href="">Hình ảnh </a></span>
+    </div>
+    @Html.Action("TopLibraryImage", "VideoHinhAnh")
+    <div id="testnhe">
+        
+    </div>
+    @*@Html.Action("ContentImage", "VideoHinhAnh")*@
+</div>
+<script>
+    $(document).ready(function () {
+        
+
+        
+        $.ajax({
+            url: '@Url.Action("ContentImage", "VideoHinhAnh")',           
+            success: function(data) {
+                $('#testnhe').append(data);
+            }
+
+        });
+    });
+    $(window).bind('hashchange', function () {
+
+        var urlHash = getHashUrlVars();
+        var page = urlHash.page;
+        var curPage = urlHash.currentPage;
+        if (urlHash.xemnhieu) {
+            var xemnhieu = urlHash.xemnhieu;
+            
+            $.ajax({
+                url: '@Url.Action("ContentImage", "VideoHinhAnh")',
+                data: { page: page, moidang: 0, xemnhieu: xemnhieu, curpage: curPage },
+
+                success: function (data) {
+                    $('#testnhe').html("");
+                    $('#testnhe').append(data);
+                }
+
+            });
+        } else if(urlHash.moidang) {
+           
+            var moidang = urlHash.moidang;
+            $.ajax({
+                url: '@Url.Action("ContentImage", "VideoHinhAnh")',
+                data: { page: page, moidang: moidang, xemnhieu: 0, curpage: curPage },
+
+                success: function (data) {
+                    $('#testnhe').html("");
+                    $('#testnhe').append(data);
+                }
+
+            });
+        }
+
+    });
+    
+</script>

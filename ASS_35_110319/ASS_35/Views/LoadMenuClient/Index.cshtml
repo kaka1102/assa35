@@ -1,0 +1,95 @@
+﻿@using DataContext.ClientBusiness;
+@using DataContext.DAL;
+
+@{
+    var model = (LstMenuClient)Model;
+    var data = model.lstMN.Cast<MenuCL>().ToList();
+}
+
+<ul class="nav navbar-nav">
+    @if (data.Count > 0)
+    {
+        foreach (var item in data)
+        {
+            if (item.mnChil.Count > 0)
+            {
+                <li class="dropdown @Html.Raw(item.isActive ==true ? "active":"")">
+                    <a class="dropdown-toggle dropbtn" data-toggle="dropdown" aria-expanded="false">@item.tenmenu.ToUpper() <b class="caret"></b></a>
+                    <ul class="dropdown-menu dropdown-content">
+                        @foreach (var value in item.mnChil)
+                        {
+                            <li>
+                                <a href="@Html.Raw(value.url)">
+                                    @Html.Raw(value.tenmenu.ToUpper())
+                                    <span class="ti-angle-right"></span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+            else
+            {
+                if ((item.url == "/trang-chu" && item.isActive == true) || (item.url == "/home" && item.isActive == true))
+                {
+                    <li  class="@Html.Raw(item.isActive ==true ? "active":"")">
+                        <a href="@item.url" id="key"><i class="fa fa-home" style="margin-right: 15px;"></i><span>@item.tenmenu.ToUpper()</span></a>
+                    </li>
+                }
+                else if ((item.url == "/trang-chu" && item.isActive == false) || (item.url == "/home" && item.isActive == false))
+                {
+                    <li class="@Html.Raw(item.isActive ==true ? "active":"")">
+                        <a href="@item.url" id="key"><i class="fa fa-home"style="margin-right: 15px;"></i><span>@item.tenmenu.ToUpper()</span></a>
+                    </li>
+                }
+                else
+                {
+                    <li class="@Html.Raw(item.isActive ==true ? "active":"")"><a href="@item.url">@item.tenmenu.ToUpper()</a></li>
+                }
+            }
+
+        }
+    }
+</ul>
+
+<form class="navbar-form navbar-right css-form-search">
+    @if (@ViewBag.TypeWebsite == "vi")
+    {
+        <div class="frm-search" style="padding-left:0px;    float: left;">
+            <div class="row">
+                <input class="form-control" style="width: 202px; height: 30px;" placeholder="Tìm kiếm..." type="text" onkeydown="if (event.keyCode == 13) { window.location = window.location.origin + '/tim-kiem' + '?q=' + this.value; return false}">
+                <span class="glyphicon glyphicon-search icon-search"></span>
+            </div>
+        </div>
+        <div class="col-xs-3">
+            <a class="=dropdown-toggle waves-effect waves-light" title="English" data-toggle="" href="/en"><img style="border: 1px solid transparent;" src="~/images/nuocanh.png"></a>
+        </div>
+    }
+    else
+    {
+        <div class="frm-search" style="padding-left:0px;    float: left;">
+            <div class="row">
+                <input class="form-control" style="width: 170px; height: 30px; min-width:unset !important"  placeholder="Search..." type="text" onkeydown="if (event.keyCode == 13) { window.location = window.location.origin + '/tim-kiem' + '?q=' + this.value; return false}">
+                <span class="glyphicon glyphicon-search icon-search"></span>
+            </div>
+        </div>
+        <div class="col-xs-3" style="padding-right:0">
+            <a class="=dropdown-toggle waves-effect waves-light" title="VietNam" data-toggle="" href="/vi"><img style="border: 1px solid transparent;" src="~/images/vietnam.png"></a>
+        </div>
+    }
+</form>
+
+<script type="text/javascript">
+
+    $(".dropdown").hover(function () {
+        $(this).addClass('open');
+    }, function () {
+        $(this).removeClass('open');
+    });
+
+    //$("#key").hover(function () {
+    //    $(this)[0].children[0].attributes.src.nodeValue = "/images/home.png";
+    //}, function () {
+    //    $(this)[0].children[0].attributes.src.nodeValue = "/images/54da7f16-0d27-4710-83ac-1b2e92297af0.png";
+    //});
+</script>

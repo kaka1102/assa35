@@ -1,0 +1,17 @@
+﻿
+@using DataContext.Constants
+@using DataContext.Until;
+@if (ViewBag.id == SystemMessageConst.StatusConst.Active)
+{
+    <span class="label label-table label-success">@(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.AccountStatusConst.MemberActive, SystemMessageConst.AccountStatusConst.MemberActiveEn))</span>
+}
+@if (ViewBag.id == SystemMessageConst.StatusConst.Pending)
+{
+    <span class="label label-table label-warning">@(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.AccountStatusConst.Pending, SystemMessageConst.AccountStatusConst.PendingEn))</span>
+}
+@if (ViewBag.id == SystemMessageConst.StatusConst.Deactive)
+{
+    <span class="label label-table label-danger">@(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.AccountStatusConst.MemberDeactive, SystemMessageConst.AccountStatusConst.MemberDeactiveEn))</span>
+}
+
+

@@ -1,0 +1,177 @@
+﻿@using DataContext
+@using DataContext.Constants
+@using DataContext.Until
+<style>
+    .file-container { display: none; }
+</style>
+<table id="manager-account" class="display">
+    <thead>
+    <tr>
+        <th></th>
+        <th>@(ASS_35.Resources.HomeText.Notice_Name)</th>
+        <th>@(ASS_35.Resources.HomeText.Creators)</th>
+        <th>@(ASS_35.Resources.HomeText.Date_created)</th>
+        <th>@(ASS_35.Resources.HomeText.Status)</th>
+        <th>@(ASS_35.Resources.HomeText.Option)</th>
+        <th class="file-container"></th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model != null)
+    {
+        var model = (List<NotificationManager_Result>) Model;
+        foreach (var item in model)
+        {
+            <tr>
+                <td class="details-control" @(ViewBag.idNguoiTao == item.idnguoitao ? "show-note =show-reason" : "show-note =hide-reason") approved-by="@item.emailnguoiduyet" active-time="@(item.thoigianduyet == null ? (ASS_35.Resources.HomeText.No_data) : item.thoigianduyet.Value.ToString("dd-MM-yyyy"))" content="@(item.noidung)" note="@(item.ghichu)" reason="@(item.lido)" version="@(item.phienban == 1 ? (ASS_35.Resources.HomeText.TV) : (ASS_35.Resources.HomeText.TA))" status="@(item.trangthai == SystemMessageConst.StatusConst.Deactive ? "show-reason" : "hide-reason")"></td>
+                <td>@(item.tenthongbao)</td>
+                <td>@item.emailnguoitao</td>
+                <td>@item.thoigiantao.Value.ToString("dd-MM-yyyy hh:mm")</td>
+                <td>
+                    @Html.Action("NotifiStatus", "Common", new {id = item.trangthai})
+                </td>
+                <td>
+                    <a class="hint--top edit-row-btn" aria-label="@(ASS_35.Resources.HomeText.Edit)" data-id="@item.id" onclick="BindButtonEditClick(this)">
+                        <i class="ti-pencil"></i>
+                    </a>
+                    <a class="hint--top delete-row-btn" aria-label="@(ASS_35.Resources.HomeText.Delete)" data-id="@item.id" onclick="BindButtonDeleteClick(this)">
+                        <i class="ti-close"></i>
+                    </a>
+                </td>
+                <td class="file-container">
+                    @Html.Action("ListFileByNotifiId", "Common", new {id = item.id, lstFile = ViewBag.lstFile})
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myLargeModalLabel"></h4>
+            </div>
+            <div class="modal-body" style="min-height: 500px">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">@(ASS_35.Resources.HomeText.Close)</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    $(function() {
+        var selector = $('#manager-account');
+        var table = selector.DataTable({
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "orderable": false
+                },
+                {
+                    "targets": 5,
+                    "orderable": false
+                }
+            ]
+        });
+        $('#manager-account tbody').on('click',
+            'td.details-control',
+            function() {
+                var self = this;
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+
+                if (row.child.isShown()) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                } else {
+                    // Open this row
+                    row.child(format(self)).show();
+                    tr.addClass('shown');
+                }
+            });
+    });
+
+    function PreviewPdf(self) {
+        var url = $(self).attr('data-url');
+        $('.modal-body').empty();
+        $('.modal-body').append("<embed src='/Media/ReadFilePDF?url=" +
+            url +
+            "' style='min-height: 500px; width: 100%;' />");
+
+    }
+
+    function format(self) {
+        // `d` is the original data object for the row
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+            '<td>@(ASS_35.Resources.HomeText.Approved_by):</td>' +
+            '<td>' +
+            $(self).attr("approved-by") +
+            '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>@(ASS_35.Resources.HomeText.Browsing_time):</td>' +
+            '<td>' +
+            $(self).attr("active-time") +
+            '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>@(ASS_35.Resources.HomeText.Content):</td>' +
+            '<td>' +
+            $(self).attr("content") +
+            '</td>' +
+            '</tr>' +
+            '<tr class="' +
+            $(self).attr("status") +
+            '">' +
+            '<td>@(ASS_35.Resources.HomeText.Reason):</td>' +
+            '<td style="color:red;">' +
+            $(self).attr("reason") +
+            '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>@(ASS_35.Resources.HomeText.Attached_files):</td>' +
+            '<td>' +
+            $(self).parent().find(".file-container").html() +
+            '</td>' +
+            '</tr>' +
+            '<tr class=' +
+            $(self).attr("show-note") +
+            '>' +
+            '<td>@(ASS_35.Resources.HomeText.Note):</td>' +
+            '<td>' +
+            $(self).attr("note") +
+            '</td>' +
+            '</tr>' +
+            '</table>';
+    }
+
+    function BindButtonEditClick(self) {
+        var id = $(self).attr("data-id");
+        LoadPage('/NotificationManager/EditNotification?id=' + id);
+    }
+
+    function BindButtonDeleteClick(self) {
+        var id = $(self).attr("data-id");
+        QTW_RUN_MESS.alter_Message_Question_Callbaclk("@Html.Raw((ASS_35.Resources.HomeText.Delete_infor))",
+            function() {
+                var formData = new FormData();
+                formData.append("id", id);
+                QTW_JQUERY.RUN_AJAX("ajaxPOST", "/NotificationManager/DeleteNotification", formData, DeleteResult);
+            });
+    }
+
+    function DeleteResult(data) {
+        if (data.result.IsSuccess === false) {
+            QTW_RUN_MESS.alter_Message_Error(data.result.Message);
+        } else {
+            QTW_RUN_MESS.alter_Message_Success(data.result.Message);
+            LoadPartialView("/NotificationManager/_ListNotification", "#table-container");
+        }
+    }
+</script>

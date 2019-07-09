@@ -1,0 +1,562 @@
+﻿@using DataContext.AdminBusiness;
+@using DataContext.DAL;
+@{
+    var model = (SystemMess)Model;
+    var data = model.LstData.Cast<ListMenu>().ToList();
+}
+@if (data.Count > 0)
+{
+    <ul class="nav" id="side-menu">
+        @foreach (var item in data)
+        {
+            if (item.idcha == 0)
+            {
+                if (item.lstMn.Count > 0)
+                {
+
+
+                    <li>
+                        <a>
+                            <i class="@item.icon" data-icon="v"></i>
+                            <span class="hide-menu">
+                                @item.tendanhmuc
+                                @if (item.lstMn.Count > 0)
+                                {
+                                    <span class="fa arrow"></span>
+                                }
+                            </span>
+                        </a>
+                        <ul class="nav nav-second-level collapse">
+                            @foreach (var children in item.lstMn)
+                            {
+                                <li data-url="@children.url" class="select-item" style="cursor: pointer;">
+                                    <a>@children.tendanhmuc</a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    <li data-url="@item.url" class="select-item" style="cursor: pointer;">
+                        <a>
+                            <i class="@item.icon" data-icon="v"></i>
+                            <span class="hide-menu">
+                                @item.tendanhmuc
+                                @if (item.lstMn.Count > 0)
+                                {
+                                    <span class="fa arrow"></span>
+                                }
+                            </span>
+                        </a>
+                    </li>
+                }
+            }
+        }
+    </ul>
+}
+
+<script>
+    $(function () {
+        LoadPageByLink();
+        BindButtonMenuItemClick();
+        BindChangeHash();
+    });
+
+    function BindChangeHash() {
+        window.addEventListener('hashchange',
+            function () {
+                var link = window.location.hash.replace("#", "");
+               // alert(link);
+                if (link !== null || link != '') {
+                    LoadPageByLink(link);
+                    
+                }
+                else {
+                    window.location.href = '/Index';
+                }
+            });
+        
+    }
+
+    function LoadPageByLink() {
+       
+        if (window.location.hash !== "") {
+            var link = window.location.hash.replace("#", "");
+            var host = '', param = '';
+            
+            if (link.indexOf("?") > 0) {
+                param = link.substring(link.indexOf("?"), link.length);
+                host = link.substring(0, link.indexOf("?"));
+                var action = ReturnNewUrl(host);
+                LoadHTMLPage(action + param);
+            } else {
+                var action = ReturnNewUrl(link);
+                LoadHTMLPage(action);
+            }
+
+        }
+    }
+
+    function BindButtonMenuItemClick() {
+        $(".select-item").click(function () {
+            var url = $(this).attr("data-url");
+            var link = ReturnNewUrl(url);
+            window.location.hash = link;
+            //var temp = "#" + link;
+            //if (temp == window.location.hash) {
+            //    var action = ReturnNewUrl(link);
+            //    LoadPage(action);
+            //}
+        });
+    }
+
+
+    function LoadHTMLPage(url) {
+        var loader = $('<div class="preloader"><div class="cssload-speeding-wheel"></div></div>');
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "html",
+            success: function (data) {
+                $('#page-contents').html(data);
+                loader.remove();
+            },
+            beforeSend: function () {
+                $('body').append(loader);
+            }
+        });
+    };
+
+    function LoadPartialView(url, container, data) {
+        $.ajax({
+            url: url,
+            data: data,
+            type: "GET",
+            dataType: "html",
+            success: function (data) {
+                $(container).html(data);
+            }
+        });
+    };
+    function LoadPageEdit(url, data) {
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            dataType: "html",
+            processData: false,
+            contentType: false,
+            success: function (data1) {
+                $('#page-contents').html(data1);
+            },
+        });
+    }
+
+
+    function LoadPage(url) {
+        var param = '';
+        var host = '';
+        if (url.indexOf("?") > 0) {
+            param = url.substring(url.indexOf("?"), url.length);
+            host = url.substring(0, url.indexOf("?"));
+            window.location.hash = ReturnNewUrl(host) + param;
+        } else {
+            window.location.hash = ReturnNewUrl(url);
+        }
+    }
+    function BindUrlBack(url, button) {
+        $('#' + button).click(function () {
+            //  var link = ReturnNewUrl(url);
+            LoadPage(url);
+        });
+    }
+    function BindUrlBackEditForm(url, button) {
+        $('#' + button).click(function () {
+            LoadHTMLPage(url);
+        });
+    }
+    function ReturnNewUrl(oldUrl) {
+        var newUrl = '';
+        switch (oldUrl) {
+            //case '/ManagerAccount/ManagerAccount':
+            //    newUrl = "ManagerAccount";
+            //    break;
+            case 'ManagerAccount':
+                newUrl = "/ManagerAccount/ManagerAccount";
+                break;
+
+            case '/ManagerAccount/AddManager':
+                newUrl = "AddManager";
+                break;
+            case 'AddManager':
+                newUrl = "/ManagerAccount/AddManager";
+                break;
+
+            case '/ManagerAccount/EditManager':
+                newUrl = "EditManager";
+                break;
+            case 'EditManager':
+                newUrl = "/ManagerAccount/EditManager";
+                break;
+
+            case '/ManagerAccount/ReporterManager':
+                newUrl = "ReporterManager";
+                break;
+            case 'ReporterManager':
+                newUrl = "/ManagerAccount/ReporterManager";
+                break;
+            case '/ManagerAccount/EditDelegateManager':
+                newUrl = "EditDelegateManager";
+                break;
+            case 'EditDelegateManager':
+                newUrl = "/ManagerAccount/EditDelegateManager";
+                break;
+
+            case '/ManagerAccount/DelegateManager':
+                newUrl = "DelegateManager";
+                break;
+            case 'DelegateManager':
+                newUrl = "/ManagerAccount/DelegateManager";
+                break;
+            case '/ManagerAccount/EditDelegateManager':
+                newUrl = "EditDelegateManager";
+                break;
+            
+            case 'EditDelegateManager':
+                newUrl = "/ManagerAccount/EditDelegateManager";
+                break;
+            case '/ManagerAccount/EditDelegate':
+                newUrl = "EditDelegate";
+                break;
+            case 'EditDelegate':
+                newUrl = "/ManagerAccount/EditDelegate";
+                break;
+            case '/ManagerAccount/EditMember':
+                newUrl = "EditMember";
+                break;
+            case 'EditMember':
+                newUrl = "/ManagerAccount/EditMember";
+                break;
+
+            case '/Media/ImagesManager':
+                newUrl = "ImagesManager";
+                break;
+            case 'ImagesManager':
+                newUrl = "/Media/ImagesManager";
+                break;
+
+            case '/Media/AddNewLibraryImages':
+                newUrl = "AddNewLibraryImages";
+                break;
+            case 'AddNewLibraryImages':
+                newUrl = "/Media/AddNewLibraryImages";
+                break;
+
+            case '/Media/EditLibraryImages':
+                newUrl = "EditLibraryImages";
+                break;
+            case 'EditLibraryImages':
+                newUrl = "/Media/EditLibraryImages";
+                break;
+
+            case '/Media/VideoManager':
+                newUrl = "VideoManager";
+                break;
+            case 'VideoManager':
+                newUrl = "/Media/VideoManager";
+                break;
+
+            case '/Media/VideoManager':
+                newUrl = "VideoManager";
+                break;
+            case 'VideoManager':
+                newUrl = "/Media/VideoManager";
+                break;
+
+            case '/Media/AddNewLibraryVideo':
+                newUrl = "AddNewLibraryVideo";
+                break;
+            case 'AddNewLibraryVideo':
+                newUrl = "/Media/AddNewLibraryVideo";
+                break;
+
+            case '/Media/EditLibraryVideo':
+                newUrl = "EditLibraryVideo";
+                break;
+            case 'EditLibraryVideo':
+                newUrl = "/Media/EditLibraryVideo";
+                break;
+
+            case '/ManagerPost/LoadAllPost':
+                newUrl = "LoadAllPost";
+                break;
+            case 'LoadAllPost':
+                newUrl = "/ManagerPost/LoadAllPost";
+                break;
+
+            case '/ManagerPost/AddNewPost':
+                newUrl = "AddNewPost";
+                break;
+            case 'AddNewPost':
+                newUrl = "/ManagerPost/AddNewPost";
+                break;
+
+            case '/ManagerPost/EditPost':
+                newUrl = "EditPost";
+                break;
+            case 'EditPost':
+                newUrl = "/ManagerPost/EditPost";
+                break;
+
+            case '/Document/LoadAllDocument':
+                newUrl = "LoadAllDocument";
+                break;
+            case 'LoadAllDocument':
+                newUrl = "/Document/LoadAllDocument";
+                break;
+
+            case '/Document/AddNewDocument':
+                newUrl = "AddNewDocument";
+                break;
+            case 'AddNewDocument':
+                newUrl = "/Document/AddNewDocument";
+                break;
+
+            case '/Document/EditDocument':
+                newUrl = "EditDocument";
+                break;
+            case 'EditDocument':
+                newUrl = "/Document/EditDocument";
+                break;
+
+            case '/ManageContact/ListContact':
+                newUrl = "ListContact";
+                break;
+            case 'ListContact':
+                newUrl = "/ManageContact/ListContact";
+                break;
+
+            case '/Speaker/Index':
+                newUrl = "ManageSpeaker";
+                break;
+            case 'ManageSpeaker':
+                newUrl = "/Speaker/Index";
+                break;
+
+            case '/Speaker/AddNew':
+                newUrl = "AddSpeaker";
+                break;
+            case 'AddSpeaker':
+                newUrl = "/Speaker/AddNew";
+                break;
+
+            case '/Speaker/EditSpeaker':
+                newUrl = "EditSpeaker";
+                break;
+            case 'EditSpeaker':
+                newUrl = "/Speaker/EditSpeaker";
+                break;
+
+            case '/NotificationManager/ListNotification':
+                newUrl = "ListNotification";
+                break;
+            case 'ListNotification':
+                newUrl = "/NotificationManager/ListNotification";
+                break;
+
+            case '/NotificationManager/AddNotification':
+                newUrl = "AddNotification";
+                break;
+            case 'AddNotification':
+                newUrl = "/NotificationManager/AddNotification";
+                break;
+
+            case '/NotificationManager/EditNotification':
+                newUrl = "EditNotification";
+                break;
+            case 'EditNotification':
+                newUrl = "/NotificationManager/EditNotification";
+                break;
+
+            case '/Statistical/LoadAlLReporter':
+                newUrl = "LoadAlLReporter";
+                break;
+            case 'LoadAlLReporter':
+                newUrl = "/Statistical/LoadAlLReporter";
+                break;
+
+            case '/Statistical/LoadAlLDelegate':
+                newUrl = "LoadAlLDelegate";
+                break;
+            case 'LoadAlLDelegate':
+                newUrl = "/Statistical/LoadAlLDelegate";
+                break;
+
+            case '/VenueManagement/ListVenue':
+                newUrl = "ListVenue";
+                break;
+            case 'ListVenue':
+                newUrl = "/VenueManagement/ListVenue";
+                break;
+
+            case '/VenueManagement/AddVenue':
+                newUrl = "AddVenue";
+                break;
+            case 'AddVenue':
+                newUrl = "/VenueManagement/AddVenue";
+                break;
+
+            case '/VenueManagement/EditVenue':
+                newUrl = "EditVenue";
+                break;
+            case 'EditVenue':
+                newUrl = "/VenueManagement/EditVenue";
+                break;
+
+            case '/Meeting/ListMeeting':
+                newUrl = "ListMeeting";
+                break;
+            case 'ListMeeting':
+                newUrl = "/Meeting/ListMeeting";
+                break;
+
+            case '/Meeting/AddMeeting':
+                newUrl = "AddMeeting";
+                break;
+            case 'AddMeeting':
+                newUrl = "/Meeting/AddMeeting";
+                break;
+
+            case '/Meeting/EditMeeting':
+                newUrl = "EditMeeting";
+                break;
+            case 'EditMeeting':
+                newUrl = "/Meeting/EditMeeting";
+                break;
+
+            case '/ConferenceIntroduction':
+                newUrl = "ConferenceIntroduction";
+                break;
+            case 'ConferenceIntroduction':
+                newUrl = "/ConferenceIntroduction";
+                break;
+
+            case '/ConferenceIntroduction/EditConferenceIntroduction':
+                newUrl = "EditConferenceIntroduction";
+                break;
+            case 'EditConferenceIntroduction':
+                newUrl = "/ConferenceIntroduction/EditConferenceIntroduction";
+                break;
+
+            case '/MeetingAndEvent/Index':
+                newUrl = "ManageMeetingEvent";
+                break;
+            case 'ManageMeetingEvent':
+                newUrl = "/MeetingAndEvent/Index";
+                break;
+
+            case '/MeetingAndEvent/AddMeeting':
+                newUrl = "AddMeetingAndEvent";
+                break;
+            case 'AddMeetingAndEvent':
+                newUrl = "/MeetingAndEvent/AddMeeting";
+                break;
+
+            case '/MeetingAndEvent/EditMeetingAndEvent':
+                newUrl = "EditMeetingAndEvent";
+                break;
+            case 'EditMeetingAndEvent':
+                newUrl = "/MeetingAndEvent/EditMeetingAndEvent";
+                break;
+
+            case '/MeetingAndEvent/DetailMeeting':
+                newUrl = "DetailMeeting";
+                break;
+            case 'DetailMeeting':
+                newUrl = "/MeetingAndEvent/DetailMeeting";
+                break;
+
+            case '/MeetingAndEvent/EditInforMeeting':
+                newUrl = "EditInforMeeting";
+                break;
+            case 'EditInforMeeting':
+                newUrl = "/MeetingAndEvent/EditInforMeeting";
+                break;
+
+            case '/AccountInfo/AccountInfomation':
+                newUrl = "AccountInfomation";
+                break;
+            case 'AccountInfomation':
+                newUrl = "/AccountInfo/AccountInfomation";
+                break;
+
+            case '/AccountInfo/ChangePassword':
+                newUrl = "ChangePassword";
+                break;
+            case 'ChangePassword':
+                newUrl = "/AccountInfo/ChangePassword";
+                break;
+            case 'MemberOfGroup':
+                newUrl = "/AccountInfo/MemberOfGroup";
+                break;
+            case '/AccountInfo/MemberOfGroup':
+                newUrl = "MemberOfGroup";
+                break;
+            case 'ListNotificationPerson':
+                newUrl = "/NotificationManager/ListNotificationPerson";
+                break;
+            case '/NotificationManager/ListNotificationPerson':
+                newUrl = "ListNotificationPerson";
+                break;
+
+            case '/AccountInfo/AddMember':
+                newUrl = "AddMember";
+                break;
+            case 'AddMember':
+                newUrl = "/AccountInfo/AddMember";
+                break;
+
+            case 'EditMemberGroup':
+                newUrl = "/AccountInfo/EditMember";
+                break;
+            case '/AccountInfo/EditMember':
+                newUrl = "EditMemberGroup";
+                break;
+            case '/Activity/ListActivity':
+                newUrl = "ListActivity";
+                break;
+            case 'ListActivity':
+                newUrl = "/Activity/ListActivity";
+                break;
+            case '/Activity/AddActivity':
+                newUrl = "AddActivity";
+                break;
+            case 'AddActivity':
+                newUrl = "/Activity/AddActivity";
+                break;
+            case '/Slide/ListImage':
+                newUrl = "ListImage";
+                break;
+            case 'ListImage':
+                newUrl = "/Slide/ListImage";
+                break;
+            case '/Slide/AddImage':
+                newUrl = "AddImage";
+                break;
+            case 'AddImage':
+                newUrl = "/Slide/AddImage";
+                break;
+            case '/Slide/EditImage':
+                newUrl = "EditImage";
+                break;
+            case 'EditImage':
+                newUrl = "/Slide/EditImage";
+                break;
+            default:
+                newUrl = oldUrl;
+                break;
+        }
+        return newUrl;
+    }
+</script>

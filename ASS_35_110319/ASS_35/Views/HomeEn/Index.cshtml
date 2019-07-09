@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutEn.cshtml";
+}
+
+
+
+<div class="">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <div class="img-slider-top">
+            <a href="/assa-vn"><img src="~/images/bannerEn-editted.png" class="img-responsive img-content-slider-top" /></a>
+        </div>
+        @Html.Action("SlideTopEn", "HomeEn")
+    </div>
+    <div class="" style="margin-bottom: 20px;">
+        <section class="sec-above container">
+            <div class="article-top">
+                @Html.Action("IntroduceHome", "HomeEn")
+            </div>
+
+        </section>
+
+    </div>
+    <section class="sec-below">
+        <div class="sec-above-bg123">
+
+        </div>
+
+        <div class="sec-above-bg">
+            <div class="sec-above-bg-color">
+                <span class="title-footer">Copyright 2018 Viet Nam Social Security. All rights reserved</span>
+            </div>
+        </div>
+    </section>
+</div>
+

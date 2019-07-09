@@ -1,0 +1,305 @@
+﻿
+
+<style>
+    .dataTables_length {
+        display: none !important;
+    }
+
+    .dataTables_filter {
+        display: none !important;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <div class="col-sm-12" style="padding-bottom: 10px; border-bottom: 1px solid red;">
+                <div class="row">
+                    <h3 class="box-title m-b-0"><i class="ti-angle-double-right" style="padding-right:10px"></i>@ViewBag.title</h3>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                    <div class="panel panel-default" style="width:100%">
+                        <div class="panel-wrapper collapse in" aria-expanded="true" style="">
+                            <div class="panel-body">
+                                <div class="row" style="margin-bottom:10px">
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-12 col-xs-12">@(ASS_35.Resources.HomeText.Account_type)</label>
+                                            <div class="col-md-8 col-sm-12 col-xs-12">
+                                                <select class="form-control" id="trangthai-chude">
+                                                    <option value="0">@(ASS_35.Resources.HomeText.All)</option>
+                                                    <option value="1">@(ASS_35.Resources.HomeText.Personal)</option>
+                                                    <option value="2">@(ASS_35.Resources.HomeText.Group)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12" id="frm_regis">
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                                <div class="checkbox checkbox-custom">
+                                                    <input id="ckdatphong" type="checkbox">
+                                                    <label for="ckdatphong"> @(ASS_35.Resources.HomeText.Room_Registration) </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                                <div class="checkbox checkbox-custom">
+                                                    <input id="ckdatxe" type="checkbox">
+                                                    <label for="ckdatxe"> @(ASS_35.Resources.HomeText.Parking_Registration) </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom:10px">
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-12 col-xs-12">@(ASS_35.Resources.HomeText.Group_Name)</label>
+                                            <div class="col-md-8 col-sm-12 col-xs-12">
+                                                <input type="text" id="tendoan" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-12 col-xs-12">@(ASS_35.Resources.HomeText.Name_delegates)</label>
+                                            <div class="col-md-8 col-sm-12 col-xs-12">
+                                                <input type="text" id="tendaibieu" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom:10px">
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-12 col-xs-12">@(ASS_35.Resources.HomeText.Register_from)</label>
+                                            <div class="input-group col-md-8 col-sm-12 col-xs-12">
+                                                <input type="text" id="tungay" class="form-control mydatepicker" placeholder="dd/mm/yyyy">
+                                                <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-12 col-xs-12">@(ASS_35.Resources.HomeText.To_date)</label>
+                                            <div class="input-group col-md-8 col-sm-12 col-xs-12">
+                                                <input type="text" id="denngay" class="form-control mydatepicker" placeholder="dd/mm/yyyy">
+                                                <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="padding-top:30px">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group" style="margin:0px">
+                                            <button class="btn btn-success waves-effect waves-light" type="button" id="btnSearch">
+                                                <span class="btn-label"><i class="ti-search"></i></span>@(ASS_35.Resources.HomeText.Button_Search)
+                                            </button>
+                                            <button class="btn btn-primary waves-effect waves-light pull-right" type="button" id="btnAddNewLib">
+                                                <span class="btn-label"><i class="ti-plus"></i></span>@(ASS_35.Resources.HomeText.Generate_report)
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <div id="example23_wrapper" class="dataTables_wrapper">
+                    <table id="example23" class="display nowrap dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example23_info" style="width: 100%;">
+                        <thead>
+                            <tr role="row">
+                                <th>ID</th>
+                                <th>@(ASS_35.Resources.HomeText.Company_Name)</th>
+                                <th>@(ASS_35.Resources.HomeText.Email_Account)</th>
+                                <th>@(ASS_35.Resources.HomeText.Time_register)</th>
+                                <th>@(ASS_35.Resources.HomeText.Account_type)</th>
+
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/ScriptPuplic/LibAss.js"></script>
+<script type="text/javascript">
+    var loaitaikhoan = "", dkphong = "false", dkxe = "false", tendoan = "", tendaibieu = "", tungay = "", denngay = "";
+    var tbl_datatable = [];
+    $(document).ready(function () {
+
+        $('.mydatepicker').datepicker();
+        LoadAllStatisticalDelegate();
+        CreateReport();
+        $('#trangthai-chude').change(function () {
+            if (this.value == 2) {
+                $('#frm_regis').css('display', 'none')
+            } else {
+                $('#frm_regis').css('display', 'block')
+            }
+        });
+    });
+
+
+    function LoadAllStatisticalDelegate() {
+        tbl_datatable = [];
+        createLoading();
+
+        loaitaikhoan = $('#trangthai-chude').val();
+        dkphong = $('#ckdatphong').is(":checked");
+        dkxe = $('#ckdatxe').is(":checked");
+        tendoan = $('#tendoan').val();
+        tendaibieu = $('#tendaibieu').val();
+        tungay = $('#tungay').val();
+        denngay = $('#denngay').val();
+
+        var table_danhsachchudeanh = $('#example23').dataTable({
+            ajax: {
+                url: "/Statistical/_LoadAllDelegate?loaitaikhoan=" + loaitaikhoan + "&dkphong=" + dkphong + "&dkxe=" + dkxe + "&tendoan=" + tendoan + "&tendaibieu=" + tendaibieu + "&tungay=" + tungay + "&denngay=" + denngay,
+                type: 'POST',
+            },
+            processing: true,
+            serverSide: true,
+            bSort: false,
+            columns: [
+                {
+                    data: 'id',
+                    class: 'text-center',
+                },
+                 {
+                     data: 'tencoquan',
+                     class: 'text-center'
+                 },
+                {
+                    data: 'email',
+                    class: 'text-center'
+                },
+                {
+                    data: 'ngaytao',
+                    class: 'text-center',
+                },
+                {
+                    data: 'tenloaitaikhoan',
+                    class: 'text-center'
+                },
+
+            ],
+            "columnDefs": [{
+                "orderable": false,
+                "targets": 'no-sort',
+            }],
+            "order": [[1, 'asc']],
+            responsive: true,
+            bLengthChange: true,
+            initComplete: function (settings, json) {
+                removeLoading();
+                if (settings.aanFeatures.f[0]) {// input
+                    var fnFilter = setStyleInputTable(settings.aanFeatures.f[0]);
+                    fnFilter.unbind();
+                    fnFilter.bind('keyup', function (e) {
+                        if (e.keyCode == 13) {
+                            if (String(this.value).trim().length > 0) {
+                                table_danhsachchudeanh.fnFilter(this.value);
+                            }
+                            else {
+                                table_danhsachchudeanh.fnFilter("");
+                            }
+                        } else {
+                            table_danhsachchudeanh.fnFilter(this.value);
+                        }
+                    });
+                }
+                if (settings.aanFeatures.l[0]) {// select
+                    var fnPageChange = setStyleSelectTable(settings.aanFeatures.l[0]);
+                }
+            },
+            fnCreatedRow: function (row, data, index) {
+                tbl_datatable.push(data);
+                var page = table_danhsachchudeanh.api().page();
+                var len = table_danhsachchudeanh.api().page.len();
+                $('td', row).eq(0).html((page * len) + (index + 1));
+                if (data.trangthai == "2") {
+                    $(row).css("background-color", "bisque");
+                } else if (data.trangthai == "3") {
+                    $(row).css("background-color", "khaki");
+                }
+            },
+            language: {
+                lengthMenu: "@Html.Raw(ASS_35.Resources.HomeText.Show_menu_line)",
+                zeroRecords: "@Html.Raw(ASS_35.Resources.HomeText.No_line)",
+                info: "@Html.Raw(ASS_35.Resources.HomeText.Total_line)",
+                emptyTable: "@Html.Raw(ASS_35.Resources.HomeText.No_data_table)",
+                infoEmpty: "@Html.Raw(ASS_35.Resources.HomeText.No_line)",
+                loadingRecords: "@Html.Raw(ASS_35.Resources.HomeText.Loading)",
+                processing: '<div class="spinner5"></div>',
+                search: "@Html.Raw(ASS_35.Resources.HomeText.Search)",
+                searchPlaceholder: "@Html.Raw(ASS_35.Resources.HomeText.Search_Content)",
+                paginate: {
+                    first: "@Html.Raw(ASS_35.Resources.HomeText.First)",
+                    last: "@Html.Raw(ASS_35.Resources.HomeText.Last)",
+                    next: " @Html.Raw(ASS_35.Resources.HomeText.Next)",
+                    previous: "@Html.Raw(ASS_35.Resources.HomeText.Previous)",
+                }
+            },
+        });
+
+        $('#trangthai-chude').change(function () {
+            tbl_datatable = [];
+            dkphong = $('#ckdatphong').is(":checked");
+            dkxe = $('#ckdatxe').is(":checked");
+            tendoan = $('#tendoan').val();
+            tendaibieu = $('#tendaibieu').val();
+            tungay = $('#tungay').val();
+            denngay = $('#denngay').val();
+
+            table_danhsachchudeanh.api().ajax.url("/Statistical/_LoadAllDelegate?loaitaikhoan=" + $(this).val() + "&dkphong=" + dkphong + "&dkxe=" + dkxe + "&tendoan=" + tendoan + "&tendaibieu=" + tendaibieu + "&tungay=" + tungay + "&denngay=" + denngay).load();
+        });
+        $('#btnSearch').click(function () {
+            tbl_datatable = [];
+            loaitaikhoan = $('#trangthai-chude').val();
+            dkphong = $('#ckdatphong').is(":checked");
+            dkxe = $('#ckdatxe').is(":checked");
+            tendoan = $('#tendoan').val();
+            tendaibieu = $('#tendaibieu').val();
+            tungay = $('#tungay').val();
+            denngay = $('#denngay').val();
+
+            table_danhsachchudeanh.api().ajax.url("/Statistical/_LoadAllDelegate?loaitaikhoan=" + loaitaikhoan + "&dkphong=" + dkphong + "&dkxe=" + dkxe + "&tendoan=" + tendoan + "&tendaibieu=" + tendaibieu + "&tungay=" + tungay + "&denngay=" + denngay).load();
+        });
+    }
+
+    function CreateReport() {
+        $('#btnAddNewLib').click(function () {
+
+            if (tbl_datatable.length > 0) {
+                var fm_data = new FormData();
+                fm_data.append("DataSend", JSON.stringify(tbl_datatable));
+
+                var success = function (dx) {
+                    if (dx.Result.IsSuccess) {
+
+                        QTW_RUN_MESS.alter_Message_Success(dx.Result.Message);
+                        window.location = window.location.origin + dx.Result.ReturnValue;
+                    }
+                    else {
+                        QTW_RUN_MESS.alter_Message_Error(dx.Result.Message);
+                    }
+                }
+                QTW_JQUERY.RUN_AJAX("ajaxPOST", "/Statistical/CreateStatisticalDelegate", fm_data, success);
+
+            } else {
+                swal("@Html.Raw(ASS_35.Resources.HomeText.Notification) !", "@Html.Raw(ASS_35.Resources.HomeText.Confirm_nodata_no_reporter) ", "success");
+            }
+
+        });
+    }
+</script>

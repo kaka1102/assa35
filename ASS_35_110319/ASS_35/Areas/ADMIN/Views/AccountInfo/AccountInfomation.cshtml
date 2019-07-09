@@ -1,0 +1,314 @@
+﻿@using DataContext
+@using DataContext.Constants
+@using DataContext.Until
+@{
+    var companyInfo = (m_thongtincoquan)ViewBag.company;
+    var accountInfo = (m_taikhoan)ViewBag.account;
+}
+<link href="~/Content/plugins/bower_components/x-editable/bootstrap-editable.css" rel="stylesheet" />
+<script src="~/Content/plugins/bower_components/moment/moment.js"></script>
+<script type="text/javascript" src="~/Content/plugins/bower_components/x-editable/bootstrap-editable.min.js"></script>
+<div class="row">
+    <div class="col-lg-12">
+    <div class="white-box">
+    <div class="col-sm-6" style="float:right">
+        <h3 id="btn-cancel" class="box-title m-b-0" style="float: right; cursor: pointer;"><i class="ti-arrow-left" style="padding-right:10px"></i><a>@(ASS_35.Resources.HomeText.ButtonBack)</a></h3>
+    </div>
+   
+    @if (ViewBag.isDelegate == true || ViewBag.isReport == true)
+    { 
+        if (accountInfo.idloaitaikhoan == SystemMessageConst.AccountType.Personal)
+        {
+            if (ViewBag.info != null)
+            {
+                var personInfo = (m_thongtincanhan) ViewBag.info;
+                <h3 class="box-title m-b-5">@(ASS_35.Resources.HomeText.Person_Detail)</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table style="clear: both" class="table table-bordered table-striped" id="user">
+                            <tbody>
+                            <tr>
+                                <td width="35%">@(ASS_35.Resources.HomeText.Full_Name)</td>
+                                <td width="65%">
+                                    @personInfo.hovaten
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>@(ASS_35.Resources.HomeText.Gender)</td>
+                                <td>
+                                    @(personInfo.gioitinh.Value == true ? ASS_35.Resources.HomeText.Male : ASS_35.Resources.HomeText.Female)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>@(ASS_35.Resources.HomeText.Date_of_Birth)</td>
+                                <td>
+                                    @(personInfo.ngaysinh.Value.ToString("dd-MM-yyyy"))
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="35%">@(ASS_35.Resources.HomeText.Email)</td>
+                                <td width="65%">
+                                    @personInfo.email
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="35%">@(ASS_35.Resources.HomeText.Email_Account)</td>
+                                <td width="65%">
+                                    @accountInfo.email
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="35%">@(ASS_35.Resources.HomeText.Address)</td>
+                                <td width="65%">
+                                    @personInfo.diachi
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="35%">@(ASS_35.Resources.HomeText.Phone)</td>
+                                <td width="65%">
+                                    @personInfo.sodienthoai
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="35%">@(ASS_35.Resources.HomeText.Position)</td>
+                                <td width="65%">
+                                    @personInfo.chucvu
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="35%">@(ASS_35.Resources.HomeText.ID_Card_Passport)</td>
+                                <td width="65%">
+                                    @personInfo.cmthochieu
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="35%">@(ASS_35.Resources.HomeText.Date_Range)</td>
+                                <td width="65%">
+                                    @(personInfo.ngaycap != null ? personInfo.ngaycap.Value.ToString("dd-MM-yyyy") : "")
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="35%">@(ASS_35.Resources.HomeText.Expiration_Date)</td>
+                                <td width="65%">
+                                    @(personInfo.ngayhethan != null ? personInfo.ngayhethan.Value.ToString("dd-MM-yyyy") : "")
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="35%">@(ASS_35.Resources.HomeText.Place_of_issue)</td>
+                                <td width="65%">@(personInfo.noicap)</td>
+                            </tr>
+                            <tr>
+                                <td width="35%">@(ASS_35.Resources.HomeText.Photo_of_ID_Card_Passport_Backside)</td>
+                                <td width="65%">
+                                    <img src="@personInfo.anhcmtmattruoc" style="max-width: 100%;"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="35%">@(ASS_35.Resources.HomeText.Photo_of_ID_Card_Passport_Front)</td>
+                                <td width="65%">
+                                    <img src="@personInfo.anhcmtmatsau" style="max-width: 100%;"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="35%">@(ASS_35.Resources.HomeText.Documentary)</td>
+                                <td width="65%">
+                                    <img src="@companyInfo.filecongvan" style="max-width: 100%;"/>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+        }
+        <h3 class="box-title m-b-5">@(ASS_35.Resources.HomeText.agency_information)</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <table style="clear: both" class="table table-bordered table-striped" id="user">
+                    <tbody>
+                    <tr>
+                        <td width="35%">@(ASS_35.Resources.HomeText.Company_Name)</td>
+                        <td width="65%">
+                            @companyInfo.tencoquan
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="35%">@(ASS_35.Resources.HomeText.Company_Address)</td>
+                        <td width="65%">
+                            @companyInfo.diachicoquan
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="35%">@(ASS_35.Resources.HomeText.Company_Email)</td>
+                        <td width="65%">
+                            @companyInfo.emailcoquan
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="35%">@(ASS_35.Resources.HomeText.Fax)</td>
+                        <td width="65%">
+                            @companyInfo.sofax
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="35%">@(ASS_35.Resources.HomeText.Company_Phone)</td>
+                        <td width="65%">
+                            @companyInfo.sodienthoai
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="35%">@(ASS_35.Resources.HomeText.Documentary)</td>
+                        <td width="65%">
+                            <img src="@companyInfo.filecongvan" style="max-width: 100%;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="35%">@(ASS_35.Resources.HomeText.invitations_to_the_conference)</td>
+                        <td width="65%">
+                            <a href="@accountInfo.giaymoi" style="max-width: 100%;" download>Download</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    @if (ViewBag.isSecretary == true || ViewBag.isEditors == true || ViewBag.isAdmin == true)
+    {
+
+        <h3 class="box-title m-b-5">@(ASS_35.Resources.HomeText.Person_Detail)</h3>
+        <div class="row">
+            <div class="col-md-12">
+                @if (ViewBag.info != null)
+                {
+                    var personInfo = (m_thongtincanhan) ViewBag.info;
+                    <table style="clear: both" class="table table-bordered table-striped" id="user">
+                        <tbody>
+                        <tr>
+                            <td width="35%">@(ASS_35.Resources.HomeText.Full_Name)</td>
+                            <td width="65%">
+                                <input id="txt-fullname" type="text" class="form-control" placeholder="@(ASS_35.Resources.HomeText.Full_Name)" value="@(personInfo.hovaten)">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="35%">@(ASS_35.Resources.HomeText.Email_Account)</td>
+                            <td width="65%">
+                                @accountInfo.email
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="35%">@(ASS_35.Resources.HomeText.Address)</td>
+                            <td width="65%">
+                                <input id="txt-address" type="text" class="form-control" placeholder="@(ASS_35.Resources.HomeText.Address)" value="@(personInfo.diachi)">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="35%">@(ASS_35.Resources.HomeText.Phone)</td>
+                            <td width="65%">
+                                <input type="text" class="form-control" id="txt-phone" placeholder="@(ASS_35.Resources.HomeText.Phone)" value="@(personInfo.sodienthoai)">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="35%">@(ASS_35.Resources.HomeText.Position)</td>
+                            <td width="65%">
+                                <input type="text" class="form-control" id="txt-postion" placeholder="@(ASS_35.Resources.HomeText.Position)" value="@(personInfo.chucvu)">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="35%">@(ASS_35.Resources.HomeText.permissions)</td>
+                            <td width="65%">
+                                @Html.Action("GetAuByAccountId", "Common", new {accountId = AccountUntil.GetAccount().id})
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <table style="clear: both" class="table table-bordered table-striped" id="user">
+                        <tbody>
+                        <tr>
+                            <td width="35%">@(ASS_35.Resources.HomeText.Full_Name)</td>
+                            <td width="65%">
+                                <input id="txt-fullname" type="text" class="form-control" placeholder="@(ASS_35.Resources.HomeText.Full_Name)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="35%">@(ASS_35.Resources.HomeText.Email_Account)</td>
+                            <td width="65%">
+                                @accountInfo.email
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="35%">@(ASS_35.Resources.HomeText.Address)</td>
+                            <td width="65%">
+                                <input id="txt-address" type="text" class="form-control" placeholder="@(ASS_35.Resources.HomeText.Address)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="35%">@(ASS_35.Resources.HomeText.Phone)</td>
+                            <td width="65%">
+                                <input type="text" class="form-control" id="txt-phone" placeholder="@(ASS_35.Resources.HomeText.Phone)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="35%">@(ASS_35.Resources.HomeText.Position)</td>
+                            <td width="65%">
+                                <input type="text" class="form-control" id="txt-postion" placeholder="@(ASS_35.Resources.HomeText.Position)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="35%">@(ASS_35.Resources.HomeText.permissions)</td>
+                            <td width="65%">
+                                @Html.Action("GetAuByAccountId", "Common", new {accountId = AccountUntil.GetAccount().id})
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+        <div class="white-box">
+            <div class="form-actions">
+                <button id="btn-save" type="button" class="btn btn-success"> <i class="fa fa-check"></i>@(ASS_35.Resources.HomeText.ButtonSave)</button>
+            </div>
+        </div>
+    }
+    </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        BindButtonSaveClick();
+        BindButtonCancelClick();
+    });
+    function BindButtonCancelClick() {
+        $("#btn-cancel").click(function() {
+            window.location = '@Url.Action("Index", "Admin")';
+        });
+    }
+    function BindButtonSaveClick() {
+        $("#btn-save").click(function () {
+            var fullName = $('#txt-fullname').val();
+            var phone = $('#txt-phone').val();
+            var address = $('#txt-address').val();
+            var postion = $('#txt-postion').val();
+            var infomationData = {
+                fullName: fullName,
+                phone: phone,
+                address: address,
+                postion: postion
+            }
+            var formData = new FormData();
+            formData.append("data", JSON.stringify(infomationData));
+            QTW_JQUERY.RUN_AJAX("ajaxPOST", "/AccountInfo/EditInfomation", formData, RegisterResult);
+        });
+    }
+    function RegisterResult(data) {
+        if (data.result.IsSuccess === false) {
+            QTW_RUN_MESS.alter_Message_Error(data.result.Message);
+        } else {
+            QTW_RUN_MESS.alter_Message_Success(data.result.Message);
+        }
+    }
+</script>

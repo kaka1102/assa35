@@ -1,0 +1,39 @@
+﻿@using DataContext.DAL;
+@using DataContext.Until;
+
+@{
+    var model = (List<SuKien>)Model;
+}
+
+<div class="news-noidung">
+    <div class="td-tintuc ">
+        <span>
+            Sự kiện
+        </span>
+    </div>
+
+
+    @if (model.Count > 0)
+    {
+        foreach (var item in model)
+        {
+            <div class="row">
+                <div class="col-sm-2">
+                    <a href="@Html.Raw(ConvertTextToLink.ConvertUrlsToLinks(item.tencuochop) + "-" + item.id)"><img class="img-responsive" style="@Html.Raw(string.IsNullOrEmpty(item.avatar) ? "padding: 10%; width: 80% !important;" : "")" src="@Html.Raw(string.IsNullOrEmpty(item.avatar) ? "/images/assa-logo.png" : item.avatar)" alt=""></a>
+                </div>
+                <div class="col-sm-10 tt-sukien">
+                    <span><a href="@Html.Raw(ConvertTextToLink.ConvertUrlsToLinks(item.tencuochop) + "-" + item.id)"> @Html.Raw(item.tencuochop)</a></span>
+                    <span><img src="~/images/dongho.png" alt="">Từ @Html.Raw(item.thoigianbatdau) đến @Html.Raw(item.thoigianketthuc) ngày @Html.Raw(item.ngaydienra)</span>
+                    <span><img src="~/images/vitri.png" alt="">@Html.Raw(item.diadiem)</span>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="row">
+            <h3>Đang cập nhật</h3>
+        </div>
+    }
+</div>
+

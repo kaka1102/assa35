@@ -1,0 +1,54 @@
+﻿
+<div class="row">
+    <div class="col-lg-12">
+        <div class="white-box">
+            <div class="col-sm-12" style="padding-bottom: 10px; border-bottom: 1px solid red; margin-bottom: 20px;">
+                <div class="row">
+                    <h3 class="box-title m-b-0"><i class="ti-angle-double-right" style="padding-right:10px"></i>@(ASS_35.Resources.HomeText.ManagerEvent)</h3>
+                </div>
+            </div>
+            <div class="row m-b-20">
+                <div class="col-sm-4">
+                    <div class="row">
+                        <button class="btn btn-primary waves-effect waves-light" type="button" id="btn-add-member">
+                            <span class="btn-label">
+                                <i class="ti-plus"></i>
+                            </span>@(ASS_35.Resources.HomeText.ButtonAddNew)
+                        </button>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row">
+                        @Html.Action("ListStatusActiveAndDeActive", "Common", new {name = "cbx-status",isAdmin = true, hasAll = true })
+                    </div>
+                </div>
+            </div>
+            <div id="table-container">
+                @Html.Action("_ListMeeting", "Meeting")
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        BindButtonAddAccountClick();
+        BindButtonStatusChange();
+    });
+    function BindButtonAddAccountClick() {
+        $("#btn-add-member").click(function () {
+            LoadPage('@Url.Action("AddMeeting", "Meeting")');
+  
+        });
+    }
+
+    function BindButtonStatusChange() {
+        $("#cbx-status").change(function () {
+            var statusId = $(this).val();
+            var data = {
+                status: statusId
+            };
+            LoadPartialView('@Url.Action("_ListMeeting", "Meeting")', "#table-container", data);
+        });
+    }
+</script>
+

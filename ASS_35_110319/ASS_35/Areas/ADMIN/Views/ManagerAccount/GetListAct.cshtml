@@ -1,0 +1,45 @@
+﻿
+@{
+    var model = (List<DataContext.SP_GetListActById_Result>) Model;
+}
+@if (model != null)
+{
+    foreach (var item in model)
+    {
+        <tr data-idact="@item.id">
+            <td class="tb-1">
+                <h6 class="text-bold mg0">@(item.actName) <span class="text-danger">*</span></h6>
+                <p>
+                    @(item.des)
+                    <br>
+                    <br>Date: @(item.startDate.Value.ToString("dd MMMM yyyy"))
+                </p>
+            </td>
+   
+       
+            <td class="tb-2">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="sec5_a@(item.id)" class="styled secactv required" value="1">
+                            Yes
+                        </label>
+                        @if (item.idActType == 2)
+                        {
+                            <p> shirt size:</p>
+                        }
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="sec5_a@(item.id)" class="styled" value="2">
+                            No
+                        </label>
+                    </div>
+                   
+                </div>
+            </td>
+
+                 
+        </tr>
+    }
+}

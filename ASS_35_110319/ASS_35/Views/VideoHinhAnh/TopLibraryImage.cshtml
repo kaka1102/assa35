@@ -1,0 +1,74 @@
+﻿@using DataContext.ClientBusiness;
+@using DataContext.DAL;
+@using DataContext.Until;
+
+@{
+    // var model = (Video)Model;
+    var model = (List<Video>)Model;
+}
+
+
+@*<div class="thuvien-bv row">
+        @if (model != null)
+        {
+            <div class="cbv-thuvien">
+                <a href=""><img src="~/images/thu-vien-anh.png" alt=""></a>
+                <a href=""><img src="~/images/thu-vien-anh1.png" alt=""></a>
+            </div>
+            <div class="col-sm-6 bt-thuvien-nb">
+                <span><a href="@Html.Raw("lib-image/" + ConvertTextToLink.ConvertUrlsToLinks(model.tenchude) + "-" + model.id)"><p class="height100">@Html.Raw(model.tenchude)</p></a></span>
+                <span>
+                    <img src="~/images/dongho.png" alt=""> @Html.Raw(model.thoigianpheduyet.Remove(2, 1).Insert(2, " tháng "))
+
+                </span>
+            </div>
+            <div class="col-sm-6 bp-thuvien-nb">
+                <a href="@Html.Raw("lib-image/" + ConvertTextToLink.ConvertUrlsToLinks(model.tenchude) + "-" + model.id)">
+                    <img src="@Html.Raw(model.link)" alt="">
+                </a>
+            </div>
+        }
+        else
+        {
+            <h3>Không có dữ liệu</h3>
+        }
+    </div>*@
+
+
+
+@*lam moi*@
+<div id="myCarousel" class="carousel slide " data-ride="carousel">
+    <div class="carousel-inner thuvien-bv row">
+        @if (model.Count > 0)
+        {
+            for (int i = 0; i < model.Count; i++)
+            {
+                <div class="item @Html.Raw(i==0?"active":"")">
+                    <div class="col-sm-6 bt-thuvien-nb">
+                        <span><a href="@Html.Raw("lib-image/" + ConvertTextToLink.ConvertUrlsToLinks(model[i].tenchude) + "-" + model[i].id)"><p class="height100">@Html.Raw(model[i].tenchude)</p></a></span>
+                        <span class="time-create-lib">
+                            <img src="~/images/dongho.png" alt=""> @Html.Raw(model[i].thoigianpheduyet.Remove(2, 1).Insert(2, " tháng "))
+
+                        </span>
+                    </div>
+                    <div class="col-sm-6 bp-thuvien-nb">
+                        <a href="@Html.Raw("lib-image/" + ConvertTextToLink.ConvertUrlsToLinks(model[i].tenchude) + "-" + model[i].id)">
+                            <img src="@Html.Raw(model[i].link)" alt="">
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+                <h3>Đang cập nhật</h3>
+        }
+
+    </div>
+    <a class="bt-left" href="#myCarousel" data-slide="prev">
+        <img src="~/images/thu-vien-anh.png" alt="">
+    </a>
+    <a class="bt-right" href="#myCarousel" data-slide="next">
+        <img src="~/images/thu-vien-anh1.png" alt="">
+    </a>
+</div>

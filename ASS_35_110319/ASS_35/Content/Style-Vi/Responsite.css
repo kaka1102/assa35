@@ -1,0 +1,496 @@
+﻿@media (min-width: 767px) {
+    .tintuc-img img {
+        min-height: 300px;
+        height: 300px;
+    }
+
+    .bp-tintuc-nb span {
+        max-height: 81px;
+        overflow: hidden;
+    }
+
+    .bp-tintuc-nb p {
+        max-height: 93px;
+        overflow: hidden;
+    }
+
+    .navbar-nav > li > a {
+        font-size: 16px ;
+    }
+}
+
+@media (max-width: 768px) {
+    .run-slider {
+        width: 65% !important;
+        margin-left: 10%;
+    }
+	#myCarousel {
+        height : auto !important;
+    }
+	.slider-t {
+	margin-bottom:0;
+}
+    .item-slider-top {
+        height: auto;
+    }
+
+    .carousel-inner > .item > a > img, .carousel-inner > .item > img {
+        height: auto !important;
+    }
+
+    .sec-cont-bottom {
+        padding-bottom: 80px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .container.practical {
+        width: 1140px !important;
+    }
+
+    .overview .container {
+        width: 1140px !important;
+    }
+}
+
+
+@media (min-width: 1023px) {
+    .bp-thuvien-nb img {
+        height: 350px;
+    }
+}
+
+
+
+@media (min-width: 426px) {
+    .conten-tt img {
+        height: 130px;
+        width: 100%;
+    }
+
+    .bp-tintuc-nb {
+        padding-left: 30px;
+    }
+
+    .css-form-search {
+        padding: 0px;
+    }
+
+    .bt-left {
+        left: 84% !important;
+        width: 7% !important;
+    }
+
+    .bt-right {
+        left: 91% !important;
+        width: 7% !important;
+    }
+
+
+
+    .tile-tt {
+        max-height: 80px;
+        overflow: hidden;
+    }
+
+    .nd-tt {
+        max-height: 45px;
+        overflow: hidden;
+    }
+
+    .ft-tt {
+        max-height: 25px;
+        overflow: hidden;
+    }
+
+    .bp-tintuc-nb p {
+        max-height: 67px;
+        overflow: hidden;
+    }
+
+    .bp-thuvien-nb img {
+        min-height: 270px;
+    }
+}
+
+@media only screen and (min-device-width: 321px) and (max-device-width: 375px) {
+    /*.icon-search {
+        right: 70px;
+    }*/
+}
+
+
+@media only screen and (min-device-width: 376px) and (max-device-width: 425px) {
+    /*.icon-search {
+        right: 105px;
+    }*/
+
+    .practical .header-title {
+        padding: 13px;
+    }
+        .practical .header-title h3 {
+            font-size: 21px;
+        }
+}
+
+@media (max-width: 320px)  {
+    /*.icon-search {
+        right: 25px;
+    }*/
+
+    
+
+    .td-thuvien1 {
+        font-size: 23px;
+    }
+
+    .bp-thuvien {
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .nav > li > a {
+        padding-right: 60px;
+    }
+}
+
+@media (max-width: 425px) {
+
+    .logo .header-title {
+        font-size: 20px;
+    }
+    .logo .header-subtit{
+        font-size: 14px;
+        margin: 3px 0 2px 0;
+    }
+    .logo .header-p{
+        font-size: 12px;
+    }
+    .img-home {
+        display: none;
+    }
+
+    .navbar-nav {
+        margin: 0px !important;
+    }
+
+    .overview-qg {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    .sukien .tintuc-bv-ct img {
+        max-width: 100% !important;
+        height: unset !important;
+    }
+  .practical  .header-title h3 {
+      font-size: 21px !important;
+      line-height:30px !important;
+    }
+
+    .sec-below .sec-above-bg .sec-above-bg-color {
+        height: 45px;
+    }
+
+    .item-slider-top {
+        height: auto;
+    }
+
+    .sb-left-l img {
+        width: 100%;
+    }
+
+    .carousel-inner > .item > a > img, .carousel-inner > .item > img {
+        height: 170px;
+    }
+
+
+    .bp-thuvien-nb img {
+        min-height: 250px;
+    }
+
+    .tieude-video-chitiet p {
+        max-height: 60px;
+        overflow: hidden;
+    }
+
+    .anh-thuvien-ct iframe {
+        min-height: 250px !important;
+    }
+
+    .video-bv-ct.row {
+        padding: 0px;
+    }
+
+    .bp-tintuc-nb p {
+        max-height: 48px;
+        overflow: hidden;
+    }
+
+    .bp-thuvien-nb iframe {
+        height: 200px !important;
+    }
+
+    .tintuc-img img {
+        min-height: 250px;
+    }
+
+    .bp-tintuc-nb span {
+        max-height: 88px;
+        overflow: hidden;
+    }
+
+    .bp-tintuc-nb p {
+        max-height: 93px;
+        overflow: hidden;
+    }
+
+    .conten-tt img {
+        height: unset;
+        width: 100%;
+    }
+
+    .tile-tt {
+        max-height: 145px;
+        overflow: hidden;
+        padding-bottom: 20px !important;
+    }
+
+    .nd-tt {
+        max-height: 105px;
+        overflow: hidden;
+    }
+
+    .ft-tt {
+        max-height: 50px;
+        overflow: hidden;
+    }
+
+    .slider-t {
+        left: 111%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .bt-left {
+        left: 88% !important;
+        width: 5% !important;
+    }
+
+    .bt-right {
+        left: 94% !important;
+        width: 5% !important;
+    }
+}
+
+
+/*.overview-qg img {
+    width: 100% !important;
+}*/
+.conten-tt {
+    padding-bottom: 20px;
+}
+
+.td-video {
+    height: 65px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 25px;
+    /*max-height: 60px;*/
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+    .td-video a {
+        font-size: 15px;
+    }
+    .td-video a:hover {
+        text-decoration: none;
+    }
+
+.dt-nd {
+    /*max-height: 65px;
+    overflow: hidden;*/
+    height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 20px;
+    max-height: 60px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 15px;
+}
+
+.l-title {
+  //  max-height: 90px;
+    overflow: hidden;
+    line-height: 1.6;
+}
+
+.content-video {
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    color: #585858;
+    font-size: 18px;
+    text-align: left;
+}
+
+    .content-video h5 {
+        line-height: 1.5;
+        font-size: 16px !important;
+    }
+
+    /*.content-video span {
+        line-height: 1.6;
+        margin-left: 12px;
+        height: 60px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        line-height: 25px;
+        max-height: 60px;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }*/
+
+.height50 {
+    max-height: 50px;
+    overflow: hidden;
+}
+
+.height100 {
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.sk-img {
+    min-height: 190px;
+}
+
+.tieude-thuvien-chitiet p {
+    max-height: 30px;
+    overflow: hidden;
+}
+
+.anh-thuvien-ct img {
+    min-height: 200px;
+}
+
+.bt-right {
+    position: absolute;
+    bottom: 0;
+    width: 5%;
+    height: 50px;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    background-color: rgba(0,0,0,0);
+    filter: alpha(opacity=50);
+    /*opacity: .5;*/
+}
+
+.bt-left {
+    position: absolute;
+    bottom: 0;
+    left: 44%;
+    width: 5%;
+    height: 50px;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    background-color: rgba(0,0,0,0);
+    filter: alpha(opacity=50);
+    /*opacity: .5;*/
+}
+
+
+@media (max-width: 425px) {
+    .sec-below .sec-above-bg {
+        height: 87px;
+        background-repeat: repeat;
+    }
+
+    .bt-left {
+        left: 72% !important;
+    }
+
+    .bt-right {
+        left: 85% !important;
+    }
+}
+
+@media (max-width: 375px) {
+    .sec-below .sec-above-bg {
+        height: 77px;
+    }
+
+    .bt-left {
+        left: 70% !important;
+    }
+
+    .bt-right {
+        left: 85% !important;
+    }
+}
+
+@media (max-width: 320px) {
+    .sec-below .sec-above-bg {
+        height: 66px;
+    }
+
+    .bp-thuvien-nb img {
+        min-height: 220px;
+    }
+
+    .bt-left {
+        left: 67% !important;
+    }
+
+    .bt-right {
+        left: 83% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .total-fm {
+        width: 100%;
+    }
+
+    .a-total {
+        width: 45%;
+        padding-right: 5%;
+        float: left;
+    }
+
+    .a-total2 {
+        width: 50%;
+        float: right;
+    }
+
+    .time-total {
+        width: 55%;
+        float: right;
+    }
+}
+
+
+
+.total-fm {
+    width: 100%;
+}
+
+.a-total {
+    width: 100%;
+}
+
+.a-total2 {
+    width: 100%;
+}
+
+.time-total {
+    width: 100%;
+}

@@ -1,0 +1,16 @@
+@media screen and (max-width: 768px){
+    .news-noidung div.col-sm-2 {
+    text-align: center;
+}
+.sukien {
+   
+    padding-left: 0px;
+}
+.tintuc-bv-ct {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.video-bv-ct.row {
+    padding:  0px;
+}
+}

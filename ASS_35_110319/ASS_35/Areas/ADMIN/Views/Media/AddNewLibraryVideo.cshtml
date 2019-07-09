@@ -1,0 +1,243 @@
+﻿
+
+<link href="~/Content/plugins/bower_components/gallery/css/animated-masonry-gallery.css" rel="stylesheet" />
+<link href="~/Content/plugins/bower_components/fancybox/ekko-lightbox.min.css" rel="stylesheet" />
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box p-l-20 p-r-20">
+            <div class="col-sm-12" style="padding-bottom: 10px; border-bottom: 1px solid red;">
+                <div class="row">
+                    <div class="col-sm-6" style="float:left">
+                        <h3 class="box-title m-b-0"><i class="ti-angle-double-right" style="padding-right:10px"></i>@(ASS_35.Resources.HomeText.Add_new_video_theme)</h3>
+                    </div>
+                    <div class="col-sm-6" style="float:right">
+                        <h3 class="box-title m-b-0" style="float:right"><i class="ti-arrow-left" style="padding-right:10px"></i><a href="javascript:0" id="btnBack">@(ASS_35.Resources.HomeText.ButtonBack)</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-md-12">
+                    <form class="form-material form-horizontal" id="formAddNew">
+                        <div class="form-group">
+                            <label class="col-md-12">@(ASS_35.Resources.HomeText.Topic_name) <i class="requite-icon">(*)</i></label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control form-control-line" id="tenchude">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">@(ASS_35.Resources.HomeText.Introduce) <i class="requite-icon">(*)</i></label>
+                            <div class="col-md-12">
+                                <textarea class="form-control" rows="5" id="gioithieu"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-12">@(ASS_35.Resources.HomeText.Version)</label>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="phienban">
+                                    <option value="1">@(ASS_35.Resources.HomeText.Vietnamese_Website)</option>
+                                    <option value="2">@(ASS_35.Resources.HomeText.Website_English)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+            <label class="col-sm-12">Upload file video (chỉ chấp nhận video mp4, flv, m4v...)<i class="requite-icon">(*)</i></label>
+            <div class="col-sm-6">
+                <div class="fileinput fileinput-new input-group" id="item-append-error">
+                    <div class="form-control" id="frmInput">
+                        <i class="glyphicon glyphicon-file"></i> 0 File được chọn
+                    </div>
+                    <span class="input-group-addon btn btn-default btn-file">
+                        <span class="fileinput-new">Select file</span>
+                        <input type="hidden"><input type="file" name="..." id="btnInputVideo" accept="video/mp4,video/x-m4v,video/*">
+                    </span>
+                    <span id="appendInput">
+
+                    </span>
+                </div>
+            </div>
+
+            <div id="gallery" class="">
+                <div id="gallery-content">
+                    <div id="gallery-content-center" class="gallery-content-center-full isotope">
+
+                    </div>
+                </div>
+            </div>
+            <div id="galleryVideo">
+                <div class="el-element-overlay" id="view-item-video">
+
+                </div>
+            </div>
+            <div id="gallaryFileOther">
+                <ul class="feeds" id="view-item-file"></ul>
+            </div>
+        </div>*@
+
+                        <div class="form-group">
+                            <label class="col-md-12">@(ASS_35.Resources.HomeText.Embed_video_youtube)<i class="requite-icon">(*)</i></label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control form-control-line" id="linkvideo" onblur="ShowVideoToIframe()">
+                            </div>
+
+                            <div id="galleryVideo">
+                                <div class="el-element-overlay" id="view-item-video">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn btn-success waves-effect waves-light" type="button" id="btnSave">
+                                <span class="btn-label"><i class="ti-save"></i></span>@(ASS_35.Resources.HomeText.ButtonSave)
+                            </button>
+                            @if (ViewBag.roll == 1)
+                            {
+                                <button class="btn btn-primary waves-effect waves-light" data-item="3" type="button" id="btnSaveandPost">
+                                    <span class="btn-label"><i class="ti-save"></i></span>@(ASS_35.Resources.HomeText.SaveAndPost)
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-primary waves-effect waves-light" data-item="2" type="button" id="btnSaveandPost">
+                                    <span class="btn-label"><i class="ti-save"></i></span>@(ASS_35.Resources.HomeText.SaveAndPostAdmin)
+                                </button>
+                            }
+                                <a href="Index#AddNewLibraryVideo" class="btn btn-success waves-effect waves-light" type="button" id="btnAddNewLib">
+                                    
+                                        <span class="btn-label"><i class="ti-plus"></i></span> @(ASS_35.Resources.HomeText.Add_new_video_theme)
+                                    
+                                </a>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="~/Content/eliteadmin-colors/js/input-file-show.js"></script>
+<script src="~/Content/plugins/bower_components/fancybox/ekko-lightbox.min.js"></script>
+<script src="~/Content/ScriptPuplic/LibAss.js"></script>
+<script type="text/javascript">
+
+
+    $(function () {
+        BindUrlBack("/Media/VideoManager", "btnBack");
+        AddNewLibraryImages();
+    });
+
+    function AddNewLibraryImages() {
+        var btnSave = document.getElementById("btnSave");
+        var btnSaveandPost = document.getElementById("btnSaveandPost");
+
+        var btnInput = document.getElementById("btnInput");
+        var tenchude = document.getElementById("tenchude");
+        var gioithieu = document.getElementById("gioithieu");
+        var phienban = document.getElementById("phienban");
+        var linkvideo = document.getElementById("linkvideo");
+
+        tenchude.addEventListener("keyup", function (e) {
+            e.preventDefault();
+            QTW_VALIDATION.CheckFiled_Requite(tenchude, "", 3, 500);
+        });
+        gioithieu.addEventListener("keyup", function (e) {
+            e.preventDefault();
+            QTW_VALIDATION.CheckFiled_Requite(gioithieu, "", 3);
+        });
+        linkvideo.addEventListener("keyup", function (e) {
+            e.preventDefault();
+            QTW_VALIDATION.isIframeRequite(linkvideo, "");
+        });
+
+        btnSave.addEventListener("click", function (e) {
+            e.preventDefault();
+            var validate = true;
+
+            if (!QTW_VALIDATION.CheckFiled_Requite(tenchude, "", 3, 500))
+                validate = false;
+            if (!QTW_VALIDATION.CheckFiled_Requite(gioithieu, "", 3))
+                validate = false;
+
+            if (!QTW_VALIDATION.isIframeRequite(linkvideo, ""))
+                validate = false;
+
+            if (validate) {
+                var fm_data = new FormData();
+                linkvideo = linkvideo.value;
+                linkvideo = linkvideo.replace("560", "100%");
+                linkvideo = linkvideo.replace("315", "100%");
+                var dataObject = {
+                    tenchude: tenchude.value,
+                    gioithieu: gioithieu.value,
+                    phienban: phienban.value,
+                    linkvideo: linkvideo,
+                    trangthai: "4"
+                };
+
+                fm_data.append("DataSend", JSON.stringify(dataObject));
+                var success = function (dx) {
+                    if (dx.Resulf.IsSuccess) {
+                        QTW_RUN_MESS.alter_Message_Success(dx.Resulf.Message);
+                    }
+                    else {
+                        QTW_RUN_MESS.alter_Message_Error(dx.Resulf.Message);
+                    }
+                }
+                var fun = function () {
+                    QTW_JQUERY.RUN_AJAX("ajaxPOST", "/Media/_AddNewLibraryVideo", fm_data, success);
+                }
+                QTW_RUN_MESS.alter_Message_Question_Callbaclk(" @Html.Raw(ASS_35.Resources.HomeText.Accept_Add) ", fun);
+            }
+        });
+        btnSaveandPost.addEventListener("click", function (e) {
+            e.preventDefault();
+            var validate = true;
+
+            if (!QTW_VALIDATION.CheckFiled_Requite(tenchude, "", 3, 500))
+                validate = false;
+            if (!QTW_VALIDATION.CheckFiled_Requite(gioithieu, "", 3))
+                validate = false;
+            if (!QTW_VALIDATION.isIframeRequite(linkvideo, ""))
+                validate = false;
+
+            if (validate) {
+                linkvideo = linkvideo.value;
+                linkvideo = linkvideo.replace("560", "100%");
+                linkvideo = linkvideo.replace("315", "100%");
+                var fm_data = new FormData();
+                var dataObject = {
+                    tenchude: tenchude.value,
+                    gioithieu: gioithieu.value,
+                    phienban: phienban.value,
+                    linkvideo: linkvideo,
+                    trangthai: btnSaveandPost.getAttribute("data-item")
+                };
+                fm_data.append("DataSend", JSON.stringify(dataObject));
+                var success = function (dx) {
+                    if (dx.Resulf.IsSuccess) {
+                        QTW_RUN_MESS.alter_Message_Success(dx.Resulf.Message);
+                    }
+                    else {
+                        QTW_RUN_MESS.alter_Message_Error(dx.Resulf.Message);
+                    }
+                }
+                var fun = function () {
+                    QTW_JQUERY.RUN_AJAX("ajaxPOST", "/Media/_AddNewLibraryVideo", fm_data, success);
+                }
+                QTW_RUN_MESS.alter_Message_Question_Callbaclk(" @Html.Raw(ASS_35.Resources.HomeText.Accept_Add) ", fun);
+            }
+        });
+    }
+    function ShowVideoToIframe() {
+        var link = $('#linkvideo').val();
+       // link = link.replace('allow="encrypted-media"', '');
+
+        $('#view-item-video').empty();
+        $('#view-item-video').append(link);
+    }
+</script>

@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Overview";
+    Layout = "~/Views/Shared/LayoutEn.cshtml";
+}
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    @Html.Action("SliderOverview", "Overview")
+</div>
+
+<div class="overview">
+    <div class="container">
+        @Html.Action("IntroduceOverview", "Overview")
+    </div>
+    <section class="sec-below">
+        <div class="sec-above-bg new-css-ft">
+            <div class="sec-above-bg-color">
+                <span class="title-footer">Copyright 2018 Social Security Office. All right reserved</span>
+            </div>
+        </div>
+    </section>
+</div>

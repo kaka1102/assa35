@@ -1,0 +1,15 @@
+﻿@using DataContext
+<select class="form-control" id="@ViewBag.name" @(ViewBag.isDisable == true ? "disabled='disabled'" : "")>
+    @if (Model == null)
+    {
+        <option value="0">@(ASS_35.Resources.HomeText.No_data)</option>
+    }
+    else
+    {
+        var model = (List<m_diadiemtochuc>) Model;
+        foreach (var item in model)
+        {
+            <option value="@item.id" @(item.id == ViewBag.idSelected ? "selected='selected'" : "")>@item.tendiadiem</option>
+        }
+    }
+</select>

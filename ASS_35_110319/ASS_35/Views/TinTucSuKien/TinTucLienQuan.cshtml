@@ -1,0 +1,38 @@
+﻿@using DataContext.DAL;
+@using DataContext.Until;
+
+@{
+    var model = (List<DetailsPost>)Model;
+}
+
+<div class="news-noidung">
+    <div class="td-tintuc ">
+        <span>
+            Tin Tức
+        </span>
+    </div>
+
+
+    @if (model.Count > 0)
+    {
+        foreach (var item in model)
+        {
+            <div class="row">
+                <div class="col-sm-3 conten-tt">
+                    <a href="@Html.Raw(ConvertTextToLink.ConvertUrlsToLinks(item.tieude) + "-" + item.id)"><img class="img-responsive" src="@Html.Raw(item.avatar)" alt=""></a>
+                </div>
+                <div class="col-sm-9 tt-sukien">
+                    <span><a href="@Html.Raw(ConvertTextToLink.ConvertUrlsToLinks(item.tieude) + "-" + item.id)"> @Html.Raw(item.tieude)</a></span>
+                    <span><img src="~/images/dongho.png" alt="">@Html.Raw(item.thoigianpheduyet.Remove(2, 1).Insert(2, " tháng "))</span>
+                    <span>@Html.Raw(item.gioithieu)</span>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="row">
+            <h3>Đang cập nhật</h3>
+        </div>
+    }
+</div>

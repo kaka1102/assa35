@@ -1,0 +1,104 @@
+﻿@using DataContext.Constants
+@using DataContext.Until
+<table id="manager-account" class="table toggle-circle table-hover">
+    <thead>
+    <tr style="background-color:  aquamarine;">
+        <th>@(ASS_35.Resources.HomeText.File_Name)</th>
+        @if (!StatusUntil.CheckAuthor(ViewBag.idAuthor, ViewBag.status))
+        {
+            <th>@(ASS_35.Resources.HomeText.Option)</th>
+        }
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr style="background-color: antiquewhite;">
+                <td>
+                    <span class="item-file-pdf" data-toggle='modal' data-target='.bs-example-modal-lg' data-url="@item.linkpath" style="cursor: pointer;" onclick="PreviewPdf(this)">@item.tenfile</span>
+                </td>
+                
+                    @if (!StatusUntil.CheckAuthor(ViewBag.idAuthor, ViewBag.status))
+                    {<td>
+                         <a class="hint--top delete-row-btn" aria-label="@(ASS_35.Resources.HomeText.Delete)" data-id="@item.id">
+                             <i class="ti-close"></i>
+                         </a>
+                     </td>
+                    }
+                
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myLargeModalLabel"></h4>
+            </div>
+            <div class="modal-body" style="min-height: 500px">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">@(ASS_35.Resources.HomeText.Close)</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function() {
+        $("#manager-account").DataTable({
+            "bSort": false,
+            "searching": false,
+            "bLengthChange": false,
+            "bPaginate": false,
+            "bInfo": false
+        });
+        BindButtonDeleteClick();
+        BindButtonEditClick();
+    });
+
+    function PreviewPdf(self) {
+        var url = $(self).attr('data-url');
+            $('.modal-body').empty();
+            $('.modal-body').append("<embed src='/Media/ReadFilePDF?url=" +
+                url +
+                "' style='min-height: 500px; width: 100%;' />");
+    }
+
+    function BindButtonDeleteClick() {
+        $(".delete-row-btn").click(function() {
+            var self = this;
+            var id = $(self).attr("data-id");
+            QTW_RUN_MESS.alter_Message_Question_Callbaclk("@Html.Raw(ASS_35.Resources.HomeText.Confirm_del_file) ",
+                function() {
+                    var formData = new FormData();
+                    formData.append("id", id);
+                    QTW_JQUERY.RUN_AJAX("ajaxPOST",
+                        "/NotificationManager/DeleteNotificationFile",
+                        formData,
+                        DeleteResult);
+                });
+        });
+    }
+
+    function DeleteResult(data) {
+        if (data.result.IsSuccess === false) {
+            QTW_RUN_MESS.alter_Message_Error(data.result.Message);
+        } else {
+            QTW_RUN_MESS.alter_Message_Success(data.result.Message);
+            LoadPartialView('/NotificationManager/ListFileByNotifiId/' + @ViewBag.id + '?status=' + @ViewBag.status + '&idAuthor=' + @ViewBag.idAuthor, "#table-container");
+        }
+    }
+
+    function BindButtonEditClick() {
+        $(".edit-row-btn").click(function() {
+            var id = $(this).attr("data-id");
+            LoadPage('/NotificationManager/EditStatusFile?id=' + id);
+        });
+    }
+</script>

@@ -1,0 +1,138 @@
+﻿@using DataContext
+@using DataContext.Until
+@{
+    var model = (List<ManagerAccount_Result>)Model;
+}
+<table id="manager-account" class="table toggle-circle table-hover">
+    <thead>
+    <tr>
+        <th style="width: 35px;"></th>
+        <th>@(ASS_35.Resources.HomeText.Email)</th>
+        <th>@(ASS_35.Resources.HomeText.Name_of_organization_reporter)</th>
+        <th style="display: none;">@(ASS_35.Resources.HomeText.Authorities)</th>
+        <th>@(ASS_35.Resources.HomeText.Account_type)</th>
+        <th>@(ASS_35.Resources.HomeText.Date_created)</th>
+        <th>@(ASS_35.Resources.HomeText.Status)</th>
+        <th>@(ASS_35.Resources.HomeText.Option)</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in model)
+        {
+            <tr @Html.Raw(item.personpending != null ? "style='background-color:#4bbfe2;'" : "")>
+                <td class="details-control"></td>
+                <td>@item.email</td>
+                <th>@(AccountUntil.GetNamePersonAccount(item.idtaikhoan.Value,item.idloaitaikhoan.Value,item.idcoquan))</th>
+                <td style="display: none;" class="au-content">
+                    @Html.Action("GetAuByAccountId", "Common", new {accountId = item.idtaikhoan})
+                </td>
+                <td>
+                    @Html.Raw(item.idloaitaikhoan == 1 ? ("<a style='color : blue;'>"+ ASS_35.Resources.HomeText.Personal+"</a>") : ("<a style='color : coral;'>" + ASS_35.Resources.HomeText.Group + "</a>"))
+                </td>
+                <td>@item.ngaytao.Value.ToString("dd-MM-yyyy")</td>
+                <td>
+                    @Html.Action("AccountStatus", "Common", new {id = item.trangthai})
+                </td>
+                <td>
+                    <a class="hint--top delete-row-btn" aria-label="@(ASS_35.Resources.HomeText.Delete)" data-id="@item.idtaikhoan"><i class="ti-close"></i></a>
+                    <a class="hint--top edit-row-btn" aria-label="@(ASS_35.Resources.HomeText.Edit)" data-id="@item.idtaikhoan"><i class="ti-pencil"></i></a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+@Html.Action("PageList", "Common", new { pageSelected = ViewBag.pageSelected, totalPage = ViewBag.totalPage })
+<script>
+    $(function () {
+        BindButtonEditClick();
+        BindButtonProductPageListClick();
+        BindButtonDeleteClick();
+        BuildTableDetail();
+    });
+
+    function BuildTableDetail() {
+        var selector = $('#manager-account');
+        var table = selector.DataTable({
+            "bLengthChange": false,
+            "bPaginate": false,
+            "bInfo": false,
+            "searching": false,
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "orderable": false
+                },
+                {
+                    "targets": 7,
+                    "orderable": false
+                }
+            ]
+        });
+        $('#manager-account tbody').on('click', 'td.details-control', function () {
+            var self = this;
+            var tr = $(this).closest('tr');
+            var row = table.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child(format(self)).show();
+                tr.addClass('shown');
+            }
+        } );
+    }
+    function format ( self ) {
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+            '<td style="vertical-align: middle;">@(ASS_35.Resources.HomeText.Authorities):</td>'+
+            '<td>' + $(self).parent().find(".au-content").html() +'</td>'+
+            '</tr>' +
+            '</table>';
+    }
+    function BindButtonEditClick(parameters) {
+        $(".edit-row-btn").click(function() {
+            var id = $(this).attr("data-id");
+            LoadPage('/ManagerAccount/EditDelegateManager?id='+id);
+        });
+    }
+
+    function BindButtonProductPageListClick() {
+        $("#btn_previous").click(function() {
+            if (1 < @ViewBag.pageSelected) {
+                LoadManagerAccount("@(ViewBag.pageSelected - 1)");
+        }
+        });
+    $("#btn_next").click(function() {
+        if (@ViewBag.pageSelected < @ViewBag.totalPage) {
+            LoadManagerAccount("@(ViewBag.pageSelected + 1)");
+            }
+        });
+        $(".page-item").click(function() {
+            LoadManagerAccount($(this).attr("page-values"));
+        });
+    }
+
+    function BindButtonDeleteClick() {
+        $(".delete-row-btn").click(function() {
+            var self = this;
+            id = $(self).attr("data-id");
+            QTW_RUN_MESS.alter_Message_Question_Callbaclk(" @Html.Raw(ASS_35.Resources.HomeText.ConfirmDeleteAccount) ", function () {
+                var formData = new FormData();
+                formData.append("id", id);
+                QTW_JQUERY.RUN_AJAX("ajaxPOST", "/ManagerAccount/DeleteAccount", formData, DeleteResult);
+            });
+        });
+    }
+    function DeleteResult(data) {
+        if (data.result.IsSuccess === false) {
+            QTW_RUN_MESS.alter_Message_Error(data.result.Message);
+        } else {
+            QTW_RUN_MESS.alter_Message_Success(data.result.Message);
+            LoadManagerAccount();
+        }
+    }
+</script>

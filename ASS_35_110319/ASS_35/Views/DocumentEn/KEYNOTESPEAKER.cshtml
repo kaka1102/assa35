@@ -1,0 +1,120 @@
+﻿@using DataContext.DAL;
+@using DataContext.Until;
+
+@{
+    var model = (List<DataContext.m_speaker>)Model;
+}
+
+<div class="otherdocuments">
+    PORTFOLIO
+    <img src="images/document-agemda-muiten.png" alt="">
+</div>
+
+<div class="">
+
+    <div class="name-portfilio">
+        <div class="col-md-8 col-md-offset-2 tab-document">
+            <div class="col-md-6 tab-document-portfilio">
+                <a href="/DocumentEn/ChangeTypePortfolio?type=KEYNOTESPEAKER" class="@Html.Raw(DisplayUntils.GetPortfolioTab() == "KEYNOTESPEAKER" ? "p-active" : "")">
+                    KEYNOTE SPEAKER
+                </a>
+            </div>
+            <div class="col-md-6 tab-document-portfilio">
+                <a href="/DocumentEn/ChangeTypePortfolio?type=GUESTSPEAKER" class="@Html.Raw(DisplayUntils.GetPortfolioTab() == "GUESTSPEAKER" ? "p-active" : "")">
+                    GUEST SPEAKER
+                </a>
+            </div>
+
+            <div class="col-md-4 tab-document-portfilio"  style="display: none">
+                <a href="/DocumentEn/ChangeTypePortfolio?type=PANELIST" class="@Html.Raw(DisplayUntils.GetPortfolioTab() == "PANELIST" ? "p-active" : "")">
+                    PANELIST
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-portfilio">
+        @if (model.Count > 0)
+        {
+            <div id="myCarousel" class="carousel myCarousel3" data-ride="carousel">
+                <ol class="carousel-indicators slide-document">
+                    @for (int i = 0; i < model.Count; i++)
+                    {
+                        <li data-target="#myCarousel" data-slide-to="@Html.Raw(i)" class="@Html.Raw(i==0?"active":"")">
+                            <img src="@Html.Raw(model[i].avatar)" class="port-thumb">
+                        </li>
+                    }
+                </ol>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner carousel-innerport portgroup1">
+                    @for (int i = 0; i < model.Count; i++)
+                    {
+                        <div class="item @Html.Raw(i==0?"active":"")">
+                            <div class="wrapper">
+                                <div class="row">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="panel-body panel-portfolio">
+
+                                            <h2 class="text-center text-bold">@Html.Raw(model[i].hoten)</h2>
+                                            <p class="text-center text-bold">@Html.Raw(model[i].chucvu)</p>
+                                            <br>
+                                            <p style="display:none">
+                                                <span class="text-bold">Abstract :</span>
+                                                @if (!string.IsNullOrEmpty(model[i].file_abstract))
+        {
+                                        <a href="@Html.Raw(model[i].file_abstract)" style="color : #fff;">
+                                            <img src="images/dowload.png"><strong style="color:black"> View </strong>
+                                        </a>
+}
+else
+{
+                                        <a href="javascript:#" style="color : #fff;">
+                                            <strong style="color:black"> No data </strong>
+                                        </a>
+}
+
+                                            </p>
+                                            <p style="display:none">
+                                                <span class="text-bold">Presentation :</span>
+                                                @if (!string.IsNullOrEmpty(model[i].presentation))
+        {
+                                        <a href="@Html.Raw(model[i].presentation)" style="color : #fff;">
+                                            <img src="images/dowload.png">
+                                            <strong style="color:black"> View </strong>
+                                        </a>
+}
+else
+{
+                                        <a href="@Html.Raw(model[i].presentation)" style="color : #fff;">
+                                            <strong style="color:black"> No data </strong>
+                                        </a>
+}
+
+                                            </p>
+                                            @Html.Raw(model[i].noidung)
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        }
+        else
+        {
+            <h3>Update later</h3>
+        }
+    </div>
+</div>

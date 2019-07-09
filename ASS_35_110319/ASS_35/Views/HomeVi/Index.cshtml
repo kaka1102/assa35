@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/LayoutVi.cshtml";
+}
+@section cssheader {
+    <style>
+        .carousel-control {
+            opacity: .5;
+        }
+
+            .carousel-control:focus, .carousel-control:hover {
+                opacity: 1;
+            }
+    </style>
+    }
+<div id="myCarousel" class="carousel slide " data-ride="carousel" data-interval="15000">
+    @Html.Action("SliderImageTop", "HomeVi")
+</div>
+
+<div class="sec-cont-bottom">
+    <!-- tin tức - sự kiện -->
+
+    <div class="inf-sukien ">
+        <div class="col-md-8 tt-c tc-bs" >
+            @Html.Action("ContentPost", "HomeVi")
+        </div>
+        <div class="sb-right col-md-4 tt-c">
+            @Html.Action("ContentVideo", "HomeVi")
+        </div>
+    </div>
+    <!-- video -->
+    <div class="tc-video">
+        @Html.Action("SliderVideo", "HomeVi")
+
+    </div>
+    <!-- hình ảnh -->
+    <div class="ds-h">
+        @Html.Action("SliderImage", "HomeVi")
+    </div>
+</div>
+
+

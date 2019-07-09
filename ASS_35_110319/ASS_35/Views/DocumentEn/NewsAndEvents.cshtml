@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "NewsAndEvents";
+    Layout = "~/Views/Shared/LayoutEn.cshtml";
+}
+
+@using DataContext.DAL;
+@using DataContext.Until;
+
+@{
+    var model = (ReturnPost)Model;
+}
+
+
+<style>
+    .sec-below {
+        padding: 0px;
+    }
+
+    .rebortotherdocuments {
+        padding-bottom: 200px;
+        line-height: 2;
+    }
+
+    .news-noidung {
+        padding-bottom: 200px;
+    }
+</style>
+<div class="document-agemda">
+    <div class="container document-nodung">
+        <div class="otherdocuments">
+            NEWS AND EVENTS
+                  </div>
+        <div class="news-noidung">
+
+            @if (model != null)
+            {
+                if (model.lstPost.Count > 0)
+                {
+                    foreach (var item in model.lstPost)
+                    {
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-12">
+                                <a href="@Html.Raw("detail-new/" + ConvertTextToLink.ConvertUrlsToLinks(item.tieude) + "-" + item.id)"><img style="width:100%" src="@Html.Raw(item.avatar)" alt=""></a>
+                            </div>
+                            <div class="col-sm-10 col-xs-12">
+                                <a style="font-size: 20px; font-weight:bold" href="@Html.Raw("detail-new/" + ConvertTextToLink.ConvertUrlsToLinks(item.tieude) + "-" + item.id)">@Html.Raw(item.tieude)</a>
+                                <p> <img src="/images/dongho.png" alt=""><span class="time-create"> @Html.Raw(item.thoigianpheduyet)</span></p>
+                            </div>
+                        </div>
+                    }
+                    <div class="row phantrang">
+                        @Html.Raw(model.dataPage)
+                    </div>
+                }
+                else
+                {
+                    <h3>Update later</h3>
+                }
+            }
+            else
+            {
+                <h3>Update later</h3>
+            }
+            
+        </div>
+    </div>
+
+    <section class="sec-below">
+        <div class="sec-above-bg">
+            <div class="sec-above-bg-color">
+                <span class="title-footer">Copyright 2018 Social Security Office. All right reserved</span>
+            </div>
+        </div>
+    </section>
+</div>

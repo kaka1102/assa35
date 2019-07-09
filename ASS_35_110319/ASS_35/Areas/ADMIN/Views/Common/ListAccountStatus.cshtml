@@ -1,0 +1,20 @@
+﻿@using DataContext
+@using DataContext.Constants
+@using DataContext.Until
+@{
+    var model = (List<m_trangthai>) Model;
+}
+@*<div class="col-sm-6">*@
+<div class="col-sm-4">
+    <select class="custom-select col-6" id="@ViewBag.name" @(ViewBag.isDisable == true ? "disabled" : "")>
+        @if (ViewBag.hasAll == true)
+        {
+            <option value="-1">@(ASS_35.Resources.HomeText.All)</option>
+        }
+        <option value="@SystemMessageConst.StatusConst.Active" @(ViewBag.idSelected == SystemMessageConst.StatusConst.Active ? "selected='selected'" : "")>@(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.AccountStatusConst.Active, SystemMessageConst.AccountStatusConst.ActiveEn))</option>
+        <option value="@SystemMessageConst.StatusConst.Pending" @(ViewBag.idSelected == SystemMessageConst.StatusConst.Pending ? "selected='selected'" : "")>@(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.AccountStatusConst.Pending, SystemMessageConst.AccountStatusConst.PendingEn))</option>
+        <option value="@SystemMessageConst.StatusConst.Deactive" @(ViewBag.idSelected == SystemMessageConst.StatusConst.Deactive ? "selected='selected'" : "")>@(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.AccountStatusConst.Deactive, SystemMessageConst.AccountStatusConst.DeactiveEn))</option>
+    </select>
+</div>
+@*</div>*@
+

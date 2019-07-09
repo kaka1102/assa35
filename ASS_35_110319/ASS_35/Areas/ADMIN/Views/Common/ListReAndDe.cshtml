@@ -1,0 +1,69 @@
+﻿@using DataContext
+@using DataContext.Constants
+@using DataContext.DAL
+@using DataContext.Until
+@{
+    var lstRe = (List<AccountInfo>)ViewBag.listRe;
+    var lstDe = (List<AccountInfo>)ViewBag.listDe;
+}
+<div class="col-md-6" style="border-right: 1px solid">
+    <table id="manager-account-re" class="table toggle-circle table-hover">
+        <thead>
+        <tr>
+          @*  <th>Phóng viên</th>*@
+            <th>@(ASS_35.Resources.HomeText.Reporter)</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in lstRe)
+        {
+            <tr>
+                <td>@item.email - @item.fullname</td>
+                <td>
+                    <input type="checkbox" @(StatusUntil.CheckNotifiPerson(ViewBag.lstPerson,item.id) ? "checked" : "") @(ViewBag.isDisable == true ? "disabled" : "") name="cbx-status" value="@item.id" class="person-item"/>
+                </td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+</div>
+<div class="col-md-6">
+    <table id="manager-account-de" class="table toggle-circle table-hover">
+        <thead>
+            <tr>
+               @* <th>Đại biểu</th>*@
+                <th>@(ASS_35.Resources.HomeText.Delegate)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in lstDe)
+            {
+                <tr>
+                    <td>@item.email - @item.fullname</td>
+                    <td>
+                        <input @(StatusUntil.CheckNotifiPerson(ViewBag.lstPerson,item.id) ? "checked" : "") @(ViewBag.isDisable == true ? "disabled" : "") type="checkbox" name="cbx-status" value="@item.id" class="person-item"/>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(function () {
+        $("#manager-account-re").DataTable({
+            "bLengthChange": false,
+            "bInfo": false,
+            "searching": false
+        });
+        $("#manager-account-de").DataTable({
+            "bLengthChange": false,
+            "bInfo": false,
+            "searching": false
+        });
+    });
+</script>

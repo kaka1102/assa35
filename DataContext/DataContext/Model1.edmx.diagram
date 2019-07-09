@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cde06ebfac1d47c8beca56d9356e0411" Name="Diagram1">
+        <EntityTypeShape EntityType="ASS_35Model.m_activity" Width="1.5" PointX="16" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_activity_detail" Width="1.5" PointX="18.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_activity_type" Width="1.5" PointX="13.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_baiviet" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_baivietgioithieu" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_chitietguimedia" Width="1.5" PointX="11.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_chitietsukienhop" Width="1.5" PointX="16" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_chitietthongbao" Width="1.5" PointX="11.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_chucnangtaikhoan" Width="1.5" PointX="11" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_cuochop" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_danhmuc" Width="1.5" PointX="8.75" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_diadiemtochuc" Width="1.5" PointX="3" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_dvtruyenthong" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_filethongbao" Width="1.5" PointX="11.25" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_hotel" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_lienhe" Width="1.5" PointX="18.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_loaitaikhoan" Width="1.5" PointX="3.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_media" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_mediadetails" Width="1.5" PointX="10.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_menuclient" Width="1.5" PointX="15.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_quocgia" Width="1.5" PointX="1.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_quyen" Width="1.5" PointX="3.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_quyentaikhoan" Width="1.5" PointX="6" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_regisActivity" Width="1.5" PointX="16" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_registration_info" Width="1.5" PointX="13.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_room_option1" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_room_option2" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_room_order" Width="1.5" PointX="18.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_room_show" Width="1.5" PointX="13.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_room_show_option1" Width="1.5" PointX="16" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_room_show_option2" Width="1.5" PointX="17.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_room_type" Width="1.5" PointX="18.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_slidetrangchu" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_speaker" Width="1.5" PointX="19.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_sukienhop" Width="1.5" PointX="13.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_taikhoan" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_thongbao" Width="1.5" PointX="9" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_thongtincanhan" Width="1.5" PointX="8.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_thongtincoquan" Width="1.5" PointX="3.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.m_trangthai" Width="1.5" PointX="0.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASS_35Model.meal_preference" Width="1.5" PointX="20.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="ASS_35Model.FK_m_activity_detail_m_activity" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_activity_m_activity_type" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_chitietguimedia_m_thongbao" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_chitietcuochopsukien_m_sukienhop" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_chitietthongbao_m_taikhoan" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_chitietthongbao_m_thongbao" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_chucnangtaikhoan_m_danhmuc" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_chucnangtaikhoan_m_quyen" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_cuochop_m_taikhoan" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_cuochop_m_trangthai" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_diadiemtochuc_m_trangthai" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_filethongbao_m_thongbao" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_taikhoan_m_loaitaikhoan" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_media_m_taikhoan" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_mediadetails_m_media" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_thongtincoquan_m_quocgia" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_quyentaikhoan_m_quyen" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_quyentaikhoan_m_taikhoan" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_quyentaikhoan_m_trangthai" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_regisActivity_m_registration_info" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_room_show_option1_m_room_show" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_taikhoan_m_thongtincoquan" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_taikhoan_m_trangthai" ManuallyRouted="false" />
+        <AssociationConnector Association="ASS_35Model.FK_m_thongtincanhan_m_taikhoan" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

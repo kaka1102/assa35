@@ -1,0 +1,614 @@
+﻿@using DataContext.Constants
+@using DataContext.Until
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.png">
+    <title>Register account</title>
+    <link href="/Content/eliteadmin-colors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/plugins/bower_components/bootstrap-extension/css/bootstrap-extension.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/eliteadmin-colors/css/animate.css" rel="stylesheet" />
+    <link href="/Content/plugins/bower_components/register-steps/steps.css" rel="stylesheet" />
+    <link href="/Content/eliteadmin-colors/css/style.css" rel="stylesheet" />
+    <link href="/Content/eliteadmin-colors/css/colors/default.css" rel="stylesheet" />
+    <link href="~/Content/plugins/bower_components/sweetalter/sweetalert.css" rel="stylesheet" />
+    <link href="~/Content/plugins/bower_components/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" />
+    <style>
+        .has-error .form-control {
+            border-color: #ed4040 !important;
+        }
+
+        #eliteregister li {
+            color: white;
+            font-weight: bold;
+        }
+
+        .box-title .collapsed i {
+            transform: rotate(180deg);
+        }
+
+        .white-box {
+            padding: 0px;
+            width: 100%;
+            float: left;
+        }
+
+        .navbar-top-links > li > a {
+            padding: 0 5px !important;
+            line-height: 30px !important;
+            min-height: 18px !important;
+        }
+
+        #msform .action-button {
+            background: #2f7dc1 !important;
+        }
+    </style>
+    <script src="/Content/plugins/bower_components/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="cssload-speeding-wheel"></div>
+    </div>
+    @*background-image: url('/Content/IMG/Background/bg-cyan.jpg')*@
+    <section id="wrapper" class="step-register" style="background-color:#f5f5f5;     border: 1px solid #cac9c9;
+    box-shadow: -1px 0px 12px 1px #dad4d4;">
+        <div class="register-box">
+            <div class="">
+                <!-- multistep form -->
+                <form id="msform">
+                    <fieldset>
+                        <div class="white-box ">
+                            <div style="width:100%;float:left">
+                                <a href="/">
+                                    <img class="img-responsive" style="width: 20%;    margin-left: 40%;" src="~/images/assa-logo.png" />
+                                </a>
+                            </div>
+                        </div>
+                        @*csss-frm" style="padding-top: 100px;*@
+                        <div class="white-box">
+
+                            <ul class="nav navbar-top-links navbar-right pull-right" style="padding-right: 10px;">
+
+                                <li class="dropdown">
+                                    <a class="=dropdown-toggle waves-effect waves-light" title="English" id="English" data-toggle="" href="javascript:0"><img style="border: 1px solid black;" src="~/Content/IMG/Icon/icon-flag-en.png"></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="=dropdown-toggle waves-effect waves-light" title="Việt Nam" id="VietNam" data-toggle="" href="javascript:0"><img style="border: 1px solid transparent;" src="~/Content/IMG/Icon/icon-flag-vn.png"></a>
+                                </li>
+                            </ul>
+                            @*<div>
+                                    <img class="img-responsive img-logo" src="~/images/assa-logo.png" />
+                                </div>*@
+                        </div>
+                        <div class="white-box">
+                            <div class="panel">
+                                <h4 class="box-title text-left">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                        @(ASS_35.Resources.HomeText.General_Information)<i class="ti-angle-down pull-right"></i>
+                                    </a>
+                                </h4>
+                                <div id="collapseOne" class="panel-collapse collapse show">
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Authorities) <span style="color: red;">*</span></label>
+                                        <select class="form-control" id="cbx-au">
+                                            <option value="@SystemMessageConst.RoleConst.Phongvien">@(ASS_35.Resources.HomeText.Reporter) </option>
+                                            <option value="@SystemMessageConst.RoleConst.Daibieu">@(ASS_35.Resources.HomeText.Delegate) </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Type_of_Account) <span style="color: red;">*</span></label>
+                                        <select class="form-control" id="cbx-type">
+                                            <option value="1">@(ASS_35.Resources.HomeText.Personal)</option>
+                                            <option value="2">@(ASS_35.Resources.HomeText.Group)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Country) <span style="color: red;">*</span></label>
+                                        @Html.Action("ListCountry", "Common", new { name = "cbx-country" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel">
+                                <h4 class="box-title text-left">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                        @(ASS_35.Resources.HomeText.Company_Detail)<i class="ti-angle-down pull-right"></i>
+                                    </a>
+                                </h4>
+                                <div id="collapseTwo" class="panel-collapse collapse">
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Company_Name) <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" id="txt-company-name" placeholder="@(ASS_35.Resources.HomeText.Company_Name)">
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Company_Address) <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" id="txt-company-address" placeholder="@(ASS_35.Resources.HomeText.Company_Address)">
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Fax)</label>
+                                        <input type="text" class="form-control" id="txt-company-fax" placeholder="Fax">
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Company_Email) <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" id="txt-company-email" placeholder="Example@domain.com">
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Documentary) <span style="opacity: 0.7;">( png, jpg, jpeg )</span><span style="color: red;">*</span></label>
+                                        <input type="file" name="file" id="file-doc" />
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Company_Phone) <span style="color: red;">*</span></label>
+                                        <input id="txt-company-phone" type="text" class="form-control" name="phone" placeholder="@(ASS_35.Resources.HomeText.Company_Phone)" />
+                                    </div>
+                                    <div id="report-status" class="form-group">
+                                        <div class="checkbox checkbox-success">
+                                            <input type="checkbox" name="cbx-status" value="1" />
+                                            <label class="control-label">@(ASS_35.Resources.HomeText.Reporting_Status)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel" id="person-container">
+                                <h4 class="box-title text-left">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                        @(ASS_35.Resources.HomeText.Person_Detail)<i class="ti-angle-down pull-right"></i>
+                                    </a>
+                                </h4>
+                                <div id="collapseThree" class="panel-collapse collapse">
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Full_Name) <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" id="txt-person-name" placeholder="@(ASS_35.Resources.HomeText.Full_Name)">
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Gender) <span style="color: red;">*</span></label>
+                                        <select class="form-control" id="cbx-person-gender">
+                                            <option value="true">@(ASS_35.Resources.HomeText.Male) </option>
+                                            <option value="false">@(ASS_35.Resources.HomeText.Female) </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Date_of_Birth)  <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" id="txt-person-birth" placeholder="dd/mm/yyyy">
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Email)  <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" id="txt-person-email" placeholder="Example@domain.com">
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Address) <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" id="txt-person-address" placeholder="@(ASS_35.Resources.HomeText.Address)">
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Phone) <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" id="txt-person-phone" placeholder="@(ASS_35.Resources.HomeText.Phone) " />
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Position)  <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" id="txt-person-position" placeholder="@(ASS_35.Resources.HomeText.Position) " />
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.ID_Card_Passport) <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" id="txt-id-card" placeholder="@(ASS_35.Resources.HomeText.ID_Card_Passport)" />
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Date_Range) <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" placeholder="dd/mm/yyyy" id="txt-date-range" />
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Expiration_Date)</label>
+                                        <input type="text" class="form-control" placeholder="dd/mm/yyyy" id="txt-date-exp" />
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Place_of_issue) <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" placeholder="@(ASS_35.Resources.HomeText.Place_of_issue)" id="txt-card-location" />
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Photo_of_ID_Card_Passport_Backside) <span style="opacity: 0.7;">( png, jpg, jpeg )</span><span style="color: red;">*</span></label>
+                                        <input type="file" name="file" id="txt-img-passport-back" />
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Photo_of_ID_Card_Passport_Front)  <span style="opacity: 0.7;">( png, jpg, jpeg )</span><span style="color: red;">*</span></label>
+                                        <input type="file" name="file" id="txt-img-passport-front" />
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Number_of_employee_Cards)  <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" placeholder="@(ASS_35.Resources.HomeText.Number_of_employee_Cards) " id="txt-number-press" />
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Photo_employee_Card)  <span style="opacity: 0.7;">( png, jpg, jpeg )</span><span style="color: red;">*</span></label>
+                                        <input type="file" name="file" id="txt-img-employee" />
+                                    </div>
+                                    <div class="form-group" style="display: inline-block; width: 49%;">
+                                        <div class="checkbox checkbox-success">
+                                            <input type="checkbox" name="cbx-room" value="1" />
+                                            <label class="control-label">@(ASS_35.Resources.HomeText.Room_Registration)</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="display: inline-block; width: 50%;">
+                                        <div class="checkbox checkbox-success">
+                                            <input type="checkbox" name="cbx-park" value="1" />
+                                            <label class="control-label">@(ASS_35.Resources.HomeText.Parking_Registration)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel">
+                                <h4 class="box-title text-left">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                        @(ASS_35.Resources.HomeText.CONFIRMATION)<i class="ti-angle-down pull-right"></i>
+                                    </a>
+                                </h4>
+                                <div id="collapseFour" class="panel-collapse collapse">
+                                    <div class="form-group text-left">
+                                        <label class="control-label">@(ASS_35.Resources.HomeText.Receive_this_email_notification) <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" id="txt-account-email" placeholder="Example@domain.com">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input id="btnsubmit" type="button" style="text-transform:uppercase" name="submit" class="action-button" value="@(ASS_35.Resources.HomeText.Submit)" />
+                    </fieldset>
+                </form>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </section>
+    <script src="~/Content/plugins/bower_components/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script src="/Content/eliteadmin-colors/bootstrap/dist/js/tether.min.js"></script>
+    <script src="/Content/eliteadmin-colors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/Content/plugins/bower_components/bootstrap-extension/js/bootstrap-extension.min.js"></script>
+    <script src="/Content/plugins/bower_components/sidebar-nav/sidebar-nav.min.js"></script>
+    <script src="/Content/plugins/bower_components/register-steps/jquery.easing.min.js"></script>
+    <script src="/Content/plugins/bower_components/register-steps/register-init.js"></script>
+
+    <script src="/Content/eliteadmin-colors/js/jquery.slimscroll.js"></script>
+    <script src="/Content/eliteadmin-colors/js/waves.js"></script>
+    <script src="/Content/eliteadmin-colors/js/custom.min.js"></script>
+    <script src="/Content/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+    <script src="/Content/ScriptPuplic/LibAss.js"></script>
+    <script src="~/Content/plugins/bower_components/sweetalter/sweetalert.min.js"></script>
+    <script src="~/Content/plugins/bower_components/sweetalter/jquery.sweet-alert.custom.js"></script>
+    <script src="~/Content/ScriptPuplic/Language.js"></script>
+    <script>
+        $(function () {
+            $("#txt-person-birth").datepicker({
+                changeYear: true,
+                yearRange: "1918:2017",
+                dateFormat: "dd-mm-yy",
+                altFormat: "dd-mm-yy"
+            });
+            $("#txt-date-range").datepicker({
+                changeYear: true,
+                yearRange: "1918:2017",
+                dateFormat: "dd-mm-yy",
+                altFormat: "dd-mm-yy"
+            });
+            $("#txt-date-exp").datepicker({
+                changeYear: true,
+                yearRange: "1918:2017",
+                dateFormat: "dd-mm-yy",
+                altFormat: "dd-mm-yy"
+            });
+            BindButtonSubmitClick();
+            BindComboboxTypeChange();
+            BindButtonComboboxAuthorChange();
+
+            ChangeLanguage();
+            var Cookie = getCookie('Language');
+            if (Cookie == 'en') {
+                $.ajax({
+                    type: "POST",
+                    url: "/Language/Change?LanguageAbbrevation=en",
+                    contentType: false,
+                    processData: false,
+                    success: function (kq) {
+                    }
+                });
+                $('#English').css('background', 'rgba(0,0,0,.1)');
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/Language/Change?LanguageAbbrevation=vi",
+                    contentType: false,
+                    processData: false,
+                    success: function (kq) {
+
+                    }
+                });
+                $('#VietNam').css('background', 'rgba(0,0,0,.1)');
+
+            }
+        });
+
+        function BindComboboxTypeChange() {
+            $("#cbx-type").change(function () {
+                if ($(this).val() === "2") {
+                    $("#person-container").css("display", "none");
+                } else {
+                    $("#person-container").css("display", "block");
+                }
+            });
+        }
+
+        function RegisterResult(data) {
+            if (data.result.IsSuccess === false) {
+                QTW_RUN_MESS.alter_Message_Error(data.result.Message);
+            } else {
+                QTW_RUN_MESS.alter_Message_Success(data.result.Message);
+            }
+        }
+
+        function BindButtonComboboxAuthorChange(parameters) {
+            $("#cbx-au").change(function () {
+                if ($(this).val() === "@SystemMessageConst.RoleConst.Phongvien") {
+                    $("#report-status").css("display", "block");
+                } else {
+                    $("#report-status").css("display", "none");
+                }
+            });
+        }
+        function BindButtonSubmitClick() {
+            $("#btnsubmit").click(function () {
+                var accEmail = $("#txt-account-email").val();
+                var accType = $("#cbx-type").val();
+                var accAu = $("#cbx-au").val();
+                var companyName = $("#txt-company-name").val();
+                var companyAddress = $("#txt-company-address").val();
+                var companyFax = $("#txt-company-fax").val();
+                var companyEmail = $("#txt-company-email").val();
+                var companyPhone = $("#txt-company-phone").val();
+                var companyCountry = $("#cbx-country").val();
+                var companyFile = $("#file-doc")[0].files[0];
+                var companyStatus = $("input[type='checkbox'][name='cbx-status']:checked").val();
+                var personName = $("#txt-person-name").val();
+                var personGender = $("#cbx-person-gender").val();
+                var personBirth = $("#txt-person-birth").val();
+                var personEmail = $("#txt-person-email").val();
+                var personAddress = $("#txt-person-address").val();
+                var personPhone = $("#txt-person-phone").val();
+                var personPosition = $("#txt-person-position").val();
+                var personCardId = $("#txt-id-card").val();
+                var personDateRange = $("#txt-date-range").val();
+                var personDateExp = $("#txt-date-exp").val();
+                var personPressCarNo = $("#txt-number-press").val();
+                var personImg1 = $("#txt-img-passport-back")[0].files[0];
+                var personImg2 = $("#txt-img-passport-front")[0].files[0];
+                var personImg3 = $("#txt-img-employee")[0].files[0];
+                var personCardLocation = $("#txt-card-location").val();
+                var personPark = $("input[type='checkbox'][name='cbx-park']:checked").val();
+                var personRoom = $("input[type='checkbox'][name='cbx-room']:checked").val();
+                var infomationData = {
+                    accEmail: accEmail,
+                    accType: accType,
+                    accAu: accAu,
+                    companyName: companyName,
+                    companyAddress: companyAddress,
+                    companyFax: companyFax,
+                    companyEmail: companyEmail,
+                    companyPhone: companyPhone,
+                    companyCountry: companyCountry,
+                    companyStatus: companyStatus,
+                    personName: personName,
+                    personGender: personGender,
+                    personBirth: personBirth,
+                    personEmail: personEmail,
+                    personAddress: personAddress,
+                    personPhone: personPhone,
+                    personPosition: personPosition,
+                    personCardId: personCardId,
+                    personDateRange: personDateRange,
+                    personDateExp: personDateExp,
+                    personPressCarNo: personPressCarNo,
+                    personCardLocation: personCardLocation,
+                    personPark: personPark,
+                    personRoom: personRoom
+                };
+                var formData = new FormData();
+                formData.append("data", JSON.stringify(infomationData));
+                formData.append("file1", companyFile);
+                formData.append("file2", personImg1);
+                formData.append("file3", personImg2);
+                formData.append("file4", personImg3);
+                var check = ValidateRegisterForm(infomationData, companyFile, personImg1, personImg2);
+                if (check != null) {
+                    QTW_RUN_MESS.alter_Message_Error(check);
+                } else {
+                    QTW_JQUERY.RUN_AJAX("ajaxPOST", "/Account/_RegisterAccount", formData, RegisterResult);
+                }
+            });
+        }
+
+        function ValidateRegisterForm(infomationData, companyFile, personImg1, personImg2) {
+            var check = null;
+            //   check = CheckRequiredField(infomationData.accEmail, 5, 50, "Email Đăng ký tài khoản");
+            check = CheckRequiredField(infomationData.accEmail, 5, 200, "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.EmailRegisterAccount, SystemMessageConst.systemmessage.EmailRegisterAccountEn))");
+
+            if (check != null) {
+                return check;
+
+            }
+            //    check = CheckEmailFormat(infomationData.accEmail, "Email Đăng ký tài khoản");
+            check = CheckEmailFormat(infomationData.accEmail, "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.EmailRegisterAccount, SystemMessageConst.systemmessage.EmailRegisterAccountEn))");
+            if (check != null) {
+                return check;
+            }
+            // check = CheckRequiredField(infomationData.companyName, 1, 50, "Tên cơ quan");
+            check = CheckRequiredField(infomationData.companyName, 1, 200, "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.CompanyName, SystemMessageConst.systemmessage.CompanyNameEn))");
+
+            if (check != null) {
+                return check;
+            }
+            // check = CheckRequiredField(infomationData.companyAddress, 5, 50, "Địa chỉ cơ quan");
+            check = CheckRequiredField(infomationData.companyAddress, 5, 200, "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.CompanyAddress, SystemMessageConst.systemmessage.CompanyAddressEn))");
+            if (check != null) {
+                return check;
+            }
+
+            if (infomationData.companyFax !== "" && infomationData.companyFax !== null) {
+
+                // check = CheckFax(infomationData.companyFax, "Fax cơ quan");
+                check = CheckFax(infomationData.companyFax, "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.CompanyFax, SystemMessageConst.systemmessage.CompanyFaxEn))");
+                if (check != null) {
+                    return check;
+                }
+            }
+            // check = CheckRequiredField(infomationData.companyEmail, 5, 50, "Email công ty");
+            check = CheckRequiredField(infomationData.companyEmail, 5, 200, "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.CompanyEmail, SystemMessageConst.systemmessage.CompanyEmailEn))");
+            if (check != null) {
+                return check;
+            }
+            //    check = CheckEmailFormat(infomationData.companyEmail, "Email công ty");
+            check = CheckEmailFormat(infomationData.companyEmail, "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.CompanyEmail, SystemMessageConst.systemmessage.CompanyEmailEn))");
+            if (check != null) {
+                return check;
+            }
+            //   check = CheckPhone(infomationData.companyPhone, "Số điện thoại công ty");
+            check = CheckPhone(infomationData.companyPhone, "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.CompanyPhone, SystemMessageConst.systemmessage.CompanyPhoneEn))");
+            if (check != null) {
+                return check;
+            }
+            if (companyFile == null) {
+                //  return "File công văn không được để trống";
+                return "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.FileDocumentary, SystemMessageConst.systemmessage.FileDocumentaryEn))";
+            }
+            if (infomationData.accType === "1") {
+                //   check = CheckRequiredField(infomationData.personName, 2, 25, "Tên cá nhân");
+                check = CheckRequiredField(infomationData.personName, 2, 200, "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.Fullname, SystemMessageConst.systemmessage.FullnameEn))");
+
+                if (check != null) {
+                    return check;
+                }
+                //  check = CheckRequiredField(infomationData.personAddress, 2, 50, "Địa chỉ cá nhân");
+                check = CheckRequiredField(infomationData.personAddress, 2, 200, "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.Address, SystemMessageConst.systemmessage.AddressEn))");
+                if (check != null) {
+                    return check;
+                }
+                //  check = CheckPhone(infomationData.personPhone, "Số điện thoại cá nhân");
+                check = CheckPhone(infomationData.personPhone, "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.Phone, SystemMessageConst.systemmessage.PhoneEn))");
+                if (check != null) {
+                    return check;
+                }
+                //    check = CheckRequiredField(infomationData.personPosition, 2, 25, "Chức vụ cá nhân");
+                check = CheckRequiredField(infomationData.personPosition, 2, 200, "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.Position, SystemMessageConst.systemmessage.PositionEn))");
+                if (check != null) {
+                    return check;
+                }
+                // check = CheckRequiredField(infomationData.personCardId, 2, 25, "Số chứng minh nhân dân , hộ chiếu");
+                check = CheckRequiredField(infomationData.personCardId, 2, 25, "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.PersonCardId, SystemMessageConst.systemmessage.PersonCardIdEn))");
+                if (check != null) {
+                    return check;
+                }
+                if (personImg1 == null) {
+                    //  return "File ảnh chứng minh / Hộ chiếu thư mặt trước không được để trống";
+                    return "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.Photo_of_ID_Card_Passport_Backside, SystemMessageConst.systemmessage.Photo_of_ID_Card_Passport_BacksideEn))";
+                }
+                if (personImg2 == null) {
+                    //  return "File ảnh chứng minh thư / Hộ chiếu mặt sau không được để trống";
+                    return "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.systemmessage.Photo_of_ID_Card_Passport_Front, SystemMessageConst.systemmessage.Photo_of_ID_Card_Passport_FrontEn))";
+                }
+            }
+
+            return check;
+        }
+
+        function CheckRequiredField(selector, min, max, name) {
+            var data = selector;
+            if (data == null) {
+                //  return name + " Không được để trống";
+                return "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.ValidateConst.CheckNotEmpty, SystemMessageConst.ValidateConst.CheckNotEmptyEn))".format(name);
+            }
+            if (data.length < min || data.length > max) {
+                //  return "Độ dài " + name + " phải nhỏ hơn " + max + " và lớn hơn " + min;
+                return "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.ValidateConst.MinMaxlengthOfText, SystemMessageConst.ValidateConst.MinMaxlengthOfTextEn))".format(name, max, min);
+
+            }
+            return null;
+        }
+
+        function CheckEmailFormat(data, name) {
+            var check = QTW_VALIDATION.common.isEmail(data);
+            if (check === false) {
+                //  return name + " Không đúng định dạng";
+                return "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.ValidateConst.DateNotCorrectFormat, SystemMessageConst.ValidateConst.DateNotCorrectFormatEn))".format(name);
+            }
+            return null;
+        }
+
+        function CheckFax(data, name) {
+            var check = QTW_VALIDATION.common.validateFAX(data);
+            if (check === false) {
+                //return name + " Không đúng định dạng";
+                return "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.ValidateConst.DateNotCorrectFormat, SystemMessageConst.ValidateConst.DateNotCorrectFormatEn))".format(name);
+            }
+            return null;
+        }
+
+        function CheckPhone(data, name) {
+            var check = QTW_VALIDATION.common.validatePhone(data);
+            if (check === false) {
+                //   return name + " Không đúng định dạng";
+                return "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.ValidateConst.DateNotCorrectFormat, SystemMessageConst.ValidateConst.DateNotCorrectFormatEn))".format(name);
+            }
+            return null;
+        }
+
+        function CheckDate(data, split, name) {
+            var check = QTW_VALIDATION.common.isValidDate(data, split);
+            if (check === false) {
+                //  return name + " Không đúng định dạng";
+                return "@Html.Raw(DisplayUntils.ReturnMessageBylanguage(SystemMessageConst.ValidateConst.DateNotCorrectFormat, SystemMessageConst.ValidateConst.DateNotCorrectFormatEn))".format(name);
+            }
+            return null;
+        }
+
+
+
+        function ChangeLanguage() {
+            $('#English').click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Language/Change?LanguageAbbrevation=en",
+                    contentType: false,
+                    processData: false,
+                    success: function (kq) {
+                        window.location.reload();
+                    }
+                });
+
+            });
+            $('#VietNam').click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Language/Change?LanguageAbbrevation=vi",
+                    contentType: false,
+                    processData: false,
+                    success: function (kq) {
+                        window.location.reload();
+
+                    }
+                });
+
+            });
+        }
+
+        function getCookie(cn) {
+            var name = cn + "=";
+            var allCookie = decodeURIComponent(document.cookie).split(';');
+            var cval = [];
+            for (var i = 0; i < allCookie.length; i++) {
+                if (allCookie[i].trim().indexOf(name) == 0) {
+                    cval = allCookie[i].trim().split("=");
+                }
+            }
+            return (cval.length > 0) ? cval[1] : "";
+        }
+    </script>
+</body>
+</html>

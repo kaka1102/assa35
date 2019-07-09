@@ -1,0 +1,69 @@
+﻿@using DataContext.ClientBusiness;
+@using DataContext.DAL;
+@using DataContext.Until;
+@{
+    var data = (ReturnData)Model;
+    var model = (List<Video>)data.lstMDA;
+}
+
+<div class="thuvien-noidung">
+    <div class="td-thuvien">
+        <div class="col-xs-6 bt-thuvien">
+            <span class="td-thuvien1">
+                XEM THÊM
+            </span>
+        </div>
+        <div class="col-xs-6 bp-thuvien">
+            <span><a href="#moidang=1&page=1">Mới đăng</a><img src="~/images/border-thuvien.png" alt=""><a href="#xemnhieu=1&page=1">Xem nhiều</a> </span>
+        </div>
+    </div>
+    <div class="thuvien-noidung-con">
+        @if (model.Count > 0)
+        {
+            int tong = model.Count / 4;
+
+            if (tong >= 1)
+            {
+                int start = 0;
+                int end = 4;
+                for (int i = 1; i <= tong; i++)
+                {
+                    <div class="row">
+
+                        @for (int j = start; j < end; j++)
+                        {
+                            <div class="col-xs-12 col-sm-6 col-md-3 content-video">
+                                <div style="position: relative">
+                                    <a href="@Html.Raw( ConvertTextToLink.ConvertUrlsToLinks(model[j].tenchude) + "-" + model[j].id)" style="position: absolute; height: 170px; width: 100%; z-index: 2;" ></a>
+                                    @Html.Raw(model[j].link)
+                                </div>
+                                <span class="td-video" style="line-height: 1.5"><a href="@Html.Raw( ConvertTextToLink.ConvertUrlsToLinks(model[j].tenchude) + "-" + model[j].id)">@Html.Raw(model[j].tenchude)</a></span>
+                            </div>
+                        }
+                    </div>
+                        start = start + 4;
+                        end = end + 4;
+                }
+            }
+            else
+            {
+                <div class="row">
+                    @for (int i = 0; i < model.Count; i++)
+                    {
+                        <div class="col-xs-12 col-sm-6 col-md-3 content-video">
+                            <div>@Html.Raw(model[i].link)</div>
+                            <span><a href="@Html.Raw(ConvertTextToLink.ConvertUrlsToLinks(model[i].tenchude) + "-" + model[i].id)">@Html.Raw(model[i].tenchude)</a></span>
+                        </div>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+                <h3>Đang cập nhật</h3>
+        }
+    </div>
+</div>
+<div class="row phantrang">
+    @Html.Raw(data.dataPage)
+</div>

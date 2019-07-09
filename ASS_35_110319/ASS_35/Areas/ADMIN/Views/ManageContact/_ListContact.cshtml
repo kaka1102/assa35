@@ -1,0 +1,15 @@
+﻿                        <label class="control-label" style="width: 100%;">
+    @(ASS_35.Resources.HomeText.Content) <span style="color: red;">*</span>
+</label>
+<textarea name="noidung" id="txt-contents" rows="10" cols="80">@(ViewBag.content)</textarea>
+<script>
+    $(function() {
+        CKEDITOR.replace('txt-contents',
+            {
+                fullPage: false,
+                imageBrowser_listUrl:
+                    "~/Content/plugins/bower_components/ckeditor/plugins/imagebrowser/browser/browser.html",
+                filebrowserVideoBrowseUrl: "/Content/plugins/bower_components/ckeditor/plugins/video/Servervideo.html"
+            });
+    })
+</script>

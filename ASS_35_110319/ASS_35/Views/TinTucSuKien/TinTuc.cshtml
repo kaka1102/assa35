@@ -1,0 +1,105 @@
+﻿@using DataContext.DAL;
+@using DataContext.Until;
+
+@{
+    var data = (ReturnPost)Model;
+    var model = (List<DetailsPost>)data.lstPost;
+}
+
+@{
+    ViewBag.Title = "TinTuc";
+    Layout = "~/Views/Shared/LayoutVi.cshtml";
+}
+<style type="text/css">
+    .container.practical {
+        padding-bottom: 40px;
+    }
+</style>
+<div class="sukien">
+    <div class="tt">
+        <span><a href="/trang-chu">Trang chủ &gt; </a></span>
+        <span><a href="/tin-tuc">Tin tức </a></span>
+    </div>
+
+    @if (model != null)
+    {
+        <div id="myCarousel" class="carousel slide " data-ride="carousel">
+            <div class="carousel-inner thuvien-bv row">
+
+                @if (model.Count > 5)
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        <div class="tintuc-bv row item @Html.Raw(i==0?"active":"")">
+                            <div class="col-xs-12 col-sm-6 tintuc-img">
+                                <a href="@Html.Raw("chi-tiet/" + ConvertTextToLink.ConvertUrlsToLinks(model[i].tieude) + "-" + model[i].id)"><img src="@Html.Raw(model[i].avatar)" alt=""></a>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 bp-tintuc-nb">
+                                <a href="@Html.Raw("chi-tiet/" + ConvertTextToLink.ConvertUrlsToLinks(model[i].tieude) + "-" + model[i].id)"><p>@Html.Raw(model[i].tieude)</p></a>
+                             
+                                <span><img src="~/images/dongho1.png" alt=""> @Html.Raw(model[i].thoigianpheduyet.Remove(2, 1).Insert(2, " tháng "))</span><br />
+                                <span>@Html.Raw(model[i].gioithieu)</span>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < model.Count; i++)
+                    {
+                        <div class="tintuc-bv row item @Html.Raw(i==0?"active":"")">
+                            <div class="col-xs-12 col-sm-6 tintuc-img">
+                                <a href="@Html.Raw("chi-tiet/" + ConvertTextToLink.ConvertUrlsToLinks(model[i].tieude) + "-" + model[i].id)"><img src="@Html.Raw(model[i].avatar)" alt=""></a>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 bp-tintuc-nb">
+                                <a href="@Html.Raw("chi-tiet/" + ConvertTextToLink.ConvertUrlsToLinks(model[i].tieude) + "-" + model[i].id)"><p>@Html.Raw(model[i].tieude)</p></a>
+                               
+                                <span><img src="~/images/dongho1.png" alt=""> @Html.Raw(model[i].thoigianpheduyet.Remove(2, 1).Insert(2, " tháng "))</span><br />
+                                <span>@Html.Raw(model[i].gioithieu)</span>
+                            </div>
+                        </div>
+                    }
+                }
+                <a class="bt-left" href="#myCarousel" data-slide="prev">
+                    <img src="~/images/tin-tin-bieutuong.png" alt="">
+                </a>
+                <a class="bt-right" href="#myCarousel" data-slide="next">
+                    <img src="~/images/tin-tin-bieutuong1.png" alt="">
+                </a>
+            </div>
+        </div>
+
+
+
+        <div class="news-noidung">
+            <div class="td-tintuc">
+                <span>
+                    Tin Tức
+                </span>
+            </div>
+
+            @foreach (var item in model)
+            {
+                <div class="row">
+                    <div class="col-sm-3 conten-tt">
+                        <a href="@Html.Raw("chi-tiet/" + ConvertTextToLink.ConvertUrlsToLinks(item.tieude) + "-" + item.id)"><img src="@Html.Raw(item.avatar)" alt=""></a>
+                        @*<img src="@Html.Raw(item.avatar)" alt="">*@
+                    </div>
+                    <div class="col-sm-9 tt-sukien">
+                        <span class="tile-tt"><a href="@Html.Raw("chi-tiet/" + ConvertTextToLink.ConvertUrlsToLinks(item.tieude) + "-" + item.id)">@Html.Raw(item.tieude)</a></span>
+                        <span class="nd-tt">@Html.Raw(item.gioithieu)</span>
+                        <span class="ft-tt"><img src="~/images/dongho.png" alt="">@Html.Raw(item.thoigianpheduyet.Remove(2, 1).Insert(2, " tháng "))</span>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row phantrang">
+            @Html.Raw(data.dataPage)
+        </div>
+    }
+    else
+    {
+        <h3>Đang cập nhật</h3>
+    }
+
+</div>

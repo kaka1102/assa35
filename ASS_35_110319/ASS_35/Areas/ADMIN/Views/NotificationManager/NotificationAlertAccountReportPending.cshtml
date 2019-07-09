@@ -1,0 +1,39 @@
+﻿@using DataContext
+@using DataContext.Constants
+@if (ViewBag.roleId == SystemMessageConst.RoleConst.Admin)
+{
+    <li class="dropdown">
+        @if (Model != null)
+        {
+            <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" id="notifi-accountpending-alert">
+                <i class="icon-cloud-upload"></i>
+                @if (Model > 0)
+                {
+                    <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                }
+            </a>
+            <ul class="dropdown-menu mailbox animated bounceInDown" id="notifi-accountpending-container" data-url="/NotificationManager/ListNotificationPerson">
+               
+            </ul>
+        }
+    </li>
+    <script>
+        $(function() {
+            BindButtonNotifiItemClick();
+            BindButtonNotifiClick();
+        });
+        function BindButtonNotifiItemClick() {
+            $("#notifi-container").click(function() {
+                var url = $(this).attr("data-url");
+                window.location.hash = url;
+                LoadPage(url);
+            });
+        }
+
+        function BindButtonNotifiClick() {
+            $("#notifi-accountpending-alert").click(function() {
+                LoadPartialView('@Url.Action("_NotificationAlertAccountReportPending")', "#notifi-accountpending-container");
+            });
+        }
+    </script>
+}

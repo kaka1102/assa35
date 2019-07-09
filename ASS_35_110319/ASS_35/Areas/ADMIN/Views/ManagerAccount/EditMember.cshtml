@@ -1,0 +1,132 @@
+﻿
+@using DataContext
+@using DataContext.Constants
+@{
+    var model = (m_thongtincanhan)Model;
+}
+<div class="white-box">
+    <div class="col-sm-6" style="float:right">
+        <h3 id="btn-cancel" class="box-title m-b-0" style="float: right; cursor: pointer;"><i class="ti-arrow-left" style="padding-right:10px"></i><a>@(ASS_35.Resources.HomeText.ButtonBack)</a></h3>
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Full_Name)</label>
+        <input type="text" class="form-control" id="txt-person-name" placeholder="@(ASS_35.Resources.HomeText.Full_Name)" value="@(model.hovaten)" readonly="readonly">
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Gender)</label>
+        <input type="text" class="form-control" id="txt-person-gender" placeholder="@(ASS_35.Resources.HomeText.Gender)" value="@(model.gioitinh.Value ? (ASS_35.Resources.HomeText.Male) : (ASS_35.Resources.HomeText.Female))" readonly="readonly">
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Date_of_Birth)</label>
+        <input type="text" class="form-control" id="txt-person-birth" placeholder="dd/mm/yyyy" value="@(model.ngaysinh.Value.ToString("dd-MM-yyyy"))" readonly="readonly">
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Email)</label>
+        <input type="text" class="form-control" id="txt-person-email" placeholder="Example@domain.com" value="@(model.email)" readonly="readonly">
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Address)</label>
+        <input type="text" class="form-control" id="txt-person-address" placeholder="@(ASS_35.Resources.HomeText.Address)" value="@(model.diachi)" readonly="readonly">
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Phone)</label>
+        <input type="text" class="form-control" id="txt-person-phone" placeholder="@(ASS_35.Resources.HomeText.Phone)" value="@(model.sodienthoai)" readonly="readonly"/>
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Position)</label>
+        <input type="text" class="form-control" id="txt-person-position" placeholder="@(ASS_35.Resources.HomeText.Position)" value="@(model.chucvu)" readonly="readonly"/>
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.ID_Card_Passport)</label>
+        <input type="text" class="form-control" id="txt-id-card" placeholder="@(ASS_35.Resources.HomeText.ID_Card_Passport)" value="@(model.cmthochieu)" readonly="readonly"/>
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Date_Range)</label>
+        <input type="text" class="form-control" placeholder="dd/mm/yyyy" id="txt-date-range" value="@(model.ngaycap.Value.ToString("dd-MM-yyyy"))" readonly="readonly"/>
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Expiration_Date)</label>
+        <input type="text" class="form-control" placeholder="dd/mm/yyyy" id="txt-date-exp" value="@(model.ngayhethan != null ? model.ngayhethan.Value.ToString("dd-MM-yyyy") : "")" readonly="readonly"/>
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Place_of_issue)</label>
+        <input type="text" class="form-control" id="txt-card-location" readonly="readonly" value="@(model.noicap)"/>
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Photo_of_ID_Card_Passport_Backside)</label>
+        <div style="width: 100%;">
+            <img class="img-fluid" src="@(model.anhcmtmattruoc)">
+        </div>
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Photo_of_ID_Card_Passport_Front)</label>
+        <div style="width: 100%;">
+            <img class="img-fluid" src="@(model.anhcmtmattruoc)">
+        </div>
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Number_of_employee_Cards)</label>
+        <input type="text" class="form-control" placeholder="@(ASS_35.Resources.HomeText.Number_of_employee_Cards)" id="txt-number-press" value="@(model.sothenhabao)" readonly="readonly"/>
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Photo_employee_Card)</label>
+        <div style="width: 100%;">
+            <img class="img-fluid" src="@(model.fileanhthe)">
+        </div>
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Parking_Registration)</label>
+        <input type="text" class="form-control" value="@(model.dangkyxe == 1 ? ASS_35.Resources.HomeText.Yes : ASS_35.Resources.HomeText.No)" readonly="readonly"/>
+    </div>
+    <div class="form-group text-left">
+        <label class="control-label">@(ASS_35.Resources.HomeText.Room_Registration)</label>
+        <input type="text" class="form-control" value="@(model.dangkyxe == 1 ? ASS_35.Resources.HomeText.Yes : ASS_35.Resources.HomeText.No)" readonly="readonly" />
+    </div>
+    @if (model.trangthai == SystemMessageConst.StatusConst.Deactive)
+    {
+        <div class="form-group text-left">
+            <label class="control-label">@(ASS_35.Resources.HomeText.Reason)</label>
+            <input type="text" class="form-control" style="color: red;" value="@(model.lydo)" readonly="readonly" />
+        </div>
+    }
+   
+    <div class="form-actions">
+       @Html.Action("MemberManagerButton","Common",new { status = model.trangthai})
+    </div>
+</div>
+<script>
+    $(function() {
+        BindButtonSaveClick();
+        BindButtonCancelClick();
+    });
+
+    function BindButtonCancelClick() {
+        $("#btn-cancel").click(function() {
+            LoadPage('@Url.Action("EditDelegateManager", "ManagerAccount",new {id = model.idtaikhoan})');
+        });
+    }
+
+    function AddResult(data) {
+        if (data.result.IsSuccess === false) {
+            QTW_RUN_MESS.alter_Message_Error(data.result.Message);
+        } else {
+            QTW_RUN_MESS.alter_Message_Success(data.result.Message);
+        }
+    }
+
+    function BindButtonSaveClick() {
+        $(".btn-save").click(function() {
+            var memberId = "@(model.id)";
+            var memberStatus = $('input[name=radio]:checked').val();
+            var feedback = $("#txt-reason").val();
+            var infomationData = {
+                memberId: memberId,
+                memberStatus: memberStatus,
+                feedback: feedback
+            }
+            var formData = new FormData();
+            formData.append("infomationData", JSON.stringify(infomationData));
+            QTW_JQUERY.RUN_AJAX("ajaxPOST", '@Url.Action("ActiveMember","ManagerAccount")', formData, AddResult);
+        });
+    }
+</script>

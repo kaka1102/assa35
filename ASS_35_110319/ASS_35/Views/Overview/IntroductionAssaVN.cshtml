@@ -1,0 +1,18 @@
+﻿@using DataContext.ClientBusiness;
+@using DataContext.DAL;
+@using DataContext.Until;
+
+@{
+    var model = (DataContext.m_baivietgioithieu)Model;
+}
+
+@if (model != null)
+{
+    @Html.Raw(model.noidung);
+}
+else
+{
+    <h3>Đang cập nhật</h3>
+}
+
+

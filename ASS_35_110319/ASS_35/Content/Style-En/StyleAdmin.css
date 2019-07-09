@@ -1,0 +1,364 @@
+﻿.tab-document-portfilio {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+    .tab-document-portfilio a {
+         text-decoration: none;
+    color: #707070;
+    font-family: Segoe UI;
+    font-size: 18px;
+    font-weight: bold;
+    }
+
+        .tab-document-portfilio a:hover {
+            color: #52a3dd;
+        }
+/*//asdasd*/
+.detail-portfilio {
+    float: left;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    padding-bottom:200px;
+}
+
+.p-active {
+    color: #2192d8 !important;
+}
+
+.MoritaAkira.active {
+    border: 5px solid #FFC107 !important;
+}
+
+.name-portfilio {
+    background: #fff;
+    float: left;
+    width: 100%;
+}
+
+.tab-document {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.otherdocuments img {
+    z-index: 99999;
+}
+
+.sec-cont-top-document {
+    height: 80px;
+    background-origin: content-box;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: relative;
+}
+
+.action-tt {
+    padding-top: 10px;
+    padding-bottom: 35px;
+    text-align: left;
+}
+
+    .action-tt span:first-child a {
+        color: #858585;
+    }
+
+    .action-tt span a {
+        font-weight: bold;
+        font-size:15px;
+    }
+
+.board-meeting span:first-child {
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 20px;
+}
+
+.board-meeting span {
+    display: block;
+}
+
+.board-meeting p img {
+    padding-right: 10px;
+    width: 100% !important;
+    max-width: 600px;
+}
+
+.infor-tt {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.time-create {
+    padding-bottom: 10px;
+    font-size: 15px;
+    display: inline-block;
+    vertical-align: sub;
+    padding-left: 5px;
+}
+
+.news-noidung {
+    overflow: hidden;
+    background-color: #fff;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.news-noidung .tt-sukien span 
+
+.td-tintuc {
+    margin-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #5d5d5d;
+    font-size: 30px;
+    margin-right: 15px;
+}
+
+    .td-tintuc span {
+        border-bottom: 3px solid #ff5a00;
+    }
+
+.news-noidung div.row {
+    margin-bottom: 20px;
+}
+
+.row {
+    margin: 0px;
+}
+
+.news-noidung div.col-sm-2 img {
+    max-width: 100%;
+}
+
+.tt-sukien span:first-child {
+    color: #236e9c;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.tt-sukien span {
+    display: block;
+    padding-bottom: 5px;
+    color: #6c6c6c;
+    
+    font-size: 15px;
+}
+
+    .tt-sukien span img {
+        padding-right: 10px;
+    }
+
+.new-action-tt {
+    padding-left: 50px;
+    background-color: #fff;
+    padding-top: 20px;
+    padding-right: 50px;
+    padding-bottom: 20px;
+}
+
+.board-meeting-new {
+    padding-right: 50px;
+}
+
+.myCarousel3 {
+    min-height: 1050px;
+}
+.board-meeting-new li {
+    font-size: 15px;
+}
+
+.detail-portfilio .carousel-indicators {
+    top: 40px;
+    height: 200px;
+}
+
+li img.port-thumb {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.carousel-innerport {
+    padding-top: 250px;
+}
+
+.carousel-indicators .active {
+    margin: 0;
+    background-color: #fff;
+    /*border: 1px solid #FFC107 !important;*/
+    border-radius: 10px;
+    width: 14px;
+    height: 14px;
+    /*background-color: #fe9054;*/
+}
+
+.carousel-indicators li {
+    /*width: auto !important;
+    height: auto !important;*/
+    text-indent: 0px;
+}
+
+.port-thumb {
+    height: 190px;
+    max-width: 200px;
+}
+.guest-speaker .port-thumb {
+    max-width: 193px !important;
+}
+li.active img.port-thumb {
+    border: 5px solid #FFC107;
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+}
+
+.carousel-indicators {
+    left: 0px !important;
+    width: 100% !important;
+    margin-left: 0px !important;
+	z-index: 1000;
+}
+
+/*///venue*/
+
+.practical-venue {
+    padding-bottom: 200px;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.venue {
+    text-align: center;
+    font-size: 2em;
+    color: #fb8849;
+    text-transform: uppercase;
+}
+
+.following-venue p {
+    text-align: center;
+    font-size: 15px;
+    color: #636363;
+}
+
+.thani {
+    color: #0f7ec2;
+    font-weight: bold;
+    font-size: 19px;
+    text-decoration: underline;
+    padding-bottom: 20px;
+}
+
+.row.contact-diachi {
+    padding-bottom: 20px;
+}
+
+.Social-Programme span {
+    display: block;
+}
+
+.Social-Programme {
+    padding-bottom: 20px;
+    padding-left: 20px;
+}
+
+    .Social-Programme span:first-child {
+        color: #535353;
+        text-transform: uppercase;
+        font-size: 15px;
+    }
+
+    .Social-Programme span:last-child {
+        color: #1d6692;
+        font-size: 15px;
+    }
+
+.mainvenue {
+    border: 5px solid #eee;
+    border-right: 0;
+    border-left: 0;
+    margin-top: 60px;
+}
+
+.custom .wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    /* background: aliceblue; */
+}
+
+.padtop64 {
+    padding-top: 64px !important;
+}
+
+.secular {
+    font-family: 'Secular One', sans-serif !important;
+}
+
+.venue_h1 {
+    font-weight: bold;
+    font-size: 55px;
+    line-height: 33px;
+    color: #f05a28;
+}
+
+.venue_p {
+    font-size: 18px;
+    font-family: 'Quicksand';
+    padding: 10px;
+    color: #f05a28;
+}
+
+.padtop30 {
+    padding-top: 30px !important;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.themecolor {
+    color: #205285;
+}
+
+.text-bold {
+    font-weight: 700;
+}
+
+.vanue_table {
+    font-family: 'Quicksand';
+    font-size: 18px;
+}
+
+.mgtop20 {
+    margin-top: 20px;
+}
+
+.vanue_table td {
+    padding: 15px 0px;
+}
+
+.vnue-left {
+    width: 100px;
+    text-align: center;
+}
+
+
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1140px !important;
+    }
+}
+
+}

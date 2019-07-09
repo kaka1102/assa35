@@ -1,0 +1,232 @@
+﻿@using DataContext
+@using DataContext.Constants
+@using DataContext.Until
+<link href="~/Scripts/bootstrap-timepicker/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-timepicker/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+@if (Model != null)
+{
+    var model = (m_cuochop)Model;
+    <div class="white-box">
+        <div class="col-sm-6" style="float: right">
+            <h3 id="btn-cancel" class="box-title m-b-0" style="float: right; cursor: pointer;">
+                <i class="ti-arrow-left" style="padding-right: 10px"></i><a>@(ASS_35.Resources.HomeText.ButtonBack)</a>
+            </h3>
+        </div>
+        <div class="form-group text-left">
+            <label class="control-label">
+                @(ASS_35.Resources.HomeText.NameEvent) <span style="color: red;">*</span>
+            </label>
+            <input @(StatusUntil.CheckAuthor(model.idnguoitao, model.trangthai) ? "disabled" : "") type="text" class="form-control" id="txt-venue-name" placeholder="@(ASS_35.Resources.HomeText.NameEvent)" value="@(model.tencuochop)">
+        </div>
+        <div class="form-group text-left">
+            <label class="col-sm-12">@(ASS_35.Resources.HomeText.Avatar)</label>
+            <div class="col-sm-6" style="margin-bottom: 25px;" id="image-container">
+                @if (model.avatar != null)
+                {
+                    <img style="max-width: 100%; max-height: 200px;" src="@(model.avatar)" />
+                }
+                else
+                {
+                    <p>@ASS_35.Resources.HomeText.No_data</p>
+                }
+            </div>
+            <div class="col-sm-6" style="display: @(StatusUntil.CheckAuthor(model.idnguoitao, model.trangthai) ? "none;" : "block;")">
+                <div class="fileinput fileinput-new input-group" id="item-append-error">
+                    <div class="form-control" id="frmInput">
+                        <i class="glyphicon glyphicon-file"></i>
+                    </div>
+                    <span class="input-group-addon btn btn-default btn-file">
+                        <span class="fileinput-new">@(ASS_35.Resources.HomeText.Select_file)</span>
+                        <input type="hidden"><input type="file" name="..." id="btnInput" accept="image/x-png,image/gif,image/jpeg">
+                    </span>
+                    <span id="appendInput">
+
+                    </span>
+                </div>
+            </div>
+            <div id="gallaryFileOther">
+                <ul class="feeds" id="view-item-file"></ul>
+            </div>
+
+        </div>
+        <div class="form-group text-left">
+            <label class="control-label">
+                @(ASS_35.Resources.HomeText.Content) <span style="color: red;">*</span>
+            </label>
+            <textarea @(StatusUntil.CheckAuthor(model.idnguoitao, model.trangthai) ? "disabled" : "") name="noidung" id="txt-venue-contents" rows="10" cols="80">@(Html.Raw(model.noidung))</textarea>
+        </div>
+        <div class="form-group text-left">
+            <label class="control-label">@(ASS_35.Resources.HomeText.Note)</label>
+            <textarea @(StatusUntil.CheckAuthor(model.idnguoitao, model.trangthai) ? "disabled" : "") id="txt-venue-note" class="form-control" rows="5">@(model.ghichu)</textarea>
+        </div>
+        <div class="form-group text-left" style="display:none">
+            <label class="control-label">
+                @(ASS_35.Resources.HomeText.Version) <span style="color: red;">*</span>
+            </label>
+            <select @(StatusUntil.CheckAuthor(model.idnguoitao, model.trangthai) ? "disabled" : "") class="form-control" id="cbx-venue-language">
+                <option value="2" @(model.phienban != SystemMessageConst.LanguageVersion.Vietnam ? "selected='selected'" : "")>@(ASS_35.Resources.HomeText.TA)</option>
+                <option value="1" @(model.phienban == SystemMessageConst.LanguageVersion.Vietnam ? "selected='selected'" : "")>@(ASS_35.Resources.HomeText.TV)</option>
+            </select>
+        </div>
+        <div class="form-group text-left">
+            <label class="control-label">
+                @(ASS_35.Resources.HomeText.Place) <span style="color: red;">*</span>
+            </label>
+            <textarea class="form-control" @(StatusUntil.CheckAuthor(model.idnguoitao, model.trangthai) ? "disabled" : "") id="txt-venue-place" rows="10" cols="80">@(model.diadiemtochuc)</textarea>
+        </div>
+        <div class="form-group text-left">
+            <label class="control-label">
+                @(ASS_35.Resources.HomeText.Date_start) <span style="color: red;">*</span>
+            </label>
+            <input @(StatusUntil.CheckAuthor(model.idnguoitao, model.trangthai) ? "disabled" : "") type="text" class="form-control" id="txt-date-start" placeholder="@(ASS_35.Resources.HomeText.Date_start)" value="@(model.ngaydienra.ToString("dd-MM-yyyy"))">
+        </div>
+        <div class="form-group text-left">
+            <label class="control-label">
+                @(ASS_35.Resources.HomeText.Time_start) <span style="color: red;">*</span>
+            </label>
+            <input @(StatusUntil.CheckAuthor(model.idnguoitao, model.trangthai) ? "disabled" : "") type="text" class="form-control" id="txt-time-start" placeholder="@(ASS_35.Resources.HomeText.Time_start)" readonly="readonly" value="@(DisplayUntils.TimeSpan_PmAmFormat(model.thoigianbatdau))">
+        </div>
+        <div class="form-group text-left">
+            <label class="control-label">
+                @(ASS_35.Resources.HomeText.Time_end) <span style="color: red;">*</span>
+            </label>
+            <input @(StatusUntil.CheckAuthor(model.idnguoitao, model.trangthai) ? "disabled" : "") type="text" class="form-control" id="txt-time-end" placeholder="@(ASS_35.Resources.HomeText.Time_end)" readonly="readonly" value="@(DisplayUntils.TimeSpan_PmAmFormat(model.thoigianketthuc))">
+        </div>
+        @Html.Action("ListSaveButton", "Common", new { status = model.trangthai, authorId = model.idnguoitao, removeButton = true })
+    </div>
+}
+else
+{
+    <p>@(ASS_35.Resources.HomeText.No_data)</p>
+}
+<script>
+    $(function () {
+        $("#txt-date-start").datepicker({
+            changeYear: true,
+            yearRange: "1918:2017",
+            dateFormat: "dd-mm-yy",
+            altFormat: "dd-mm-yy"
+        });
+        $("#txt-time-start").timepicker();
+        $("#txt-time-end").timepicker();
+        CKEDITOR.replace('txt-venue-contents',
+            {
+                fullPage: false,
+                imageBrowser_listUrl:
+                    "~/Content/plugins/bower_components/ckeditor/plugins/imagebrowser/browser/browser.html",
+                filebrowserVideoBrowseUrl:
+                    "/Content/plugins/bower_components/ckeditor/plugins/video/Servervideo.html"
+            });
+        BindButtonSaveClick();
+        BindButtonCancelClick();
+        BindButtonComboboxTargetChange();
+        BindButtonChooseFileChange();
+    });
+
+    function BindButtonCancelClick() {
+        $("#btn-cancel").click(function () {
+            LoadPage('@Url.Action("ListMeeting", "Meeting")');
+        });
+    }
+
+    function AddResult(data) {
+        if (data.result.IsSuccess === false) {
+            QTW_RUN_MESS.alter_Message_Error(data.result.Message);
+        } else {
+            QTW_RUN_MESS.alter_Message_Success(data.result.Message);
+        }
+    }
+
+    function BindButtonComboboxTargetChange() {
+        $("#cbx-target-person").change(function () {
+            if ($(this).val() === "0") {
+                $("#person-container").css("display", "block");
+            } else {
+                $("#person-container").css("display", "none");
+            }
+        });
+    }
+
+    function BindButtonSaveClick() {
+        $(".btn-save").click(function () {
+            var meetId = "@ViewBag.id";
+            var meetingContents = CKEDITOR.instances['txt-venue-contents'].getData();
+            var meetingName = $("#txt-venue-name").val();
+            var meetingNote = $("#txt-venue-note").val();
+            var meetingLanguage = $("#cbx-venue-language").val();
+            var meetStatus = $(this).attr("data-type");
+            var venuePlace = $("#txt-venue-place").val();
+            var startDate = $("#txt-date-start").val();
+            var startTime = $("#txt-time-start").val();
+            var endTime = $("#txt-time-end").val();
+            var meetReason = $("#txt-reason").val();
+            var adminStatus = $('input[name=radio]:checked').val();
+            var informationData = {
+                meetContents: meetingContents,
+                meetName: meetingName,
+                meetNote: meetingNote,
+                meetLanguage: meetingLanguage,
+                venuePlace: venuePlace,
+                meetId: meetId,
+                meetStatus: meetStatus,
+                startDate: startDate,
+                startTime: startTime,
+                endTime: endTime,
+                meetReason: meetReason,
+                adminStatus: adminStatus
+            }
+            var formData = new FormData();
+            formData.append("informationData", JSON.stringify(informationData));
+            formData.append("avarta", $("#btnInput")[0].files[0]);
+            QTW_JQUERY.RUN_AJAX("ajaxPOST", "/Meeting/_EditMeeting", formData, AddResult);
+        });
+    }
+
+    function BindButtonChooseFileChange() {
+        $("#btnInput").change(function () {
+            var avarta = $("#btnInput")[0].files;
+            BuildFileItemLayout(avarta[0]);
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#image-container').empty();
+                $('#image-container').append('<img src="' +
+                    e.target.result +
+                    '" <img style="max-width: 100%; max-height: 200px;"/>');
+            }
+            reader.readAsDataURL(avarta[0]);
+        });
+    }
+
+    function BuildFileItemLayout(file, index) {
+        var icon = "fa fa-file-photo-o";
+        var container = $("<li  style='position: relative;'></li>");
+        container.append("<div style='width: 90%;' class='li-item-file li-file model_img img-responsive'>\
+                                            <div class='bg-purple' style='width: 40px;float: left;'>\
+                                                 <i class='" +
+            icon +
+            " text-white'></i>\
+                                            </div>\
+                                            <div style='float: left;padding: 10px;width: 70%;'>\
+                                                <span style='float:left'>" +
+            file.name +
+            "</span>\
+                                            </div>\
+                                            <div style='float: right;padding: 10px;width: 20%;'>\
+                                               <span style='padding-right:50px' class='text-muted'>" +
+            file.size +
+            " bytes</span>\
+                                            </div>\
+                                       </div>\
+                                       <button type='button' data-index='" +
+            index +
+            "' aria-label='@Html.Raw((ASS_35.Resources.HomeText.Delete))' class='btn btn-danger btn-circle hint--top btnRemoveItems' style='position: absolute;top: 15px;right: 15px;display: none;'><i class='fa fa-times'></i></button>");
+        $('#view-item-file').empty();
+        $('#view-item-file').append(container);
+        container.find('.btnRemoveItems').click(function () {
+            container.remove();
+            var input = $("#btnInput");
+            input = input.val('').clone(true);
+            $('#image-container').empty();
+        });
+    }
+</script>

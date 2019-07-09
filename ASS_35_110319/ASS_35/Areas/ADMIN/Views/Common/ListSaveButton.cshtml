@@ -1,0 +1,35 @@
+﻿
+@using DataContext.Constants
+@using DataContext.Until
+<div class="form-group text-left">
+    <label class="control-label">@(ASS_35.Resources.HomeText.CurrentStatus)</label>
+    <input type="text" class="form-control" value="@ViewBag.value" readonly="readonly">
+</div>
+
+@Html.Action("ListStatusRadioPost", "Common", new {name = "cbx-status", status = ViewBag.status, hasRemoveSite = true})
+<div class="form-group text-left">
+    @if (ViewBag.authorId == AccountUntil.GetAccount().id && ViewBag.status == SystemMessageConst.StatusConst.SaveDraft)
+    {
+        <button class="btn btn-default waves-effect waves-light btn-save" type="button" data-type="@SystemMessageConst.StatusConst.SaveDraft">
+            <span class="btn-label"><i class="ti-save"></i></span>@(ASS_35.Resources.HomeText.Save_Draft)
+        </button>
+    }
+    @if ((ViewBag.myRole == SystemMessageConst.RoleConst.Banthuky || ViewBag.myRole == SystemMessageConst.RoleConst.Admin)  && (ViewBag.status == SystemMessageConst.StatusConst.Pending))
+    {
+        <button class="btn btn-success waves-effect waves-light btn-save" type="button" data-type="@SystemMessageConst.StatusConst.Pending">
+            <span class="btn-label"><i class="ti-save"></i></span>@(ASS_35.Resources.HomeText.ButtonSave)
+        </button>
+    }
+    @if ((ViewBag.myRole == SystemMessageConst.RoleConst.Banthuky || ViewBag.myRole == SystemMessageConst.RoleConst.Admin) && (ViewBag.status == SystemMessageConst.StatusConst.SaveDraft || ViewBag.status == SystemMessageConst.StatusConst.Deactive || ViewBag.status == SystemMessageConst.StatusConst.RemoveOnSite))
+    {
+        <button class="btn btn-success waves-effect waves-light btn-save" type="button" data-type="@SystemMessageConst.StatusConst.Active">
+            <span class="btn-label"><i class="ti-save"></i></span>@(ASS_35.Resources.HomeText.SaveAndPost)
+        </button>
+    }
+    @if (ViewBag.myRole == SystemMessageConst.RoleConst.Admin && ViewBag.status == SystemMessageConst.StatusConst.Active && ViewBag.removeButton == true)
+    {
+        <button class="btn btn-danger waves-effect waves-light btn-save" type="button" data-type="@SystemMessageConst.StatusConst.RemoveOnSite">
+            <span class="btn-label"><i class="ti-save"></i></span>@(ASS_35.Resources.HomeText.RemoveOnSite)
+        </button>
+    }
+</div>

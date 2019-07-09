@@ -1,0 +1,23 @@
+﻿@using DataContext
+@if (Model != null)
+{
+    var model = (List<ListNotificationPerson_Result>) Model;
+    <li>
+        <div class="drop-title">@(ASS_35.Resources.HomeText.You_have) @(model.Count) @(ASS_35.Resources.HomeText.New_messages)</div>
+    </li>
+    <li>
+        <div class="message-center">
+            @foreach (var item in model)
+            {
+                <a>
+                    <div class="mail-contnet">
+                        <h5>@item.emailnguoitao</h5>
+                        <span class="mail-desc">@item.tenthongbao</span> <span class="time">@item.thoigianduyet.Value.ToString("dd-MM-yyyy hh:mm")</span>
+                    </div>
+                </a>
+            }
+        </div>
+    </li>
+  
+}
+

@@ -1,0 +1,41 @@
+﻿@using DataContext.DAL;
+@using DataContext.Until;
+
+@{
+    var model = (SuKien)Model;
+}
+
+@{
+    ViewBag.Title = "ChiTietSuKien";
+    Layout = "~/Views/Shared/LayoutVi.cshtml";
+}
+
+<div class="sukien">
+    @if (model != null)
+    {
+        <div class="tt">
+            <span><a href="">Trang chủ &gt; </a></span>
+            <span><a style="color:#2f88c5" href="">@Html.Raw(model.tencuochop)</a></span>
+        </div>
+    }
+    else
+    {
+        <div class="tt">
+            <span><a href="">Trang chủ &gt; </a></span>
+            <span><a href="">Sự kiện </a></span>
+        </div>
+    }
+    <div class="tintuc-bv-ct row">
+
+        @if (model != null)
+        {
+            <span style="font-family:Arial;font-size:27px;font-weight:bold;" class="time-create">@Html.Raw(model.tencuochop)</span>
+            <span class="time-create"><img src="~/images/dongho.png" alt="">Từ @Html.Raw(model.thoigianbatdau) đến @Html.Raw(model.thoigianketthuc) ngày @Html.Raw(model.ngaydienra)</span>
+            <span class="time-create"><img src="~/images/vitri.png" alt="">@Html.Raw(model.diadiem)</span>
+            @Html.Raw(model.noidung)
+        }
+    </div>
+
+    @Html.Action("SuKienLienQuan", "TinTucSuKien")
+
+</div>

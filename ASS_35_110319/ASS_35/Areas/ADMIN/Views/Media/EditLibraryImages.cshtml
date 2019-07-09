@@ -1,0 +1,421 @@
+﻿
+
+<link href="~/Content/plugins/bower_components/gallery/css/animated-masonry-gallery.css" rel="stylesheet" />
+<link href="~/Content/plugins/bower_components/fancybox/ekko-lightbox.min.css" rel="stylesheet" />
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box p-l-20 p-r-20">
+            <div class="col-sm-12" style="padding-bottom: 10px; border-bottom: 1px solid red;">
+                <div class="row">
+                    <div class="col-sm-6" style="float:left">
+                        <h3 class="box-title m-b-0"><i class="ti-angle-double-right" style="padding-right:10px"></i>@(ASS_35.Resources.HomeText.Editing_photo_themes)</h3>
+                    </div>
+                    <div class="col-sm-6" style="float:right">
+                        <h3 class="box-title m-b-0" style="float:right"><i class="ti-arrow-left" style="padding-right:10px"></i><a href="javascript:0" id="btnBack">@(ASS_35.Resources.HomeText.ButtonBack)</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-md-12">
+                    <form class="form-material form-horizontal" id="formAddNew">
+                        <div class="form-group">
+                            <label class="col-md-12">@(ASS_35.Resources.HomeText.Topic_name) <i class="requite-icon">(*)</i></label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control form-control-line" id="tenchude">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">@(ASS_35.Resources.HomeText.Introduce) <i class="requite-icon">(*)</i></label>
+                            <div class="col-md-12">
+                                <textarea class="form-control" rows="5" id="gioithieu"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-12">@(ASS_35.Resources.HomeText.Version)</label>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="phienban">
+                                    <option value="1">@(ASS_35.Resources.HomeText.Vietnamese_Website)</option>
+                                    <option value="2">@(ASS_35.Resources.HomeText.Website_English)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-12">@(ASS_35.Resources.HomeText.Pictures_in_the_topic)</label>
+                            <div class="galleryView">
+                                <div id="galleryViewContent">
+                                    <div id="galleryView-content-center" style="margin-top:10px" class="galleryView-content gallery-content-center-full isotope">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-12">@(ASS_35.Resources.HomeText.Upload_images_file)</label>
+                            <div class="col-sm-6">
+                                <div class="fileinput fileinput-new input-group" id="item-append-error">
+                                    <div class="form-control" id="frmInput">
+                                        <i class="glyphicon glyphicon-file"></i> @(ASS_35.Resources.HomeText.Leng_File_Chose)
+                                    </div>
+                                    <span class="input-group-addon btn btn-default btn-file">
+                                        <span class="fileinput-new">@(ASS_35.Resources.HomeText.Select_file)</span>
+                                        <input type="hidden"><input type="file" name="..." multiple id="btnInput" accept="image/*">
+                                    </span>
+                                    <span id="appendInput">
+
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div id="gallery" class="">
+                                <div id="gallery-content">
+                                    <div id="gallery-content-center" class="gallery-content-center-full isotope">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12">@(ASS_35.Resources.HomeText.Status)</label>
+                            <div class="col-md-6">
+                                <select class="form-control" id="trangthai-chude" disabled>
+                                    <option value="3" disabled>@(ASS_35.Resources.HomeText.Active)</option>
+                                    <option value="2" disabled>@(ASS_35.Resources.HomeText.Pending)</option>
+                                    <option value="1" disabled>@(ASS_35.Resources.HomeText.Deactive)</option>
+                                    <option value="4" disabled>@(ASS_35.Resources.HomeText.Save_Draft)</option>
+                                    <option value="5" disabled>@(ASS_35.Resources.HomeText.RemoveOnSite)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6" id="frm-edit-status">
+                            </div>
+                        </div>
+                        <div class="form-group" id="fr-lydo" style="display:none">
+                            <label class="col-md-12">@(ASS_35.Resources.HomeText.Reason)</label>
+                            <div class="col-md-12">
+                                <textarea class="form-control" rows="5" id="lydo">@(ASS_35.Resources.HomeText.Violation_of_the_terms_of_the_organizers)</textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="form-actions">
+                            <button class="btn btn-success waves-effect waves-light" type="button" id="btnSave">
+                                <span class="btn-label"><i class="ti-save"></i></span>@(ASS_35.Resources.HomeText.ButtonSave)
+                            </button>
+
+                            @if (ViewBag.quyen == 1)
+                            {
+                                <button class="btn btn-primary waves-effect waves-light" data-item="3" type="button" id="btnSaveandPost">
+                                    <span class="btn-label"><i class="ti-save"></i></span>@(ASS_35.Resources.HomeText.SaveAndPost)
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-primary waves-effect waves-light" data-item="2" type="button" id="btnSaveandPost">
+                                    <span class="btn-label"><i class="ti-save"></i></span>@(ASS_35.Resources.HomeText.SaveAndPostAdmin)
+                                </button>
+                            }
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="~/Content/eliteadmin-colors/js/input-file-show.js"></script>
+<script src="~/Content/plugins/bower_components/fancybox/ekko-lightbox.min.js"></script>
+<script src="~/Content/ScriptPuplic/LibAss.js"></script>
+<script type="text/javascript">
+    var lstDel = [];
+    var btnSave = document.getElementById("btnSave");
+    var btnSaveandPost = document.getElementById("btnSaveandPost");
+
+    var btnInput = document.getElementById("btnInput");
+    var tenchude = document.getElementById("tenchude");
+    var gioithieu = document.getElementById("gioithieu");
+    var phienban = document.getElementById("phienban");
+    var trangthai = document.getElementById("trangthai-chude");
+    var lydo = document.getElementById("lydo");
+
+
+    $(function () {
+        var userInfo = JSON.parse(@Html.Raw(ViewBag.data));
+        BindValueToControl(userInfo);
+
+        BindUrlBackEditForm("/Media/ImagesManager", "btnBack");
+
+        $('#btnSave').click(function () {
+            UpdateLibraryImages(userInfo.id);
+        });
+        $('#btnSaveandPost').click(function () {
+            UpdateLibraryImagesAndPost(userInfo.id);
+        });
+    });
+
+    function BindValueToControl(data) {
+        console.log(data);
+        if(data.trangthai==2 || data.trangthai==3){
+            $('#btnSaveandPost').css('display','none');
+        }else{
+            $('#btnSaveandPost').css('display','inline-block');
+        }
+
+        $('#tenchude').val(data.tenchude);
+        $('#gioithieu').val(data.gioithieu);
+        $('#phienban').val(data.phienban);
+        $('#trangthai-chude').val(data.trangthai);
+
+        $('#frm-edit-status').empty();
+        if(@ViewBag.quyen ==1 && data.trangthai==2){
+            $('#frm-edit-status').append('<div class="form-check">\
+                                    <label class="custom-control custom-radio">\
+                                        <input id="radio1" name="radio" type="radio" data-val-radio="3" class="custom-control-input">\
+                                        <span class="custom-control-indicator"></span>\
+                                        <span class="custom-control-description">'+ "@Html.Raw(ASS_35.Resources.HomeText.PostWebsite) "+'</span>\
+                                    </label>\
+                                </div>\
+                                <div class="form-check">\
+                                    <label class="custom-control custom-radio">\
+                                        <input id="radio2" name="radio" type="radio" data-val-radio="1" class="custom-control-input">\
+                                        <span class="custom-control-indicator"></span>\
+                                        <span class="custom-control-description">'+"@Html.Raw(ASS_35.Resources.HomeText.Deactive)"+'</span>\
+                                    </label>\
+                                </div>');
+        }else if(@ViewBag.quyen ==1 && data.trangthai==3)
+        {
+            $('#frm-edit-status').append('<div class="form-check">\
+                                    <label class="custom-control custom-radio">\
+                                       <input type="checkbox" name="radio" data-val-radio="5" class="custom-control-input">\
+                                        <span class="custom-control-indicator"></span>\
+                                        <span class="custom-control-description">'+"@Html.Raw(ASS_35.Resources.HomeText.RemoveOnSite)"+'</span>\
+                                    </label>\
+                                </div>');
+        }
+
+
+        $('#frm-edit-status input').change(function(){
+
+            if(($(this).attr('data-val-radio') ==1 || $(this).attr('data-val-radio') ==5) && @ViewBag.quyen ==1 && $(this).is(":checked") ==true){
+                $('#fr-lydo').css("display", "block");
+            }
+            else {
+                $('#fr-lydo').css("display", "none");
+            }
+        });
+
+        if (data.lydo != null && data.trangthai!=2) {
+            $('#fr-lydo').css("display", "block");
+            $('#lydo').val(data.lydo);
+        }
+
+        $.each(data.chitiet, function (i, v) {
+            RenderImages(v);
+        });
+
+        tenchude.addEventListener("keyup", function (e) {
+            e.preventDefault();
+            QTW_VALIDATION.CheckFiled_Requite(tenchude, "", 3, 500);
+        });
+        gioithieu.addEventListener("keyup", function (e) {
+            e.preventDefault();
+            QTW_VALIDATION.CheckFiled_Requite(gioithieu, "", 3);
+        });
+    }
+
+    function UpdateLibraryImages(id) {
+
+        var validate = true;
+
+        if (!QTW_VALIDATION.CheckFiled_Requite(tenchude, "", 3, 500))
+            validate = false;
+        if (!QTW_VALIDATION.CheckFiled_Requite(gioithieu, "", 3))
+            validate = false;
+
+        if (validate) {
+            var trangthaichude = $('#frm-edit-status input[name="radio"]:checked').attr('data-val-radio');
+            if(trangthaichude ==undefined){
+                trangthaichude=trangthai.value;
+            }
+
+            var fm_data = new FormData();
+            var dataObject = {
+                id: id,
+                tenchude: tenchude.value,
+                gioithieu: gioithieu.value,
+                phienban: phienban.value,
+                trangthai: trangthaichude,
+                lydo: lydo.value
+            };
+
+            var lstFile = [];
+            
+            var button = $('#gallery-content-center').find('button');
+            $.each(button, function (i, v) {
+                var fileImage = {};
+                var id = $(this).attr("data-id");
+                var spanParent = $(this).closest('span');
+                var caption = spanParent.find('.captionImage').val();
+
+                fileImage.id = id;
+                fileImage.caption = caption;
+                lstFile.push(fileImage);
+            });
+            var lstOldFile = [];
+
+            var button = $('#galleryView-content-center').find('button');
+            $.each(button, function (i, v) {
+                var fileImage = {};
+                var id = $(this).attr("data-id");
+                var spanParent = $(this).closest('span');
+                var caption = spanParent.find('.captionImage').val();
+
+                fileImage.id = id;
+                fileImage.caption = caption;
+                lstOldFile.push(fileImage);
+            });
+            fm_data.append("DataSend", JSON.stringify(dataObject));
+            fm_data.append("lstOldFile", JSON.stringify(lstOldFile));
+            fm_data.append("lstFile", JSON.stringify(lstFile));
+
+            var success = function (dx) {
+                if (dx.Result.IsSuccess) {
+                    QTW_RUN_MESS.alter_Message_Success(dx.Result.Message);
+                }
+                else {
+                    QTW_RUN_MESS.alter_Message_Error(dx.Result.Message);
+                }
+            }
+            var fun = function () {
+                QTW_JQUERY.RUN_AJAX("ajaxPOST", "/Media/_EditLibraryImages", fm_data, success);
+            }
+            QTW_RUN_MESS.alter_Message_Question_Callbaclk(" @Html.Raw(ASS_35.Resources.HomeText.Update_infor) ", fun);
+
+        } else {
+            console.log(0000000000000000);
+        }
+    }
+
+    function UpdateLibraryImagesAndPost(id) {
+
+        var validate = true;
+
+        if (!QTW_VALIDATION.CheckFiled_Requite(tenchude, "", 3, 500))
+            validate = false;
+        if (!QTW_VALIDATION.CheckFiled_Requite(gioithieu, "", 3))
+            validate = false;
+
+        if (validate) {
+            var fm_data = new FormData();
+            var dataObject = {
+                id: id,
+                tenchude: tenchude.value,
+                gioithieu: gioithieu.value,
+                phienban: phienban.value,
+                trangthai: btnSaveandPost.getAttribute("data-item"),
+                lydo: lydo.value
+            };
+
+            var lstFile = [];
+            var button = $('#gallery-content-center').find('button');
+            $.each(button, function (i, v) {
+                var fileImage = {};
+                var id = $(this).attr("data-id");
+                var spanParent = $(this).closest('span');
+                var caption = spanParent.find('.captionImage').val();
+
+                fileImage.id = id;
+                fileImage.caption = caption;
+                lstFile.push(fileImage);
+            });
+            var lstOldFile = [];
+
+            var button = $('#galleryView-content-center').find('button');
+            $.each(button, function (i, v) {
+                var fileImage = {};
+                var id = $(this).attr("data-id");
+                var spanParent = $(this).closest('span');
+                var caption = spanParent.find('.captionImage').val();
+
+                fileImage.id = id;
+                fileImage.caption = caption;
+                lstOldFile.push(fileImage);
+            });
+            fm_data.append("DataSend", JSON.stringify(dataObject));
+            fm_data.append("lstOldFile", JSON.stringify(lstDel));
+            fm_data.append("lstFile", JSON.stringify(lstFile));
+
+            var success = function (dx) {
+                if (dx.Result.IsSuccess) {
+                    QTW_RUN_MESS.alter_Message_Success(dx.Result.Message);
+                }
+                else {
+                    QTW_RUN_MESS.alter_Message_Error(dx.Result.Message);
+                }
+            }
+            var fun = function () {
+                QTW_JQUERY.RUN_AJAX("ajaxPOST", "/Media/_EditLibraryImages", fm_data, success);
+            }
+            QTW_RUN_MESS.alter_Message_Question_Callbaclk(" @Html.Raw(ASS_35.Resources.HomeText.Update_infor) ", fun);
+
+        } else {
+            console.log(0000000000000000);
+        }
+    }
+
+    function RenderImages(file) {
+        var span = document.createElement("span");
+        var link = document.createElement("a");
+        var preview = document.createElement("img");
+        var button = document.createElement("button")
+        var close = document.createElement("i");
+        var input = document.createElement("input");
+
+        span.appendChild(button);
+        span.appendChild(preview);
+        button.appendChild(close);
+        span.appendChild(input);
+
+        span.setAttribute("style", "height: 100%;float: left;position: relative;")
+
+        button.setAttribute("type", "button");
+        button.setAttribute("type", "button");
+        button.setAttribute("aria-label", ' @Html.Raw(ASS_35.Resources.HomeText.Delete)');
+        button.setAttribute("class", "btn btn-danger btn-circle hint--top btnRemoveItems");
+        button.setAttribute("style", "position: absolute;top: 0px;right: 0px;display: none;");
+        button.setAttribute("data-id", file.id);
+
+        input.setAttribute("type", "text");
+        input.setAttribute("name", "caption");
+        input.setAttribute("class", "captionImage");
+        input.setAttribute("placeholder", "Trích dẫn");
+        input.setAttribute("data-id", file.id);
+        input.setAttribute("value", file.caption == null ? "":file.caption);
+
+        close.setAttribute("class", "fa fa-times");
+
+        preview.setAttribute("title", file.tenfile);
+        preview.setAttribute("src", file.duongdanfile);
+        preview.setAttribute("class", "all studio isotope-item");
+        preview.setAttribute("data-toggle", "lightbox");
+        preview.setAttribute("data-gallery", "multiimages");
+        preview.setAttribute("href", file.duongdanfile);
+
+
+        $('#galleryView-content-center').append(span);
+
+        button.addEventListener("click", function () {
+
+            var idItem = $(this);
+            lstDel.push($(this).attr("data-id"));
+            idItem.parent().remove();
+        });
+    }
+
+
+</script>

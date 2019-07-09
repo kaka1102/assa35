@@ -1,0 +1,86 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <div class="white-box">
+            <div class="col-sm-12" style="padding-bottom: 10px; border-bottom: 1px solid red; margin-bottom: 20px;">
+                <div class="row">
+                    <h3 class="box-title m-b-0"><i class="ti-angle-double-right" style="padding-right:10px"></i>@(ASS_35.Resources.HomeText.Manage_admin)</h3>
+                </div>
+            </div>
+            <div class="row m-b-20">
+                <div class="col-sm-4">
+                    <div class="row">
+                        <button class="btn btn-primary waves-effect waves-light" type="button" id="btn-add">
+                            <span class="btn-label">
+                                <i class="ti-plus"></i>
+                            </span>@(ASS_35.Resources.HomeText.ButtonAddNew)
+                        </button>
+                    </div>
+                </div>
+                @Html.Action("ListRole", "Common", new {name = "cbx-role"})
+                @Html.Action("ListAccountStatus", "Common", new {name = "cbx-status", hasAll =true})
+            </div>
+            <div id="myTable_filter" class="dataTables_filter app-search hidden-xs">
+                <label style="float: right;">@(ASS_35.Resources.HomeText.Search) <input id="txt-search" type="search" class="select1 form-control inputSearch" placeholder="@(ASS_35.Resources.HomeText.Search_Content)" aria-controls="example23"></label>
+            </div>
+            <div id="table-container">
+                @Html.Action("_ManagerAccount", "ManagerAccount")
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function() {
+        BindButtonRoleChange();
+        BindButtonSearchKeyUp();
+        BindButtonStatusChange();
+        BindButtonAddAccountClick();
+    });
+
+    function BindButtonAddAccountClick() {
+        $("#btn-add").click(function() {
+            LoadPage('@Url.Action("AddManager", "ManagerAccount")');
+        });
+    }
+
+    function BindButtonSearchKeyUp() {
+        $("#txt-search").keyup(function() {
+            LoadManagerAccount(1, false);
+        });
+    }
+
+    function BindButtonRoleChange() {
+        $("#cbx-role").change(function() {
+            LoadManagerAccount();
+        });
+    }
+
+    function BindButtonStatusChange() {
+        $("#cbx-status").change(function() {
+            LoadManagerAccount();
+        });
+    }
+
+    function LoadManagerAccount(page, isLoader) {
+        var loader = $('<div class="preloader"><div class="cssload-speeding-wheel"></div></div>');
+        $.ajax({
+            url: "@Url.Action("_ManagerAccount", "ManagerAccount")",
+            data: {
+                searchData: $("#txt-search").val(),
+                roleId: $("#cbx-role").val(),
+                statusId: $("#cbx-status").val(),
+                page: page
+            },
+            type: "GET",
+            dataType: "html",
+            success: function(data) {
+                $('#table-container').html(data);
+                loader.remove();
+            },
+            beforeSend: function() {
+                if (isLoader !== false) {
+                    $('body').append(loader);
+                }
+            }
+        });
+    }
+</script>

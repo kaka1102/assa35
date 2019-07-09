@@ -1,0 +1,32 @@
+﻿@using DataContext
+@{
+    var model = (List<m_activity_detail>) Model;
+}
+@if (model != null)
+{
+    <div class="size_shirt_wrap mgtop20" style="display:none;">
+        <div>
+            <span>Please select the shirt size for ASSA Welcome dinner</span>
+            <select class="select t-sizex" name="sec5_shirtsize" id="size_shirt">
+                <option value="">Size (Chest/Shoulder)</option>
+                @foreach (var item in model)
+                {
+                    <option value="@item.id">@item.actDetail</option>
+                }
+            </select>
+        </div>
+        <div class="mgtop20">
+            <label class="text-semibold w55">For : <span class="text-danger">*</span></label>
+            <label class="radio-inline">
+                <input type="radio" name="sec5_shirtfor" class="styled t-sizex" id="sec5_shirtfor" value="M">
+                Male
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="sec5_shirtfor" class="styled" value="F">
+                Female
+            </label>
+        </div>
+
+    </div>
+  
+}
